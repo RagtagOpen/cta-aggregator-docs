@@ -156,7 +156,7 @@ This endpoint retrieves all contacts.
 
 ### HTTP Request
 
-`GET http://localhost:3000/contacts`
+`GET http://localhost:3000/v1/contacts`
 
 ### Filter
 
@@ -164,14 +164,15 @@ You can filter based on the following attribteus
 
 Filter    | Example
 --------- |  -----------
-email     | `GET "http://localhost:3000/contacts?filter[email]=Wilma@aol.com"`
-name      | `GET "http://localhost:3000/contacts?filter[name]=Wilma Flintstone"`
+email     | `GET "http://localhost:3000/v1/contacts?filter[email]=Wilma@aol.com"`
+name      | `GET "http://localhost:3000/v1/contacts?filter[name]=Wilma Flintstone"`
 
 
 ## Get a Specific Contact
 
 
-```shell curl -X GET  "http://localhost:3000/v1/contacts/83911d17-b56e-4c11-bc5b-485c8cba8513"
+```shell
+curl -X GET  "http://localhost:3000/v1/contacts/83911d17-b56e-4c11-bc5b-485c8cba8513"
   -H "Accept: application/vnd.api+json"
   -H "Content-Type: application/vnd.api+json"
 ```
@@ -198,7 +199,7 @@ name      | `GET "http://localhost:3000/contacts?filter[name]=Wilma Flintstone"`
 
 ### HTTP Request
 
-`GET "http://localhost:3000/contacts/<UUID>`
+`GET "http://localhost:3000/v1/contacts/<UUID>`
 
 ### URL Parameters
 
@@ -210,7 +211,7 @@ ID | The ID of the contact to retrieve
 ## Create a Contact
 
 ```shell
-curl -X POST 
+curl -X POST "http://localhost:3000/v1/contacts/"
   -H "Accept: application/vnd.api+json" 
   -H "Content-Type: application/vnd.api+json" 
   -d '{
@@ -224,7 +225,6 @@ curl -X POST
       }
     }
   }'
- "http://localhost:3000/v1/contacts/"
 ```
 
 > The above command returns JSON structured like this:
@@ -246,3 +246,7 @@ curl -X POST
   }
 }
 ```
+
+### HTTP Request
+
+`POST "http://localhost:3000/v1/contacts`

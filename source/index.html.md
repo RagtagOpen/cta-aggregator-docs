@@ -19,4 +19,11 @@ search: true
 
 # Introduction
 
-You can use our API to access API endpoints associated with Calls to Actions, called "events" in the system.
+This API provides information about calls to action.  A call to action is 
+represented by the event resource.  An event resource has two related 
+resources: a contact and (optionally) a location.
+
+The API follows the [JSON API spec](http://jsonapi.org/).  Feature like
+pagination, filtering, and CRUDing resrouces are all implemented following the 
+conventions established in this spec.
+
