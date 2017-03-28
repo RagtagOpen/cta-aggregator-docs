@@ -5,8 +5,8 @@ language_tabs:
   - shell
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
+  - <a href='#' target="_blank">Sign Up for a Developer Key</a>
+  - <a href='https://github.com/tripit/slate' target="_blank">Documentation Powered by Slate</a>
 
 includes:
   - events
@@ -17,7 +17,7 @@ includes:
 search: true
 ---
 
-# Introduction
+# Call to Action Aggregator
 
 This API provides information about calls to action.  A call to action is 
 represented by the event resource.  An event resource has two related 

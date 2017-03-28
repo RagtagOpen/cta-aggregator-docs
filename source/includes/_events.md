@@ -1,5 +1,22 @@
 # Events
 
+Every call to action is represented in the API as an event.  Events have related resources such as a contact or a location.
+
+###  Event Attributes
+
+Attribute 	| Data Type | Meaning
+----------  | -------   | -------
+id          | uuid      | unique identifier
+title       | string    | name of the event
+description | string    | breif summary of the event
+free        | boolean   | whether there's a cost for the event
+start-time  | integer   | event start time expressed in epoch time
+ent-time    | integer   | event end time expressed in epoch time
+event-type  | string    | options are "onsite" or "phone"
+website     | string    | site where the CTA originated
+
+If you're looking for the contact or location for an event, you'll find it in the `relationship` hash when request an event from the API.
+
 ## Get All Events
 
 ```shell
@@ -332,10 +349,10 @@ This endpoint retrieves all events.
 
 You can filter based on the following attribteus
 
-Filter 		| Values | Description|  Example
---------- |  ----------- |  ----------- |  -----------
-upcoming     | true |  filter by events in the future | `GET "http://localhost:3000/v1/events?filter[upcoming]=true"` 
-event type     | onsite, phone |  filter by events type | `GET "http://localhost:3000/v1/events?filter[event_type]=onsite"` 
+Filter    | Values        | Description           |  Example
+--------- | ---------     | -----------           |  -------
+upcoming  | true          |  events in the future | `GET "http://localhost:3000/v1/events?filter[upcoming]=true"`
+event type| onsite, phone |  event type           | `GET "http://localhost:3000/v1/events?filter[event_type]=onsite"`
 
 
 ## Get a Specific Event
@@ -462,9 +479,14 @@ curl -X POST "http://localhost:3000/v1/events"
 }
 ```
 
-A POST request to the `events` endpoint can include a JSON payload that specifies how an event is related to other records (location and/or contact).  To do this, add a `relationships` hash that contains the ids of each related resource.
+The payload for a POST request to the `events` endpoint can specify how an event is related to other records (location and/or contact).  To do this, add a `relationships` hash that contains the ids of each related resource.
 
-You can also create an event record and then add a location and a contact to it.  See below for an example.
+<aside class="warning">
+Note: You cannot create your event and it's related records simulatanesouly.
+You need to find or create the related record first and then pass along its id when creating the event.
+</aside>
+
+Alternatively, you can create an event record, then add a location and a contact to it. The next section contains examples of how ot do that.
 
 ### HTTP Request
 
@@ -550,7 +572,7 @@ curl -X PUT "http://localhost:3000/v1/events/25c96b80-6dbe-4dda-85a6-d760aa82f5a
   }'
 ```
 
-> The above command returns JSON structured like this:
+> The above command returns this HTTP status:
 
 ```json
 status: 204
@@ -572,12 +594,12 @@ curl -X PUT "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56db
 	-d '{
     "data": {
       "id": "9efce530-4e6d-458c-93ad-22e42c3c8aa5",
-        "type": "locations"
+      "type": "locations"
     }
   }'
 ```
 
-> The above command returns JSON structured like this:
+> The above command returns this HTTP status:
 
 ```json
 status: 204

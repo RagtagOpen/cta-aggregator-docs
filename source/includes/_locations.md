@@ -1,5 +1,18 @@
 # Locations
 
+All onsite events have a location associated with them.
+
+###  Location Attributes
+
+Attribute 	| Data Type | Meaning
+----------  | -------   | -------
+id          | uuid      | unique identifier
+address     | string    | full address
+city        | string    | city name
+state       | string    | 2 letter state abbreviation
+zipcode     | string    | postal code
+notes       | text      | Additional information
+
 ## Get All Locations
 
 ```shell
