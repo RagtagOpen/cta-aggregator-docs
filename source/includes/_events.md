@@ -395,6 +395,81 @@ Parameter | Description
 ID | The ID of the event to retrieve
 
 
+## Create an Event with Relationships
+
+```shell
+curl -X POST "http://localhost:3000/v1/events"
+  -H "Accept: application/vnd.api+json" 
+  -H "Content-Type: application/vnd.api+json" 
+  -d ' {
+    "data": {
+      "type": "events",
+        "attributes": {
+          "title": "pizza pizza pizza",
+          "description": "desc",
+          "free": true,
+          "website": "www.example.com",
+          "event-type": "onsite",
+          "start-time": "1526725814",
+          "end-time": "1526740214"  
+        },
+    		"relationships": {
+    		  "location": {
+               "data": { "type": "locations", "id": "657a33f9-6139-45a8-becd-f581809a8b05" }
+            },
+    		  "contact": {
+               "data": { "type": "contacts", "id": "368f52df-395f-4ad7-8ee2-50921d74dae1" }
+            }            
+        }
+    }
+  }'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "data": {
+    "id": "31a22b00-8e7d-4194-b260-162439f56dba",
+    "type": "events",
+    "links": {
+      "self": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba"
+    },
+    "attributes": {
+      "title": "pizza pizza pizza",
+      "description": "desc",
+      "free": true,
+      "start-time": 1526725814,
+      "end-time": 1526740214,
+      "event-type": "onsite",
+      "website": "www.example.com"
+    },
+    "relationships": {
+      "location": {
+        "links": {
+          "self": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/relationships/location",
+          "related": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/location"
+        }
+      },
+      "contact": {
+        "links": {
+          "self": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/relationships/contact",
+          "related": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/contact"
+        }
+ 			}
+    }
+  }
+}
+```
+
+A POST request to the `events` endpoint can include a JSON payload that specifies how an event is related to other records (location and/or contact).  To do this, add a `relationships` hash that contains the ids of each related resource.
+
+You can also create an event record and then add a location and a contact to it.  See below for an example.
+
+### HTTP Request
+
+`POST "http://localhost:3000/v1/events/`
+
 ## Create an Event
 
 ```shell
