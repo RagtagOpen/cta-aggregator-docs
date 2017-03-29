@@ -430,15 +430,15 @@ curl -X POST "http://localhost:3000/v1/events"
           "start-time": "1526725814",
           "end-time": "1526740214"  
         },
-    		"relationships": {
-    		  "location": {
-               "data": { "type": "locations", "id": "657a33f9-6139-45a8-becd-f581809a8b05" }
-            },
-    		  "contact": {
-               "data": { "type": "contacts", "id": "368f52df-395f-4ad7-8ee2-50921d74dae1" }
-            }            
-        }
-    }
+        "relationships": {
+          "location": {
+            "data": { "type": "locations", "id": "657a33f9-6139-45a8-becd-f581809a8b05" }
+          },
+          "contact": {
+            "data": { "type": "contacts", "id": "368f52df-395f-4ad7-8ee2-50921d74dae1" }
+          }
+       }
+     }
   }'
 ```
 
@@ -473,7 +473,7 @@ curl -X POST "http://localhost:3000/v1/events"
           "self": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/relationships/contact",
           "related": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/contact"
         }
- 			}
+      }
     }
   }
 }
