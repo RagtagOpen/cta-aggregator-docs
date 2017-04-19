@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" width="540" height="653" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <source>
+    <![CDATA[Client->Server: POST /authenticate\nHeaders:\nHTTP_AUTHORIZATION: <api-key>:<api-secret>
+        Note left of Server: Validates\napi key\nand secret\nto determine\nuser
+        Server->Client: RESPONSE:\nStatus: 201\nBody: {jwt: xxxx.yyyy}
+        Note right of Client: Stores JWT\nto use in\nauthorization\nheader
+        Client->Server: REQUEST to protected endpoint\nHeaders:\nHTTP_AUTHORIZATION: Bearer xxxx.yyyy
+        Server->Client: RESPONSE:\nStatus:20X]]>
+      </source>
+      <desc>
+      </desc>
+      <defs>
+        <marker viewBox="0 0 5 5" markerWidth="5" markerHeight="5" orient="auto" refX="5" refY="2.5" id="markerArrowBlock">
+          <path d="M 0 0 L 5 2.5 L 0 5 z">
+          </path>
+        </marker>
+        <marker viewBox="0 0 9.6 16" markerWidth="4" markerHeight="16" orient="auto" refX="9.6" refY="8" id="markerArrowOpen">
+          <path d="M 9.6,8 1.92,16 0,13.7 5.76,8 0,2.286 1.92,0 9.6,8 z">
+          </path>
+        </marker>
+      </defs>
+      <g class="title">
+      </g>
+      <g class="actor">
+        <rect x="10" y="20" width="77.609375" height="38" stroke="#000000" fill="#ffffff" style="stroke-width: 2;">
+        </rect>
+        <text x="20" y="45" style="font-size: 16px; font-family: &quot;Andale Mono&quot;, monospace;">
+          <tspan x="20">Client</tspan>
+        </text>
+      </g>
+      <g class="actor">
+        <rect x="10" y="595.9375" width="77.609375" height="38" stroke="#000000" fill="#ffffff" style="stroke-width: 2;">
+        </rect>
+        <text x="20" y="620.9375" style="font-size: 16px; font-family: &quot;Andale Mono&quot;, monospace;">
+          <tspan x="20">Client</tspan>
+        </text>
+      </g>
+      <line x1="48.8046875" x2="48.8046875" y1="58" y2="595.9375" stroke="#000000" fill="none" style="stroke-width: 2;">
+      </line>
+      <g class="actor">
+        <rect x="433.265625" y="20" width="77.609375" height="38" stroke="#000000" fill="#ffffff" style="stroke-width: 2;">
+        </rect>
+        <text x="443.265625" y="45" style="font-size: 16px; font-family: &quot;Andale Mono&quot;, monospace;">
+          <tspan x="443.265625">Server</tspan>
+        </text>
+      </g>
+      <g class="actor">
+        <rect x="433.265625" y="595.9375" width="77.609375" height="38" stroke="#000000" fill="#ffffff" style="stroke-width: 2;">
+        </rect>
+        <text x="443.265625" y="620.9375" style="font-size: 16px; font-family: &quot;Andale Mono&quot;, monospace;">
+          <tspan x="443.265625">Server</tspan>
+        </text>
+      </g>
+      <line x1="472.0703125" x2="472.0703125" y1="58" y2="595.9375" stroke="#000000" fill="none" style="stroke-width: 2;">
+      </line>
+      <g class="signal">
+        <text x="58.8046875" y="89.5625" style="font-size: 16px; font-family: &quot;Andale Mono&quot;, monospace;">
+          <tspan x="58.8046875">POST /authenticate</tspan>
+          <tspan dy="1.2em" x="58.8046875">Headers:</tspan>
+          <tspan dy="1.2em" x="58.8046875">HTTP_AUTHORIZATION: &lt;api-key&gt;:&lt;api-secret&gt;</tspan>
+        </text>
+        <line x1="48.8046875" x2="472.0703125" y1="134.875" y2="134.875" stroke="#000000" fill="none" style="stroke-width: 2; marker-end: url(&quot;#markerArrowBlock&quot;);">
+        </line>
+      </g>
+      <g class="note">
+        <rect x="326.8515625" y="154.875" width="125.21875" height="104.796875" stroke="#000000" fill="#ffffff" style="stroke-width: 2;">
+        </rect>
+        <text x="331.8515625" y="174.875" style="font-size: 16px; font-family: &quot;Andale Mono&quot;, monospace;">
+          <tspan x="331.8515625">Validates</tspan>
+          <tspan dy="1.2em" x="331.8515625">api key</tspan>
+          <tspan dy="1.2em" x="331.8515625">and secret</tspan>
+          <tspan dy="1.2em" x="331.8515625">to determine</tspan>
+          <tspan dy="1.2em" x="331.8515625">user</tspan>
+        </text>
+      </g>
+      <g class="signal">
+        <text x="154.8203125" y="291.3671875" style="font-size: 16px; font-family: &quot;Andale Mono&quot;, monospace;">
+          <tspan x="154.8203125">RESPONSE:</tspan>
+          <tspan dy="1.2em" x="154.8203125">Status: 201</tspan>
+          <tspan dy="1.2em" x="154.8203125">Body: {jwt: xxxx.yyyy}</tspan>
+        </text>
+        <line x1="472.0703125" x2="48.8046875" y1="336.28125" y2="336.28125" stroke="#000000" fill="none" style="stroke-width: 2; marker-end: url(&quot;#markerArrowBlock&quot;);">
+        </line>
+      </g>
+      <g class="note">
+        <rect x="68.8046875" y="356.28125" width="134.8125" height="85.59375" stroke="#000000" fill="#ffffff" style="stroke-width: 2;">
+        </rect>
+        <text x="73.8046875" y="376.28125" style="font-size: 16px; font-family: &quot;Andale Mono&quot;, monospace;">
+          <tspan x="73.8046875">Stores JWT</tspan>
+          <tspan dy="1.2em" x="73.8046875">to use in</tspan>
+          <tspan dy="1.2em" x="73.8046875">authorization</tspan>
+          <tspan dy="1.2em" x="73.8046875">header</tspan>
+        </text>
+      </g>
+      <g class="signal">
+        <text x="87.609375" y="473.4375" style="font-size: 16px; font-family: &quot;Andale Mono&quot;, monospace;">
+          <tspan x="87.609375">REQUEST to protected endpoint</tspan>
+          <tspan dy="1.2em" x="87.609375">Headers:</tspan>
+          <tspan dy="1.2em" x="87.609375">HTTP_AUTHORIZATION: Bearer xxxx.yyyy</tspan>
+        </text>
+        <line x1="48.8046875" x2="472.0703125" y1="518.75" y2="518.75" stroke="#000000" fill="none" style="stroke-width: 2; marker-end: url(&quot;#markerArrowBlock&quot;);">
+        </line>
+      </g>
+      <g class="signal">
+        <text x="212.4296875" y="550.15625" style="font-size: 16px; font-family: &quot;Andale Mono&quot;, monospace;">
+          <tspan x="212.4296875">RESPONSE:</tspan>
+          <tspan dy="1.2em" x="212.4296875">Status:20X</tspan>
+        </text>
+        <line x1="472.0703125" x2="48.8046875" y1="575.9375" y2="575.9375" stroke="#000000" fill="none" style="stroke-width: 2; marker-end: url(&quot;#markerArrowBlock&quot;);">
+        </line>
+      </g>
+    </svg>
