@@ -7,8 +7,8 @@ The authentication flow for the cta-aggregator proceeds as follows:
 
 ```shell
 # Set the api key and secret in the authorization header
-curl -X POST "http://localhost:3000/authenticate"
-  -H "HTTP_AUTHORIZATION: api-key:api-secret"
+curl -X POST "http://localhost:3000/v1/authorize"
+  -H "AUTHORIZATION: api-key:api-secret"
 ```
 
 > The above command returns JSON structured like this:
@@ -24,7 +24,7 @@ curl -X POST "http://localhost:3000/authenticate"
 ```shell
 # set the JWT in the authorization header
 curl -X POST "http://localhost:3000/some-protected-endpoint"
-  -H "HTTP_AUTHORIZATION: Bearer xxxx.yyyy"
+  -H "AUTHORIZATION: Bearer xxxx.yyyy"
 ```
 
 > The above request should return a 200 status response if authentication is successful
@@ -47,8 +47,8 @@ You must replace <code>api-key</code> with your personal API key and <code>api-s
 ## Unsuccessful Authentication:
 
 ```shell
-curl -X POST "http://localhost:3000/authenticate"
-  -H "HTTP_AUTHORIZATION: wrong-api-key:or-secret"
+curl -X POST "http://localhost:3000/v1/authorize"
+  -H "AUTHORIZATION: wrong-api-key:or-secret"
 ```
 > The above command will return a 404 when the api key or secret is invalid
 
@@ -60,7 +60,7 @@ If the server cannot successfully validate that the key and secret belong to a r
 ```shell
 # set the JWT in the authorization header
 curl -X POST "http://localhost:3000/some-protected-endpoint"
-  -H "HTTP_AUTHORIZATION: Bearer xxxx.yyyy"
+  -H "AUTHORIZATION: Bearer xxxx.yyyy"
 ```
 > The above command will return a 401 when the JWT has expired
 
@@ -72,7 +72,7 @@ All JWTs issued by the server will expire after 24 hours. When a token expires, 
 ```shell
 # set a bad JWT in the authorization header
 curl -X POST "http://localhost:3000/some-protected-endpoint"
-  -H "HTTP_AUTHORIZATION: Bearer abcd.efgh"
+  -H "AUTHORIZATION: Bearer abcd.efgh"
 ```
 > The above command will return a 401 when the JWT is incorrect.
 
