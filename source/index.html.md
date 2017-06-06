@@ -13,6 +13,7 @@ includes:
   - events
   - contacts
   - locations
+  - scripts
   - errors
 
 search: true
