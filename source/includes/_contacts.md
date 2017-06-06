@@ -1,5 +1,18 @@
 # Contacts
 
+A contact is a person associated with an event.  Each contact must have a name
+and either an email address or phone number.  All other fields are optional.
+
+###  Contact Attributes
+
+Attribute 	| Data Type | Meaning
+----------  | -------   | -------
+id          | uuid      | unique identifier
+name        | string    | full name of person
+email       | string    | email address
+phone       | string    | phone number
+website     | string    | website associated with person
+
 ## Get All Contacts
 
 ```shell

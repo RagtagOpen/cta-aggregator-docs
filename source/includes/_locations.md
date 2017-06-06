@@ -1,5 +1,18 @@
 # Locations
 
+All onsite events have a location associated with them.
+
+###  Location Attributes
+
+Attribute 	| Data Type | Meaning
+----------  | -------   | -------
+id          | uuid      | unique identifier
+address     | string    | full address
+city        | string    | city name
+state       | string    | 2 letter state abbreviation
+zipcode     | string    | postal code
+notes       | text      | Additional information
+
 ## Get All Locations
 
 ```shell
@@ -20,8 +33,7 @@ curl -X GET  "http://localhost:3000/v1/locations"
         "self": "http://localhost:3000/v1/locations/56ee1a5e-90a1-4c03-a0fd-d025e4b9538d"
       },
       "attributes": {
-        "address-line-1": "210 E. 249 St.",
-        "address-line-2": "",
+        "address": "210 E. 249 St.",
         "city": "New York",
         "state": "TX",
         "zipcode": "52569",
@@ -35,8 +47,7 @@ curl -X GET  "http://localhost:3000/v1/locations"
         "self": "http://localhost:3000/v1/locations/dc1d144a-054c-4a87-8b1b-d984efd8c394"
       },
       "attributes": {
-        "address-line-1": "36 N. 100 Ave.",
-        "address-line-2": "Suite 2311",
+        "address": "36 N. 100 Ave.",
         "city": "Baltimore",
         "state": "NY",
         "zipcode": "18400",
@@ -50,8 +61,7 @@ curl -X GET  "http://localhost:3000/v1/locations"
         "self": "http://localhost:3000/v1/locations/3cf1e2c9-0b21-4eee-ab3e-25ea77b83db3"
       },
       "attributes": {
-        "address-line-1": "169 S. 142 Ave.",
-        "address-line-2": "Suite 2793",
+        "address": "169 S. 142 Ave.",
         "city": "Bannock",
         "state": "WA",
         "zipcode": "19076",
@@ -65,8 +75,7 @@ curl -X GET  "http://localhost:3000/v1/locations"
         "self": "http://localhost:3000/v1/locations/964500a4-6d11-4f62-be8c-fdd556293848"
       },
       "attributes": {
-        "address-line-1": "239 N. 69 Blvd.",
-        "address-line-2": "",
+        "address": "239 N. 69 Blvd.",
         "city": "Bannock",
         "state": "ID",
         "zipcode": "78290",
@@ -80,8 +89,7 @@ curl -X GET  "http://localhost:3000/v1/locations"
         "self": "http://localhost:3000/v1/locations/91369577-323d-4c9a-b735-bb46bd60b76d"
       },
       "attributes": {
-        "address-line-1": "168 E. 178 Blvd.",
-        "address-line-2": "",
+        "address": "168 E. 178 Blvd.",
         "city": "Dallas",
         "state": "ID",
         "zipcode": "44153",
@@ -95,8 +103,7 @@ curl -X GET  "http://localhost:3000/v1/locations"
         "self": "http://localhost:3000/v1/locations/47237bc6-e028-44ec-ac42-1dcbfe953f4f"
       },
       "attributes": {
-        "address-line-1": "84 W. 242 Blvd.",
-        "address-line-2": "Suite 1955",
+        "address": "84 W. 242 Blvd.",
         "city": "Baltimore",
         "state": "TX",
         "zipcode": "51990",
@@ -110,8 +117,7 @@ curl -X GET  "http://localhost:3000/v1/locations"
         "self": "http://localhost:3000/v1/locations/d96721d5-ef23-4fac-95bb-5dab2412ed41"
       },
       "attributes": {
-        "address-line-1": "174 S. 205 St.",
-        "address-line-2": "Suite 82",
+        "address": "174 S. 205 St.",
         "city": "San Francisco",
         "state": "WA",
         "zipcode": "27006",
@@ -125,8 +131,7 @@ curl -X GET  "http://localhost:3000/v1/locations"
         "self": "http://localhost:3000/v1/locations/0940c205-9962-45b3-b11b-52ed7b798143"
       },
       "attributes": {
-        "address-line-1": "197 S. 99 Blvd.",
-        "address-line-2": "",
+        "address": "197 S. 99 Blvd.",
         "city": "San Francisco",
         "state": "CA",
         "zipcode": "98345",
@@ -140,8 +145,7 @@ curl -X GET  "http://localhost:3000/v1/locations"
         "self": "http://localhost:3000/v1/locations/95d916ca-e59b-46cc-ab1a-eac9a9b24768"
       },
       "attributes": {
-        "address-line-1": "113 N. 234 Ave.",
-        "address-line-2": "",
+        "address": "113 N. 234 Ave.",
         "city": "Los Angeles",
         "state": "TX",
         "zipcode": "15656",
@@ -155,8 +159,7 @@ curl -X GET  "http://localhost:3000/v1/locations"
         "self": "http://localhost:3000/v1/locations/fa6d4802-937c-4e27-a938-1450083aebae"
       },
       "attributes": {
-        "address-line-1": "146 N. 246 Ave.",
-        "address-line-2": "",
+        "address": "146 N. 246 Ave.",
         "city": "Spokane",
         "state": "ID",
         "zipcode": "44766",
@@ -184,10 +187,10 @@ You can filter based on the following attribteus
 
 Filter    | Example
 --------- |  -----------
-address_line_1    | `GET "http://localhost:3000/v1/locations?filter[address_line_1]=123 Fake St."`
-city | `GET "http://localhost:3000/v1/locations?filter[city]=Detroit"`
-state | `GET "http://localhost:3000/v1/locations?filter[state]=ID"`
-zipcode | `GET "http://localhost:3000/v1/locations?filter[zipcode]=66001"`
+address   | `GET "http://localhost:3000/v1/locations?filter[address]=123 Fake St."`
+city      | `GET "http://localhost:3000/v1/locations?filter[city]=Detroit"`
+state     | `GET "http://localhost:3000/v1/locations?filter[state]=ID"`
+zipcode   | `GET "http://localhost:3000/v1/locations?filter[zipcode]=66001"`
 
 
 ## Get a Specific Location
@@ -210,8 +213,7 @@ curl -X GET  "http://localhost:3000/v1/locations/83911d17-b56e-4c11-bc5b-485c8cb
       "self": "http://localhost:3000/v1/locations/657a33f9-6139-45a8-becd-f581809a8b05"
     },
     "attributes": {
-      "address-line-1": "123 Fake Street",
-      "address-line-2": null,
+      "address": "123 Fake Street",
       "city": "Fakeville",
       "state": "CA",
       "zipcode": "91666",
@@ -242,7 +244,7 @@ curl -X POST "http://localhost:3000/v1/locations"
 		"data": {
 			"type": "locations",
 			"attributes": {
-				"address-line-1": "121 Fake Street",
+				"address": "121 Fake Street",
 				"city": "Fakeville",
 				"state": "CA",
 				"zipcode": "91666",
@@ -263,8 +265,7 @@ curl -X POST "http://localhost:3000/v1/locations"
       "self": "http://localhost:3000/v1/locations/657a33f9-6139-45a8-becd-f581809a8b05"
     },
     "attributes": {
-      "address-line-1": "123 Fake Street",
-      "address-line-2": null,
+      "address": "123 Fake Street",
       "city": "Fakeville",
       "state": "CA",
       "zipcode": "91666",
