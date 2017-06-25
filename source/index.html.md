@@ -14,6 +14,7 @@ includes:
   - contacts
   - locations
   - errors
+  - embedding
 
 search: true
 ---
@@ -27,4 +28,3 @@ resources: a contact and (optionally) a location.
 The API follows the [JSON API spec](http://jsonapi.org/).  Feature like
 pagination, filtering, and CRUDing resrouces are all implemented following the
 conventions established in this spec.
-
