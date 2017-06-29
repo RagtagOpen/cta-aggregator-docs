@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Simple CTA Example</title>
+    </head>
+    <body>
+        <!-- Use a simple definition list to display the CTAs. -->
+        <dl id='#events'></dl>
+        <script>
+         var events = document.getElementById('#events');
+
+         req=new XMLHttpRequest();
+
+         // Call back function, recieves the results of the AJAX call
+         req.onload=function(){
+             response = JSON.parse(req.responseText);
+             // Loop over the events and display
+             response.data.forEach(function(event) {
+                 events.innerHTML += "<dt>" + event.attributes.title + "</dt>\n" +
+                                     '<dd>' + event.attributes.title + '</dd>';
+             });
+         };
+         // Connect to the API
+         req.open("GET",'http://localhost:3000/v1/events',true);
+         // and send the request.
+         req.send();
+        </script>
+    </body>
+</html>
