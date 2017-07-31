@@ -6,6 +6,8 @@ documentation.
 
 The codebase for the CTA Aggregator is located here: https://github.com/Ragtagteam/cta-aggregator.
 
+This docs site is deployed at https://ragtagteam.github.io/cta-aggregator-docs/.
+
 ## Setup
 
 To run this project locally, install the dependencies and launch the server
