@@ -1,5 +1,15 @@
 # Locations
 
+A location resource contains the following attributes
+
+Name    | Type | Description
+--------- |  ----------- |  -----------
+venue | string | Optional venue name at the event address, useful for names of buildings. (ex: Smith Hall)
+address_lines | Array | An array of strings representing the event’s street address.
+locality |string | A city or other local administrative area.
+region |string | State or subdivision codes according to ISO 3166-2 (Final 2 alpha digits).
+postal_code |string | The region specific postal code, such as a zip code.
+
 ## Get All Locations
 
 ```shell
@@ -12,163 +22,233 @@ curl -X GET  "http://localhost:3000/v1/locations"
 
 ```json
 {
-  "data": [
-    {
-      "id": "56ee1a5e-90a1-4c03-a0fd-d025e4b9538d",
-      "type": "locations",
-      "links": {
-        "self": "http://localhost:3000/v1/locations/56ee1a5e-90a1-4c03-a0fd-d025e4b9538d"
-      },
-      "attributes": {
-        "address-line-1": "210 E. 249 St.",
-        "address-line-2": "",
-        "city": "New York",
-        "state": "TX",
-        "zipcode": "52569",
-        "notes": null
-      }
-    },
-    {
-      "id": "dc1d144a-054c-4a87-8b1b-d984efd8c394",
-      "type": "locations",
-      "links": {
-        "self": "http://localhost:3000/v1/locations/dc1d144a-054c-4a87-8b1b-d984efd8c394"
-      },
-      "attributes": {
-        "address-line-1": "36 N. 100 Ave.",
-        "address-line-2": "Suite 2311",
-        "city": "Baltimore",
-        "state": "NY",
-        "zipcode": "18400",
-        "notes": null
-      }
-    },
-    {
-      "id": "3cf1e2c9-0b21-4eee-ab3e-25ea77b83db3",
-      "type": "locations",
-      "links": {
-        "self": "http://localhost:3000/v1/locations/3cf1e2c9-0b21-4eee-ab3e-25ea77b83db3"
-      },
-      "attributes": {
-        "address-line-1": "169 S. 142 Ave.",
-        "address-line-2": "Suite 2793",
-        "city": "Bannock",
-        "state": "WA",
-        "zipcode": "19076",
-        "notes": null
-      }
-    },
-    {
-      "id": "964500a4-6d11-4f62-be8c-fdd556293848",
-      "type": "locations",
-      "links": {
-        "self": "http://localhost:3000/v1/locations/964500a4-6d11-4f62-be8c-fdd556293848"
-      },
-      "attributes": {
-        "address-line-1": "239 N. 69 Blvd.",
-        "address-line-2": "",
-        "city": "Bannock",
-        "state": "ID",
-        "zipcode": "78290",
-        "notes": null
-      }
-    },
-    {
-      "id": "91369577-323d-4c9a-b735-bb46bd60b76d",
-      "type": "locations",
-      "links": {
-        "self": "http://localhost:3000/v1/locations/91369577-323d-4c9a-b735-bb46bd60b76d"
-      },
-      "attributes": {
-        "address-line-1": "168 E. 178 Blvd.",
-        "address-line-2": "",
-        "city": "Dallas",
-        "state": "ID",
-        "zipcode": "44153",
-        "notes": null
-      }
-    },
-    {
-      "id": "47237bc6-e028-44ec-ac42-1dcbfe953f4f",
-      "type": "locations",
-      "links": {
-        "self": "http://localhost:3000/v1/locations/47237bc6-e028-44ec-ac42-1dcbfe953f4f"
-      },
-      "attributes": {
-        "address-line-1": "84 W. 242 Blvd.",
-        "address-line-2": "Suite 1955",
-        "city": "Baltimore",
-        "state": "TX",
-        "zipcode": "51990",
-        "notes": null
-      }
-    },
-    {
-      "id": "d96721d5-ef23-4fac-95bb-5dab2412ed41",
-      "type": "locations",
-      "links": {
-        "self": "http://localhost:3000/v1/locations/d96721d5-ef23-4fac-95bb-5dab2412ed41"
-      },
-      "attributes": {
-        "address-line-1": "174 S. 205 St.",
-        "address-line-2": "Suite 82",
-        "city": "San Francisco",
-        "state": "WA",
-        "zipcode": "27006",
-        "notes": null
-      }
-    },
-    {
-      "id": "0940c205-9962-45b3-b11b-52ed7b798143",
-      "type": "locations",
-      "links": {
-        "self": "http://localhost:3000/v1/locations/0940c205-9962-45b3-b11b-52ed7b798143"
-      },
-      "attributes": {
-        "address-line-1": "197 S. 99 Blvd.",
-        "address-line-2": "",
-        "city": "San Francisco",
-        "state": "CA",
-        "zipcode": "98345",
-        "notes": null
-      }
-    },
-    {
-      "id": "95d916ca-e59b-46cc-ab1a-eac9a9b24768",
-      "type": "locations",
-      "links": {
-        "self": "http://localhost:3000/v1/locations/95d916ca-e59b-46cc-ab1a-eac9a9b24768"
-      },
-      "attributes": {
-        "address-line-1": "113 N. 234 Ave.",
-        "address-line-2": "",
-        "city": "Los Angeles",
-        "state": "TX",
-        "zipcode": "15656",
-        "notes": null
-      }
-    },
-    {
-      "id": "fa6d4802-937c-4e27-a938-1450083aebae",
-      "type": "locations",
-      "links": {
-        "self": "http://localhost:3000/v1/locations/fa6d4802-937c-4e27-a938-1450083aebae"
-      },
-      "attributes": {
-        "address-line-1": "146 N. 246 Ave.",
-        "address-line-2": "",
-        "city": "Spokane",
-        "state": "ID",
-        "zipcode": "44766",
-        "notes": null
-      }
+    "data": [
+        {
+            "id": "cf2e490a-7bed-46d5-8e0a-386dfb365cc8",
+            "type": "locations",
+            "links": {
+                "self": "http://localhost:3000/v1/locations/cf2e490a-7bed-46d5-8e0a-386dfb365cc8"
+            },
+            "attributes": {
+                "venue": null,
+                "address_lines": null,
+                "locality": "Santa Fe",
+                "region": "NM",
+                "postal_code": null
+            },
+            "relationships": {
+                "user": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/locations/cf2e490a-7bed-46d5-8e0a-386dfb365cc8/relationships/user",
+                        "related": "http://localhost:3000/v1/locations/cf2e490a-7bed-46d5-8e0a-386dfb365cc8/user"
+                    }
+                }
+            }
+        },
+        {
+            "id": "dca1fc5b-a26b-4a7e-809a-26d8417921c8",
+            "type": "locations",
+            "links": {
+                "self": "http://localhost:3000/v1/locations/dca1fc5b-a26b-4a7e-809a-26d8417921c8"
+            },
+            "attributes": {
+                "venue": null,
+                "address_lines": null,
+                "locality": "New York",
+                "region": "NY",
+                "postal_code": null
+            },
+            "relationships": {
+                "user": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/locations/dca1fc5b-a26b-4a7e-809a-26d8417921c8/relationships/user",
+                        "related": "http://localhost:3000/v1/locations/dca1fc5b-a26b-4a7e-809a-26d8417921c8/user"
+                    }
+                }
+            }
+        },
+        {
+            "id": "2bd08fff-2154-4eaf-8a05-b014f462fa1e",
+            "type": "locations",
+            "links": {
+                "self": "http://localhost:3000/v1/locations/2bd08fff-2154-4eaf-8a05-b014f462fa1e"
+            },
+            "attributes": {
+                "venue": null,
+                "address_lines": null,
+                "locality": "San Francisco",
+                "region": "CA",
+                "postal_code": null
+            },
+            "relationships": {
+                "user": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/locations/2bd08fff-2154-4eaf-8a05-b014f462fa1e/relationships/user",
+                        "related": "http://localhost:3000/v1/locations/2bd08fff-2154-4eaf-8a05-b014f462fa1e/user"
+                    }
+                }
+            }
+        },
+        {
+            "id": "58ad3adb-7cb5-4851-99e4-e9e3f7f6aee1",
+            "type": "locations",
+            "links": {
+                "self": "http://localhost:3000/v1/locations/58ad3adb-7cb5-4851-99e4-e9e3f7f6aee1"
+            },
+            "attributes": {
+                "venue": null,
+                "address_lines": "3845 S Capitol St SW",
+                "locality": "Washington",
+                "region": "DC",
+                "postal_code": "20032"
+            },
+            "relationships": {
+                "user": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/locations/58ad3adb-7cb5-4851-99e4-e9e3f7f6aee1/relationships/user",
+                        "related": "http://localhost:3000/v1/locations/58ad3adb-7cb5-4851-99e4-e9e3f7f6aee1/user"
+                    }
+                }
+            }
+        },
+        {
+            "id": "45edada9-947f-4c00-922f-9aaffe0f23a7",
+            "type": "locations",
+            "links": {
+                "self": "http://localhost:3000/v1/locations/45edada9-947f-4c00-922f-9aaffe0f23a7"
+            },
+            "attributes": {
+                "venue": null,
+                "address_lines": "201 Railroad St N",
+                "locality": "Ridgway",
+                "region": "CO",
+                "postal_code": "81432"
+            },
+            "relationships": {
+                "user": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/locations/45edada9-947f-4c00-922f-9aaffe0f23a7/relationships/user",
+                        "related": "http://localhost:3000/v1/locations/45edada9-947f-4c00-922f-9aaffe0f23a7/user"
+                    }
+                }
+            }
+        },
+        {
+            "id": "5539972b-9ea8-4c24-8718-4b9c3221a8c8",
+            "type": "locations",
+            "links": {
+                "self": "http://localhost:3000/v1/locations/5539972b-9ea8-4c24-8718-4b9c3221a8c8"
+            },
+            "attributes": {
+                "venue": null,
+                "address_lines": "Dr Holly Hale Center, 135 Harrison Avenue, Panama City, FL 32405",
+                "locality": "Panama City",
+                "region": "FL",
+                "postal_code": "32401"
+            },
+            "relationships": {
+                "user": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/locations/5539972b-9ea8-4c24-8718-4b9c3221a8c8/relationships/user",
+                        "related": "http://localhost:3000/v1/locations/5539972b-9ea8-4c24-8718-4b9c3221a8c8/user"
+                    }
+                }
+            }
+        },
+        {
+            "id": "f2765cdc-c4c8-469d-bc2f-93533e655acd",
+            "type": "locations",
+            "links": {
+                "self": "http://localhost:3000/v1/locations/f2765cdc-c4c8-469d-bc2f-93533e655acd"
+            },
+            "attributes": {
+                "venue": null,
+                "address_lines": "12861 N 8th Ave",
+                "locality": "Phoenix",
+                "region": "AZ",
+                "postal_code": "85029"
+            },
+            "relationships": {
+                "user": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/locations/f2765cdc-c4c8-469d-bc2f-93533e655acd/relationships/user",
+                        "related": "http://localhost:3000/v1/locations/f2765cdc-c4c8-469d-bc2f-93533e655acd/user"
+                    }
+                }
+            }
+        },
+        {
+            "id": "954de3db-ef9e-4ed5-8809-d3fbd5bb168d",
+            "type": "locations",
+            "links": {
+                "self": "http://localhost:3000/v1/locations/954de3db-ef9e-4ed5-8809-d3fbd5bb168d"
+            },
+            "attributes": {
+                "venue": null,
+                "address_lines": [],
+                "locality": "Minneapolis",
+                "region": "MN",
+                "postal_code": "55435"
+            },
+            "relationships": {
+                "user": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/locations/954de3db-ef9e-4ed5-8809-d3fbd5bb168d/relationships/user",
+                        "related": "http://localhost:3000/v1/locations/954de3db-ef9e-4ed5-8809-d3fbd5bb168d/user"
+                    }
+                }
+            }
+        },
+        {
+            "id": "f050ccea-acfd-48d1-a7e2-792773e853a5",
+            "type": "locations",
+            "links": {
+                "self": "http://localhost:3000/v1/locations/f050ccea-acfd-48d1-a7e2-792773e853a5"
+            },
+            "attributes": {
+                "venue": null,
+                "address_lines": "1700 South Broad Street",
+                "locality": "Philadelphia",
+                "region": "PA",
+                "postal_code": "19145"
+            },
+            "relationships": {
+                "user": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/locations/f050ccea-acfd-48d1-a7e2-792773e853a5/relationships/user",
+                        "related": "http://localhost:3000/v1/locations/f050ccea-acfd-48d1-a7e2-792773e853a5/user"
+                    }
+                }
+            }
+        },
+        {
+            "id": "9c7b641b-2feb-48a3-b16c-4c1be029d440",
+            "type": "locations",
+            "links": {
+                "self": "http://localhost:3000/v1/locations/9c7b641b-2feb-48a3-b16c-4c1be029d440"
+            },
+            "attributes": {
+                "venue": null,
+                "address_lines": "60  Lake St",
+                "locality": "Burlington",
+                "region": "VT",
+                "postal_code": "05401"
+            },
+            "relationships": {
+                "user": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/locations/9c7b641b-2feb-48a3-b16c-4c1be029d440/relationships/user",
+                        "related": "http://localhost:3000/v1/locations/9c7b641b-2feb-48a3-b16c-4c1be029d440/user"
+                    }
+                }
+            }
+        }
+    ],
+    "links": {
+        "first": "http://localhost:3000/v1/locations?page%5Bnumber%5D=1&page%5Bsize%5D=10",
+        "next": "http://localhost:3000/v1/locations?page%5Bnumber%5D=2&page%5Bsize%5D=10",
+        "last": "http://localhost:3000/v1/locations?page%5Bnumber%5D=3&page%5Bsize%5D=10"
     }
-  ],
-  "links": {
-    "first": "http://localhost:3000/v1/locations?page%5Bnumber%5D=1&page%5Bsize%5D=10",
-    "next": "http://localhost:3000/v1/locations?page%5Bnumber%5D=2&page%5Bsize%5D=10",
-    "last": "http://localhost:3000/v1/locations?page%5Bnumber%5D=3&page%5Bsize%5D=10"
-  }
 }
 ```
 
@@ -180,14 +260,13 @@ This endpoint retrieves all locations.
 
 ### Filter
 
-You can filter based on the following attribteus
+You can filter based on the following attributes.
 
 Filter    | Example
 --------- |  -----------
-address_line_1    | `GET "http://localhost:3000/v1/locations?filter[address_line_1]=123 Fake St."`
-city | `GET "http://localhost:3000/v1/locations?filter[city]=Detroit"`
-state | `GET "http://localhost:3000/v1/locations?filter[state]=ID"`
-zipcode | `GET "http://localhost:3000/v1/locations?filter[zipcode]=66001"`
+locality | `GET "http://localhost:3000/v1/locations?filter[locality]=Detroit"`
+region | `GET "http://localhost:3000/v1/locations?filter[region]=ID"`
+postal_code | `GET "http://localhost:3000/v1/locations?filter[postal_code]=66001"`
 
 
 ## Get a Specific Location
@@ -199,26 +278,34 @@ curl -X GET  "http://localhost:3000/v1/locations/83911d17-b56e-4c11-bc5b-485c8cb
   -H "Content-Type: application/vnd.api+json"
 ```
 
-> The above command returns JSON structured like this:
+The above command returns JSON structured like this:
 
 ```json
 {
-  "data": {
-    "id": "657a33f9-6139-45a8-becd-f581809a8b05",
-    "type": "locations",
-    "links": {
-      "self": "http://localhost:3000/v1/locations/657a33f9-6139-45a8-becd-f581809a8b05"
-    },
-    "attributes": {
-      "address-line-1": "123 Fake Street",
-      "address-line-2": null,
-      "city": "Fakeville",
-      "state": "CA",
-      "zipcode": "91666",
-      "notes": "Buzzer is broken.  Email when you arrive"
+    "data": {
+        "id": "cf2e490a-7bed-46d5-8e0a-386dfb365cc8",
+        "type": "locations",
+        "links": {
+            "self": "http://localhost:3000/v1/locations/cf2e490a-7bed-46d5-8e0a-386dfb365cc8"
+        },
+        "attributes": {
+            "venue": "Riverfront park,
+            "address_lines": '123 Fake Stree',
+            "locality": "Santa Fe",
+            "region": "NM",
+            "postal_code": "87501"
+        },
+        "relationships": {
+            "user": {
+                "links": {
+                    "self": "http://localhost:3000/v1/locations/cf2e490a-7bed-46d5-8e0a-386dfb365cc8/relationships/user",
+                    "related": "http://localhost:3000/v1/locations/cf2e490a-7bed-46d5-8e0a-386dfb365cc8/user"
+                }
+            }
+        }
     }
-  }
 }
+
 ```
 
 ### HTTP Request
@@ -238,39 +325,46 @@ ID | The ID of the location to retrieve
 curl -X POST "http://localhost:3000/v1/locations"
   -H "Content-Type: application/vnd.api+json" 
   -H "Accept: application/vnd.api+json" 
-  -d '  {
-		"data": {
-			"type": "locations",
-			"attributes": {
-				"address-line-1": "121 Fake Street",
-				"city": "Fakeville",
-				"state": "CA",
-				"zipcode": "91666",
-				"notes": "Buzzer is broken.  Email when you arrive"
-			}
-		}
-	}'
+  -d ' {
+    "data": {
+        "type": "locations",
+        "attributes": {
+            "venue": "Moe's Cantina",
+            "address_lines": "123 Fake Street",
+            "locality": "Santa Fe",
+            "region": "NM",
+            "postal_code": 87501
+        }
+    }
+} '
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "data": {
-    "id": "657a33f9-6139-45a8-becd-f581809a8b05",
-    "type": "locations",
-    "links": {
-      "self": "http://localhost:3000/v1/locations/657a33f9-6139-45a8-becd-f581809a8b05"
-    },
-    "attributes": {
-      "address-line-1": "123 Fake Street",
-      "address-line-2": null,
-      "city": "Fakeville",
-      "state": "CA",
-      "zipcode": "91666",
-      "notes": "Buzzer is broken.  Email when you arrive"
+    "data": {
+        "id": "a728f38a-623c-4342-aa89-7ab39fd83c35",
+        "type": "locations",
+        "links": {
+            "self": "http://localhost:3000/v1/locations/a728f38a-623c-4342-aa89-7ab39fd83c35"
+        },
+        "attributes": {
+            "venue": "Moe's Cantina",
+            "address_lines": "123 Fake Street",
+            "locality": "Santa Fe",
+            "region": "NM",
+            "postal_code": "87501"
+        },
+        "relationships": {
+            "user": {
+                "links": {
+                    "self": "http://localhost:3000/v1/locations/a728f38a-623c-4342-aa89-7ab39fd83c35/relationships/user",
+                    "related": "http://localhost:3000/v1/locations/a728f38a-623c-4342-aa89-7ab39fd83c35/user"
+                }
+            }
+        }
     }
-  }
 }
 ```
 
