@@ -1,5 +1,22 @@
 # Events
 
+An event resource contains the following attributes.
+
+Name    | Type | Description
+--------- |  ----------- |  -----------
+identifiers | array | A unique string array of identifiers in the format [system name]:[id]. See the general concepts document for more information about identifiers.
+title | string | The title of the event. Intended for public display rather than administrative purposes.
+description | string |  description of the event, usually displayed publicly. May contain text and/or HTML.
+browser_url | string | A URL string pointing to the publicly available event page on the web.
+origin_system| string | A human readable identifier of the system where this event was created. (ex: “OSDI System”)
+featured_image_url| string | A URL string pointing to a publicly available featured image file for this event on the web.
+start_date | datetime | The start time for the event.
+end_date | datetime | date  The date for all day events.
+free | boolean | Indicator of whether there is a cost associated with attending the event
+location_id| integer | identifier for location associated with event
+created_at | datetime | A read-only property representing the date and time the resource was created on the local system.
+updated_at | datetime |A read-only property representing the date and time the resource was last modified on the local system.
+
 ## Get All Events
 
 ```shell
@@ -12,313 +29,343 @@ curl -X GET "http://localhost:3000/v1/events"
 
 ```json
 {
-  "data": [
-    {
-      "id": "a94af705-c389-4c33-8b25-e35a42062949",
-      "type": "events",
-      "links": {
-        "self": "http://localhost:3000/v1/events/a94af705-c389-4c33-8b25-e35a42062949"
-      },
-      "attributes": {
-        "title": "occaecat sed nulla ea consectetur",
-        "description": "magna adipiscing id aute consectetur ut incididunt mollit non Duis dolore elit reprehenderit laboris sed dolore Excepteur ut est nostrud officia deserunt ipsum sunt culpa",
-        "free": false,
-        "start-time": 1526236740,
-        "end-time": 1526247540,
-        "event-type": "onsite",
-        "website": "www.consectetur.com"
-      },
-      "relationships": {
-        "location": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/a94af705-c389-4c33-8b25-e35a42062949/relationships/location",
-            "related": "http://localhost:3000/v1/events/a94af705-c389-4c33-8b25-e35a42062949/location"
-          }
+    "data": [
+        {
+            "id": "b22dec03-2542-41da-a412-2642b76895ce",
+            "type": "events",
+            "links": {
+                "self": "http://localhost:3000/v1/events/b22dec03-2542-41da-a412-2642b76895ce"
+            },
+            "attributes": {
+                "title": "Reception",
+                "description": null,
+                "browser_url": "https://secure.emilyslist.org/page/contribute/Events_Test",
+                "origin_system": "emilyslist:Events_Test",
+                "featured_image_url": null,
+                "start_date": "2017-07-27T00:00:00.000Z",
+                "end_date": null,
+                "free": false,
+                "identifier": null,
+                "identifiers": []
+            },
+            "relationships": {
+                "location": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/b22dec03-2542-41da-a412-2642b76895ce/relationships/location",
+                        "related": "http://localhost:3000/v1/events/b22dec03-2542-41da-a412-2642b76895ce/location"
+                    }
+                },
+                "user": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/b22dec03-2542-41da-a412-2642b76895ce/relationships/user",
+                        "related": "http://localhost:3000/v1/events/b22dec03-2542-41da-a412-2642b76895ce/user"
+                    }
+                }
+            }
         },
-        "contact": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/a94af705-c389-4c33-8b25-e35a42062949/relationships/contact",
-            "related": "http://localhost:3000/v1/events/a94af705-c389-4c33-8b25-e35a42062949/contact"
-          }
-        }
-      }
-    },
-    {
-      "id": "5ddc36fd-ccd8-41e4-a454-c1b008e264a7",
-      "type": "events",
-      "links": {
-        "self": "http://localhost:3000/v1/events/5ddc36fd-ccd8-41e4-a454-c1b008e264a7"
-      },
-      "attributes": {
-        "title": "pariatur non amet dolor sunt",
-        "description": "Excepteur est ea elit in minim dolor incididunt occaecat amet in fugiat ullamco sunt Duis sint sit anim reprehenderit id eu consequat nulla ut laborum",
-        "free": false,
-        "start-time": 1507813620,
-        "end-time": 1507824420,
-        "event-type": "onsite",
-        "website": "www.non.com"
-      },
-      "relationships": {
-        "location": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/5ddc36fd-ccd8-41e4-a454-c1b008e264a7/relationships/location",
-            "related": "http://localhost:3000/v1/events/5ddc36fd-ccd8-41e4-a454-c1b008e264a7/location"
-          }
+        {
+            "id": "4a9cf064-f6a4-4ac0-bdf9-bc94b51d5925",
+            "type": "events",
+            "links": {
+                "self": "http://localhost:3000/v1/events/4a9cf064-f6a4-4ac0-bdf9-bc94b51d5925"
+            },
+            "attributes": {
+                "title": "Briefing and Luncheon ",
+                "description": null,
+                "browser_url": "https://secure.emilyslist.org/page/contribute/NYC_Ignite_Change_Luncheon",
+                "origin_system": "emilyslist:NYC_Ignite_Change_Luncheon",
+                "featured_image_url": null,
+                "start_date": "2017-09-18T00:00:00.000Z",
+                "end_date": null,
+                "free": false,
+                "identifier": null,
+                "identifiers": []
+            },
+            "relationships": {
+                "location": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/4a9cf064-f6a4-4ac0-bdf9-bc94b51d5925/relationships/location",
+                        "related": "http://localhost:3000/v1/events/4a9cf064-f6a4-4ac0-bdf9-bc94b51d5925/location"
+                    }
+                },
+                "user": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/4a9cf064-f6a4-4ac0-bdf9-bc94b51d5925/relationships/user",
+                        "related": "http://localhost:3000/v1/events/4a9cf064-f6a4-4ac0-bdf9-bc94b51d5925/user"
+                    }
+                }
+            }
         },
-        "contact": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/5ddc36fd-ccd8-41e4-a454-c1b008e264a7/relationships/contact",
-            "related": "http://localhost:3000/v1/events/5ddc36fd-ccd8-41e4-a454-c1b008e264a7/contact"
-          }
-        }
-      }
-    },
-    {
-      "id": "3b2aa5cc-430d-42ec-9a3f-ddac99957584",
-      "type": "events",
-      "links": {
-        "self": "http://localhost:3000/v1/events/3b2aa5cc-430d-42ec-9a3f-ddac99957584"
-      },
-      "attributes": {
-        "title": "ex cillum ut quis pariatur",
-        "description": "sit aliqua reprehenderit amet sed ut enim occaecat adipiscing aute aliquip minim deserunt et officia quis eu proident ut nulla fugiat eiusmod in do qui",
-        "free": false,
-        "start-time": 1498284480,
-        "end-time": 1498295280,
-        "event-type": "onsite",
-        "website": "www.pariatur.com"
-      },
-      "relationships": {
-        "location": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/3b2aa5cc-430d-42ec-9a3f-ddac99957584/relationships/location",
-            "related": "http://localhost:3000/v1/events/3b2aa5cc-430d-42ec-9a3f-ddac99957584/location"
-          }
+        {
+            "id": "2c2841e5-330a-4bf2-9a2b-63b62b3672d0",
+            "type": "events",
+            "links": {
+                "self": "http://localhost:3000/v1/events/2c2841e5-330a-4bf2-9a2b-63b62b3672d0"
+            },
+            "attributes": {
+                "title": "Luncheon",
+                "description": null,
+                "browser_url": "https://secure.emilyslist.org/page/contribute/western-regional-luncheon",
+                "origin_system": "emilyslist:western-regional-luncheon",
+                "featured_image_url": null,
+                "start_date": "2017-10-13T00:00:00.000Z",
+                "end_date": null,
+                "free": false,
+                "identifier": null,
+                "identifiers": []
+            },
+            "relationships": {
+                "location": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/2c2841e5-330a-4bf2-9a2b-63b62b3672d0/relationships/location",
+                        "related": "http://localhost:3000/v1/events/2c2841e5-330a-4bf2-9a2b-63b62b3672d0/location"
+                    }
+                },
+                "user": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/2c2841e5-330a-4bf2-9a2b-63b62b3672d0/relationships/user",
+                        "related": "http://localhost:3000/v1/events/2c2841e5-330a-4bf2-9a2b-63b62b3672d0/user"
+                    }
+                }
+            }
         },
-        "contact": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/3b2aa5cc-430d-42ec-9a3f-ddac99957584/relationships/contact",
-            "related": "http://localhost:3000/v1/events/3b2aa5cc-430d-42ec-9a3f-ddac99957584/contact"
-          }
-        }
-      }
-    },
-    {
-      "id": "79eb5360-ad92-4fcd-96f8-7b64a8ec16a1",
-      "type": "events",
-      "links": {
-        "self": "http://localhost:3000/v1/events/79eb5360-ad92-4fcd-96f8-7b64a8ec16a1"
-      },
-      "attributes": {
-        "title": "deserunt sint labore dolore in",
-        "description": "do Ut occaecat sint dolore sed minim nisi amet pariatur aliqua elit commodo dolor ea ullamco dolor labore irure adipiscing qui Duis aute deserunt nulla",
-        "free": false,
-        "start-time": 1555809000,
-        "end-time": 1555823400,
-        "event-type": "onsite",
-        "website": "www.aute.com"
-      },
-      "relationships": {
-        "location": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/79eb5360-ad92-4fcd-96f8-7b64a8ec16a1/relationships/location",
-            "related": "http://localhost:3000/v1/events/79eb5360-ad92-4fcd-96f8-7b64a8ec16a1/location"
-          }
+        {
+            "id": "7c2bfc80-030b-4864-83f2-3852209f7e0c",
+            "type": "events",
+            "links": {
+                "self": "http://localhost:3000/v1/events/7c2bfc80-030b-4864-83f2-3852209f7e0c"
+            },
+            "attributes": {
+                "title": "Night Out for Safety and Liberation",
+                "description": null,
+                "browser_url": "http://facebook.com/events/124363648167925",
+                "origin_system": "Facebook",
+                "featured_image_url": null,
+                "start_date": "2017-08-01T22:00:00.000Z",
+                "end_date": null,
+                "free": false,
+                "identifier": null,
+                "identifiers": []
+            },
+            "relationships": {
+                "location": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/7c2bfc80-030b-4864-83f2-3852209f7e0c/relationships/location",
+                        "related": "http://localhost:3000/v1/events/7c2bfc80-030b-4864-83f2-3852209f7e0c/location"
+                    }
+                },
+                "user": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/7c2bfc80-030b-4864-83f2-3852209f7e0c/relationships/user",
+                        "related": "http://localhost:3000/v1/events/7c2bfc80-030b-4864-83f2-3852209f7e0c/user"
+                    }
+                }
+            }
         },
-        "contact": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/79eb5360-ad92-4fcd-96f8-7b64a8ec16a1/relationships/contact",
-            "related": "http://localhost:3000/v1/events/79eb5360-ad92-4fcd-96f8-7b64a8ec16a1/contact"
-          }
-        }
-      }
-    },
-    {
-      "id": "5d28b127-d7ff-4ef0-9215-b1029f4eefb0",
-      "type": "events",
-      "links": {
-        "self": "http://localhost:3000/v1/events/5d28b127-d7ff-4ef0-9215-b1029f4eefb0"
-      },
-      "attributes": {
-        "title": "consectetur do velit sed anim",
-        "description": "exercitation laboris in nulla Duis eu nisi ex in consequat quis proident ut anim dolor culpa est dolore aliquip ad magna in esse do ea",
-        "free": true,
-        "start-time": 1576524120,
-        "end-time": 1576527720,
-        "event-type": "onsite",
-        "website": "www.sit.com"
-      },
-      "relationships": {
-        "location": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/5d28b127-d7ff-4ef0-9215-b1029f4eefb0/relationships/location",
-            "related": "http://localhost:3000/v1/events/5d28b127-d7ff-4ef0-9215-b1029f4eefb0/location"
-          }
+        {
+            "id": "05166da1-d88a-4e28-844a-dad88716ee94",
+            "type": "events",
+            "links": {
+                "self": "http://localhost:3000/v1/events/05166da1-d88a-4e28-844a-dad88716ee94"
+            },
+            "attributes": {
+                "title": "D3 Monthly Meeting - August",
+                "description": null,
+                "browser_url": "http://facebook.com/events/808441485976208",
+                "origin_system": "Facebook",
+                "featured_image_url": null,
+                "start_date": "2017-08-02T00:30:00.000Z",
+                "end_date": null,
+                "free": false,
+                "identifier": null,
+                "identifiers": []
+            },
+            "relationships": {
+                "location": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/05166da1-d88a-4e28-844a-dad88716ee94/relationships/location",
+                        "related": "http://localhost:3000/v1/events/05166da1-d88a-4e28-844a-dad88716ee94/location"
+                    }
+                },
+                "user": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/05166da1-d88a-4e28-844a-dad88716ee94/relationships/user",
+                        "related": "http://localhost:3000/v1/events/05166da1-d88a-4e28-844a-dad88716ee94/user"
+                    }
+                }
+            }
         },
-        "contact": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/5d28b127-d7ff-4ef0-9215-b1029f4eefb0/relationships/contact",
-            "related": "http://localhost:3000/v1/events/5d28b127-d7ff-4ef0-9215-b1029f4eefb0/contact"
-          }
-        }
-      }
-    },
-    {
-      "id": "8ec14d5b-1565-43a9-bbbb-fa66a8f1b875",
-      "type": "events",
-      "links": {
-        "self": "http://localhost:3000/v1/events/8ec14d5b-1565-43a9-bbbb-fa66a8f1b875"
-      },
-      "attributes": {
-        "title": "incididunt in officia dolor laborum",
-        "description": "quis cillum ipsum eu dolor esse pariatur Excepteur in aliquip sint anim officia do cupidatat sunt sit dolore in incididunt laboris ut magna veniam ut",
-        "free": true,
-        "start-time": 1509701760,
-        "end-time": 1509705360,
-        "event-type": "onsite",
-        "website": "www.adipiscing.com"
-      },
-      "relationships": {
-        "location": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/8ec14d5b-1565-43a9-bbbb-fa66a8f1b875/relationships/location",
-            "related": "http://localhost:3000/v1/events/8ec14d5b-1565-43a9-bbbb-fa66a8f1b875/location"
-          }
+        {
+            "id": "9dd21b59-11ef-4626-8646-af7950b57e92",
+            "type": "events",
+            "links": {
+                "self": "http://localhost:3000/v1/events/9dd21b59-11ef-4626-8646-af7950b57e92"
+            },
+            "attributes": {
+                "title": "August 2017 Bay County Democratic Veterans Caucus",
+                "description": null,
+                "browser_url": "http://facebook.com/events/396096687404412",
+                "origin_system": "Facebook",
+                "featured_image_url": null,
+                "start_date": "2017-08-02T01:00:00.000Z",
+                "end_date": null,
+                "free": false,
+                "identifier": null,
+                "identifiers": []
+            },
+            "relationships": {
+                "location": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/9dd21b59-11ef-4626-8646-af7950b57e92/relationships/location",
+                        "related": "http://localhost:3000/v1/events/9dd21b59-11ef-4626-8646-af7950b57e92/location"
+                    }
+                },
+                "user": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/9dd21b59-11ef-4626-8646-af7950b57e92/relationships/user",
+                        "related": "http://localhost:3000/v1/events/9dd21b59-11ef-4626-8646-af7950b57e92/user"
+                    }
+                }
+            }
         },
-        "contact": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/8ec14d5b-1565-43a9-bbbb-fa66a8f1b875/relationships/contact",
-            "related": "http://localhost:3000/v1/events/8ec14d5b-1565-43a9-bbbb-fa66a8f1b875/contact"
-          }
-        }
-      }
-    },
-    {
-      "id": "5ccd793f-02df-4fee-8ab6-d2f87fcda52e",
-      "type": "events",
-      "links": {
-        "self": "http://localhost:3000/v1/events/5ccd793f-02df-4fee-8ab6-d2f87fcda52e"
-      },
-      "attributes": {
-        "title": "occaecat nostrud exercitation eiusmod aute",
-        "description": "cillum consequat nisi dolor labore deserunt Excepteur ullamco proident laboris ut aliqua in Duis cupidatat enim ad sed qui occaecat minim reprehenderit fugiat exercitation dolore",
-        "free": false,
-        "start-time": 1534443720,
-        "end-time": 1534450920,
-        "event-type": "onsite",
-        "website": "www.non.com"
-      },
-      "relationships": {
-        "location": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/5ccd793f-02df-4fee-8ab6-d2f87fcda52e/relationships/location",
-            "related": "http://localhost:3000/v1/events/5ccd793f-02df-4fee-8ab6-d2f87fcda52e/location"
-          }
+        {
+            "id": "8d2ba324-5849-425a-8c03-540f26982881",
+            "type": "events",
+            "links": {
+                "self": "http://localhost:3000/v1/events/8d2ba324-5849-425a-8c03-540f26982881"
+            },
+            "attributes": {
+                "title": "LD 28 monthly meeting-AUGUST (no July meeting)",
+                "description": null,
+                "browser_url": "http://facebook.com/events/318853201874086",
+                "origin_system": "Facebook",
+                "featured_image_url": null,
+                "start_date": "2017-08-02T02:00:00.000Z",
+                "end_date": null,
+                "free": false,
+                "identifier": null,
+                "identifiers": []
+            },
+            "relationships": {
+                "location": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/8d2ba324-5849-425a-8c03-540f26982881/relationships/location",
+                        "related": "http://localhost:3000/v1/events/8d2ba324-5849-425a-8c03-540f26982881/location"
+                    }
+                },
+                "user": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/8d2ba324-5849-425a-8c03-540f26982881/relationships/user",
+                        "related": "http://localhost:3000/v1/events/8d2ba324-5849-425a-8c03-540f26982881/user"
+                    }
+                }
+            }
         },
-        "contact": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/5ccd793f-02df-4fee-8ab6-d2f87fcda52e/relationships/contact",
-            "related": "http://localhost:3000/v1/events/5ccd793f-02df-4fee-8ab6-d2f87fcda52e/contact"
-          }
-        }
-      }
-    },
-    {
-      "id": "ee626b19-351d-4948-a21f-61682bc4c047",
-      "type": "events",
-      "links": {
-        "self": "http://localhost:3000/v1/events/ee626b19-351d-4948-a21f-61682bc4c047"
-      },
-      "attributes": {
-        "title": "magna Duis officia sed dolore",
-        "description": "qui ipsum Ut aliqua labore consectetur exercitation id veniam anim quis mollit do amet aute sit fugiat eu commodo dolore in ut est irure tempor",
-        "free": true,
-        "start-time": 1536480180,
-        "end-time": 1536494580,
-        "event-type": "onsite",
-        "website": "www.nostrud.com"
-      },
-      "relationships": {
-        "location": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/ee626b19-351d-4948-a21f-61682bc4c047/relationships/location",
-            "related": "http://localhost:3000/v1/events/ee626b19-351d-4948-a21f-61682bc4c047/location"
-          }
+        {
+            "id": "66a3e13d-f438-4b3d-a28e-0e960963101e",
+            "type": "events",
+            "links": {
+                "self": "http://localhost:3000/v1/events/66a3e13d-f438-4b3d-a28e-0e960963101e"
+            },
+            "attributes": {
+                "title": "Democracy Convention 2017",
+                "description": null,
+                "browser_url": "http://facebook.com/events/979847085463838",
+                "origin_system": "Facebook",
+                "featured_image_url": null,
+                "start_date": "2017-08-02T13:00:00.000Z",
+                "end_date": null,
+                "free": false,
+                "identifier": null,
+                "identifiers": []
+            },
+            "relationships": {
+                "location": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/66a3e13d-f438-4b3d-a28e-0e960963101e/relationships/location",
+                        "related": "http://localhost:3000/v1/events/66a3e13d-f438-4b3d-a28e-0e960963101e/location"
+                    }
+                },
+                "user": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/66a3e13d-f438-4b3d-a28e-0e960963101e/relationships/user",
+                        "related": "http://localhost:3000/v1/events/66a3e13d-f438-4b3d-a28e-0e960963101e/user"
+                    }
+                }
+            }
         },
-        "contact": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/ee626b19-351d-4948-a21f-61682bc4c047/relationships/contact",
-            "related": "http://localhost:3000/v1/events/ee626b19-351d-4948-a21f-61682bc4c047/contact"
-          }
-        }
-      }
-    },
-    {
-      "id": "e91a408f-6b84-4a7c-a3f9-f527fe030e9a",
-      "type": "events",
-      "links": {
-        "self": "http://localhost:3000/v1/events/e91a408f-6b84-4a7c-a3f9-f527fe030e9a"
-      },
-      "attributes": {
-        "title": "tempor in nisi in enim",
-        "description": "pariatur magna aliquip et veniam cillum nisi adipiscing mollit ut anim commodo ex in reprehenderit esse sit quis occaecat Lorem exercitation Excepteur irure ullamco nulla",
-        "free": true,
-        "start-time": 1553486640,
-        "end-time": 1553497440,
-        "event-type": "onsite",
-        "website": "www.laboris.com"
-      },
-      "relationships": {
-        "location": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/e91a408f-6b84-4a7c-a3f9-f527fe030e9a/relationships/location",
-            "related": "http://localhost:3000/v1/events/e91a408f-6b84-4a7c-a3f9-f527fe030e9a/location"
-          }
+        {
+            "id": "2f6f43ef-8b7b-4340-8953-afb6733cfb4b",
+            "type": "events",
+            "links": {
+                "self": "http://localhost:3000/v1/events/2f6f43ef-8b7b-4340-8953-afb6733cfb4b"
+            },
+            "attributes": {
+                "title": "Philly - Gerrymandering: Film and Discussion",
+                "description": null,
+                "browser_url": "http://facebook.com/events/743518679189815",
+                "origin_system": "Facebook",
+                "featured_image_url": null,
+                "start_date": "2017-08-02T22:00:00.000Z",
+                "end_date": null,
+                "free": false,
+                "identifier": null,
+                "identifiers": []
+            },
+            "relationships": {
+                "location": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/2f6f43ef-8b7b-4340-8953-afb6733cfb4b/relationships/location",
+                        "related": "http://localhost:3000/v1/events/2f6f43ef-8b7b-4340-8953-afb6733cfb4b/location"
+                    }
+                },
+                "user": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/2f6f43ef-8b7b-4340-8953-afb6733cfb4b/relationships/user",
+                        "related": "http://localhost:3000/v1/events/2f6f43ef-8b7b-4340-8953-afb6733cfb4b/user"
+                    }
+                }
+            }
         },
-        "contact": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/e91a408f-6b84-4a7c-a3f9-f527fe030e9a/relationships/contact",
-            "related": "http://localhost:3000/v1/events/e91a408f-6b84-4a7c-a3f9-f527fe030e9a/contact"
-          }
+        {
+            "id": "91d671d6-cb8e-4597-a525-ece68deed075",
+            "type": "events",
+            "links": {
+                "self": "http://localhost:3000/v1/events/91d671d6-cb8e-4597-a525-ece68deed075"
+            },
+            "attributes": {
+                "title": "Building Empathy and Addressing Racial Oppression (Session 2)",
+                "description": null,
+                "browser_url": "http://facebook.com/events/1426807630717923",
+                "origin_system": "Facebook",
+                "featured_image_url": null,
+                "start_date": "2017-08-02T22:30:00.000Z",
+                "end_date": null,
+                "free": false,
+                "identifier": null,
+                "identifiers": []
+            },
+            "relationships": {
+                "location": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/91d671d6-cb8e-4597-a525-ece68deed075/relationships/location",
+                        "related": "http://localhost:3000/v1/events/91d671d6-cb8e-4597-a525-ece68deed075/location"
+                    }
+                },
+                "user": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/91d671d6-cb8e-4597-a525-ece68deed075/relationships/user",
+                        "related": "http://localhost:3000/v1/events/91d671d6-cb8e-4597-a525-ece68deed075/user"
+                    }
+                }
+            }
         }
-      }
-    },
-    {
-      "id": "8319d43b-e8ca-4b15-b6a8-fa475089a790",
-      "type": "events",
-      "links": {
-        "self": "http://localhost:3000/v1/events/8319d43b-e8ca-4b15-b6a8-fa475089a790"
-      },
-      "attributes": {
-        "title": "esse elit cillum consectetur do",
-        "description": "sint dolore id sunt officia labore nulla et dolor exercitation ipsum Ut ex enim nisi non commodo ut tempor in elit aute dolor nostrud cupidatat",
-        "free": false,
-        "start-time": 1519024680,
-        "end-time": 1519028280,
-        "event-type": "onsite",
-        "website": "www.dolore.com"
-      },
-      "relationships": {
-        "location": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/8319d43b-e8ca-4b15-b6a8-fa475089a790/relationships/location",
-            "related": "http://localhost:3000/v1/events/8319d43b-e8ca-4b15-b6a8-fa475089a790/location"
-          }
-        },
-        "contact": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/8319d43b-e8ca-4b15-b6a8-fa475089a790/relationships/contact",
-            "related": "http://localhost:3000/v1/events/8319d43b-e8ca-4b15-b6a8-fa475089a790/contact"
-          }
-        }
-      }
+    ],
+    "links": {
+        "first": "http://localhost:3000/v1/events?page%5Bnumber%5D=1&page%5Bsize%5D=10",
+        "next": "http://localhost:3000/v1/events?page%5Bnumber%5D=2&page%5Bsize%5D=10",
+        "last": "http://localhost:3000/v1/events?page%5Bnumber%5D=3&page%5Bsize%5D=10"
     }
-  ],
-  "links": {
-    "first": "http://localhost:3000/v1/events?page%5Bnumber%5D=1&page%5Bsize%5D=10",
-    "next": "http://localhost:3000/v1/events?page%5Bnumber%5D=2&page%5Bsize%5D=10",
-    "last": "http://localhost:3000/v1/events?page%5Bnumber%5D=6&page%5Bsize%5D=10"
-  }
 }
 ```
 
@@ -334,8 +381,8 @@ You can filter based on the following attribteus
 
 Filter 		| Values | Description|  Example
 --------- |  ----------- |  ----------- |  -----------
-upcoming     | true |  filter by events in the future | `GET "http://localhost:3000/v1/events?filter[upcoming]=true"` 
-event type     | onsite, phone |  filter by events type | `GET "http://localhost:3000/v1/events?filter[event_type]=onsite"` 
+upcoming     | true, false |  filter by events in the future | `GET "http://localhost:3000/v1/events?filter[upcoming]=true"`
+free     | true, false |  filter by free events | `GET "http://localhost:3000/v1/events?filter[free]=true"`
 
 
 ## Get a Specific Event
@@ -351,36 +398,39 @@ curl -X GET  "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56d
 
 ```json
 {
-  "data": {
-    "id": "31a22b00-8e7d-4194-b260-162439f56dba",
-    "type": "events",
-    "links": {
-      "self": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba"
-    },
-    "attributes": {
-      "title": "pizza pizza pizza",
-      "description": "desc",
-      "free": true,
-      "start-time": 1526725814,
-      "end-time": 1526740214,
-      "event-type": "onsite",
-      "website": "www.example.com"
-    },
-    "relationships": {
-      "location": {
+    "data": {
+        "id": "b22dec03-2542-41da-a412-2642b76895ce",
+        "type": "events",
         "links": {
-          "self": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/relationships/location",
-          "related": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/location"
+            "self": "http://localhost:3000/v1/events/b22dec03-2542-41da-a412-2642b76895ce"
+        },
+        "attributes": {
+            "title": "Reception",
+            "description": null,
+            "browser_url": "https://secure.emilyslist.org/page/contribute/Events_Test",
+            "origin_system": "emilyslist:Events_Test",
+            "featured_image_url": null,
+            "start_date": "2017-07-27T00:00:00.000Z",
+            "end_date": null,
+            "free": false,
+            "identifier": null,
+            "identifiers": []
+        },
+        "relationships": {
+            "location": {
+                "links": {
+                    "self": "http://localhost:3000/v1/events/b22dec03-2542-41da-a412-2642b76895ce/relationships/location",
+                    "related": "http://localhost:3000/v1/events/b22dec03-2542-41da-a412-2642b76895ce/location"
+                }
+            },
+            "user": {
+                "links": {
+                    "self": "http://localhost:3000/v1/events/b22dec03-2542-41da-a412-2642b76895ce/relationships/user",
+                    "related": "http://localhost:3000/v1/events/b22dec03-2542-41da-a412-2642b76895ce/user"
+                }
+            }
         }
-      },
-      "contact": {
-        "links": {
-          "self": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/relationships/contact",
-          "related": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/contact"
-        }
-      }
     }
-  }
 }
 ```
 
@@ -398,59 +448,70 @@ ID | The ID of the event to retrieve
 ## Create an Event
 
 ```shell
-curl -X POST "http://localhost:3000/v1/events"
-  -H "Accept: application/vnd.api+json" 
-  -H "Content-Type: application/vnd.api+json" 
-  -d ' {
+{
     "data": {
-      "type": "events",
+        "type": "events",
         "attributes": {
-          "title": "pizza pizza pizza",
-          "description": "desc",
-          "free": true,
-          "website": "www.example.com",
-          "event-type": "onsite",
-          "start-time": "1526725814",
-          "end-time": "1526740214"  
+            "title": "Sitin at city hall",
+            "description": null,
+            "browser_url": "https://secure.emilyslist.org/page/contribute/cityhallsitin",
+            "origin_system": "emilyslist",
+            "featured_image_url": null,
+            "start_date": "2017-07-27T00:00:00.000Z",
+            "end_date": null,
+            "free": false,
+            "identifier": null,
+            "identifiers": ["emilyslist:cityhallsitin"]
+        },
+        "relationships": {
+            "location": {
+                "data": {
+                    "type": "locations",
+                    "id": "cf2e490a-7bed-46d5-8e0a-386dfb365cc8"
+                }
+            }
         }
     }
-  }'
+}
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "data": {
-    "id": "31a22b00-8e7d-4194-b260-162439f56dba",
-    "type": "events",
-    "links": {
-      "self": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba"
-    },
-    "attributes": {
-      "title": "pizza pizza pizza",
-      "description": "desc",
-      "free": true,
-      "start-time": 1526725814,
-      "end-time": 1526740214,
-      "event-type": "onsite",
-      "website": "www.example.com"
-    },
-    "relationships": {
-      "location": {
+    "data": {
+        "id": "6ef4013f-e016-4ca0-bb28-d2d3e39286d6",
+        "type": "events",
         "links": {
-          "self": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/relationships/location",
-          "related": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/location"
+            "self": "http://localhost:3000/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6"
+        },
+        "attributes": {
+            "title": "Sitin at city hall",
+            "description": null,
+            "browser_url": "https://secure.emilyslist.org/page/contribute/cityhallsitin",
+            "origin_system": "emilyslist:cityhallsitin",
+            "featured_image_url": null,
+            "start_date": "2017-07-27T00:00:00.000Z",
+            "end_date": null,
+            "free": false,
+            "identifier": null,
+            "identifiers": ["emilyslist:cityhallsitin"]
+        },
+        "relationships": {
+            "location": {
+                "links": {
+                    "self": "http://localhost:3000/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/relationships/location",
+                    "related": "http://localhost:3000/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/location"
+                }
+            },
+            "user": {
+                "links": {
+                    "self": "http://localhost:3000/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/relationships/user",
+                    "related": "http://localhost:3000/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/user"
+                }
+            }
         }
-      },
-      "contact": {
-        "links": {
-          "self": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/relationships/contact",
-          "related": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/contact"
-        }
- 			}
     }
-  }
 }
 ```
 
@@ -461,55 +522,3 @@ This endpoint creates a new event.
 `POST "http://localhost:3000/v1/events/`
 
 
-## Add a Contact to an Event
-
-```shell
-curl -X PUT "http://localhost:3000/v1/events/25c96b80-6dbe-4dda-85a6-d760aa82f5a9/relationships/contacts"
-  -H "Content-Type: application/vnd.api+json" 
-	-H "Accept: application/vnd.api+json" 
-	-d '{
-    "data": {
-      "id": "9efce530-4e6d-458c-93ad-22e42c3c8aa5",
-      "type": "contacts"
-    }
-  }'
-```
-
-> The above command returns JSON structured like this:
-
-```json
-status: 204
-```
-
-This endpoint allows you to add a contact to an event.
-
-### HTTP Request
-
-`PUT http://localhost:3000/v1/events/<UUID>/relationships/contacts`
-
-
-## Add a Location to an Event
-
-```shell
-curl -X PUT "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/relationships/location"
-  -H "Content-Type: application/vnd.api+json" 
-	-H "Accept: application/vnd.api+json" 
-	-d '{
-    "data": {
-      "id": "9efce530-4e6d-458c-93ad-22e42c3c8aa5",
-        "type": "locations"
-    }
-  }'
-```
-
-> The above command returns JSON structured like this:
-
-```json
-status: 204
-```
-
-This endpoint allows you to add a location to an event.
-
-### HTTP Request
-
-`PUT http://localhost:3000/v1/events/<UUID>/relationships/location`
