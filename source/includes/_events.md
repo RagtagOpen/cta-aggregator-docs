@@ -5,17 +5,17 @@ An event resource contains the following attributes.
 Name    | Type | Description
 --------- |  ----------- |  -----------
 identifiers | array | A unique string array of identifiers in the format [system name]:[id]. See the general concepts document for more information about identifiers.
+start_date | datetime | The start time for the event.
+end_date | datetime | date  The date for all day events.
+created_at | datetime | A read-only property representing the date and time the resource was created on the local system.
+updated_at | datetime |A read-only property representing the date and time the resource was last modified on the local system.
 title | string | The title of the event. Intended for public display rather than administrative purposes.
 description | string |  description of the event, usually displayed publicly. May contain text and/or HTML.
 browser_url | string | A URL string pointing to the publicly available event page on the web.
 origin_system| string | A human readable identifier of the system where this event was created. (ex: “OSDI System”)
 featured_image_url| string | A URL string pointing to a publicly available featured image file for this event on the web.
-start_date | datetime | The start time for the event.
-end_date | datetime | date  The date for all day events.
 free | boolean | Indicator of whether there is a cost associated with attending the event
 location_id| integer | identifier for location associated with event
-created_at | datetime | A read-only property representing the date and time the resource was created on the local system.
-updated_at | datetime |A read-only property representing the date and time the resource was last modified on the local system.
 
 ## Get All Events
 
@@ -486,7 +486,7 @@ ID | The ID of the event to retrieve
             "self": "http://localhost:3000/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6"
         },
         "attributes": {
-            "title": "Sitin at city hall",
+            "title": "Sit in at city hall",
             "description": null,
             "browser_url": "https://secure.emilyslist.org/page/contribute/cityhallsitin",
             "origin_system": "emilyslist:cityhallsitin",
