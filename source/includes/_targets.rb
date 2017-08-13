@@ -7,6 +7,14 @@ Name    | Type | Description
 identifiers | array | A unique string array of identifiers in the format [system name]:[id]. See the general concepts document for more information about identifiers.
 created_at | datetime | A read-only property representing the date and time the resource was created on the local system.
 updated_at | datetime |A read-only property representing the date and time the resource was last modified on the local system.
+title | string | The title or position of the target. (ex: “Senator” or “CEO”)
+organization | string |The organization the target belongs to. (ex: “U.S. Senate” or “Acme Corporation”)
+given_name | string | The first or given name of the target. (ex: “John”)
+family_name | string | The last or family name of the target. (ex: “Smith”)
+ocdid | string | array | The Open Civic Data Division ID for this target’s political geography, if applicable. See here for more documentation. (ex: “ocd-division/country:us/state:ny/cd:18”, which corresponds to New York’s 18th Congressional District)
+postal_addresses | array | see https://opensupporter.github.io/osdi-docs/advocacy_campaigns.html#postal-addresses
+email_addresses | array | see https://opensupporter.github.io/osdi-docs/advocacy_campaigns.html#email-addresses
+phone_numbers | array | see https://opensupporter.github.io/osdi-docs/advocacy_campaigns.html#phone-numbers
 
 ## Get All Targets
 

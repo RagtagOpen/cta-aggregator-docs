@@ -11,8 +11,9 @@ toc_footers:
 includes:
   - authentication
   - events
-  - contacts
   - locations
+  - advocacy_campaigns
+  - targets
   - errors
   - embedding
 
