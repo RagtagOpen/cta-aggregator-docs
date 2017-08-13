@@ -1,6 +1,7 @@
 # Targets
 
-A target resource contains the following attributes.
+A Target resource is a sub-resource related to an Advocacy Campaign.
+Each Advocacy Campaign contains an array of targets.  Each Target contains the following attributes.
 
 Name    | Type | Description
 --------- |  ----------- |  -----------
@@ -15,6 +16,9 @@ ocdid | string | array | The Open Civic Data Division ID for this target’s pol
 postal_addresses | array | see https://opensupporter.github.io/osdi-docs/advocacy_campaigns.html#postal-addresses
 email_addresses | array | see https://opensupporter.github.io/osdi-docs/advocacy_campaigns.html#email-addresses
 phone_numbers | array | see https://opensupporter.github.io/osdi-docs/advocacy_campaigns.html#phone-numbers
+
+
+For more information on OSDI's Target resource, follow this link: [https://opensupporter.github.io/osdi-docs/advocacy_campaigns.html#target]( https://opensupporter.github.io/osdi-docs/advocacy_campaigns.html#target)
 
 ## Get All Targets
 

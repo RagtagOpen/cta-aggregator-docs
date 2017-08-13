@@ -1,6 +1,7 @@
 # Locations
 
-A location resource contains the following attributes
+A Location resource is a sub-resource related to an Event.  Each Event has one Location. 
+A location resource contains the following attributes.
 
 Name    | Type | Description
 --------- |  ----------- |  -----------
@@ -9,6 +10,8 @@ address_lines | Array | An array of strings representing the event’s street ad
 locality |string | A city or other local administrative area.
 region |string | State or subdivision codes according to ISO 3166-2 (Final 2 alpha digits).
 postal_code |string | The region specific postal code, such as a zip code.
+
+For more information on OSDI's Location resource, follow this link: [https://opensupporter.github.io/osdi-docs/events.html#location](https://opensupporter.github.io/osdi-docs/events.html#location).
 
 ## Get All Locations
 

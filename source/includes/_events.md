@@ -1,6 +1,10 @@
 # Events
 
-An event resource contains the following attributes.
+An Event Resource is a top-level resource that represents a call to action that has a locaiton.
+
+kk
+
+ contains the following attributes.
 
 Name    | Type | Description
 --------- |  ----------- |  -----------
@@ -16,6 +20,9 @@ origin_system| string | A human readable identifier of the system where this eve
 featured_image_url| string | A URL string pointing to a publicly available featured image file for this event on the web.
 free | boolean | Indicator of whether there is a cost associated with attending the event
 location_id| integer | identifier for location associated with event
+
+For more information on OSDI's Event resource, follow this link: 
+[https://opensupporter.github.io/osdi-docs/events.html](https://opensupporter.github.io/osdi-docs/events).
 
 ## Get All Events
 
