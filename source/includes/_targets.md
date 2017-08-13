@@ -231,6 +231,7 @@ ID | The ID of the targets to retrieve
 curl -X POST "http://localhost:3000/v1/targets"
   -H "Content-Type: application/vnd.api+json" 
   -H "Accept: application/vnd.api+json" 
+  -H "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1MDI2NjMwMjEsInN1YiI6ImI0ZDQ5MDAzLWEyMWYtNGVjZi1hYjM3LTQzMmRkMWM4MzE4MiJ9.Q_QeKrpgvelRZ-XB8gM1B1SSrjeGVEK93HLW2p4SoFJv5zICQV6aFiKyA1lJ8qhrPBzqIPtTgqQBTN9ng0c0PA"
   -d ' {
     "data": {
         "type": "targets",
@@ -317,4 +318,4 @@ This endpoint creates a new target
 
 `POST "http://localhost:3000/v1/targets/"`
 
-
+Requests to create a resource must include a valid JWT token. This token can be obtained from the `authantication` endpoint.
