@@ -38,331 +38,106 @@ curl -X GET "http://localhost:3000/v1/events"
 {
     "data": [
         {
-            "id": "b22dec03-2542-41da-a412-2642b76895ce",
+            "id": "d9aa62d4-3d06-46d4-b855-d0a200b420ad",
             "type": "events",
             "links": {
-                "self": "http://localhost:3000/v1/events/b22dec03-2542-41da-a412-2642b76895ce"
+                "self": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad"
             },
             "attributes": {
-                "title": "Reception",
+                "title": "Join EMILY's List President Stephanie Schriock for a special reception in Santa Fe!",
                 "description": null,
                 "browser_url": "https://secure.emilyslist.org/page/contribute/Events_Test",
-                "origin_system": "emilyslist:Events_Test",
+                "origin_system": "Emily's List",
                 "featured_image_url": null,
-                "start_date": "2017-07-27T00:00:00.000Z",
+                "start_date": "2017-07-27T05:30:00.000Z",
                 "end_date": null,
                 "free": false,
-                "identifier": null,
-                "identifiers": []
+                "identifiers": [
+                    "emilys-list:Events_Test",
+                    "cta-aggregator:d9aa62d4-3d06-46d4-b855-d0a200b420ad"
+                ]
             },
             "relationships": {
                 "location": {
                     "links": {
-                        "self": "http://localhost:3000/v1/events/b22dec03-2542-41da-a412-2642b76895ce/relationships/location",
-                        "related": "http://localhost:3000/v1/events/b22dec03-2542-41da-a412-2642b76895ce/location"
+                        "self": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/location",
+                        "related": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/location"
                     }
                 },
                 "user": {
                     "links": {
-                        "self": "http://localhost:3000/v1/events/b22dec03-2542-41da-a412-2642b76895ce/relationships/user",
-                        "related": "http://localhost:3000/v1/events/b22dec03-2542-41da-a412-2642b76895ce/user"
+                        "self": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/user",
+                        "related": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/user"
                     }
                 }
             }
         },
         {
-            "id": "4a9cf064-f6a4-4ac0-bdf9-bc94b51d5925",
+            "id": "3b511fd6-3057-46a0-9bac-e6c1633019ba",
             "type": "events",
             "links": {
-                "self": "http://localhost:3000/v1/events/4a9cf064-f6a4-4ac0-bdf9-bc94b51d5925"
+                "self": "http://localhost:3000/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba"
             },
             "attributes": {
-                "title": "Briefing and Luncheon ",
+                "title": "Join EMILY's List President Stephanie Schriock and featured speakers Senator Kirsten Gillibrand and Rep. Jacky Rosen at our Ignite Change Luncheon in New York!",
                 "description": null,
                 "browser_url": "https://secure.emilyslist.org/page/contribute/NYC_Ignite_Change_Luncheon",
-                "origin_system": "emilyslist:NYC_Ignite_Change_Luncheon",
+                "origin_system": "Emily's List",
                 "featured_image_url": null,
-                "start_date": "2017-09-18T00:00:00.000Z",
+                "start_date": "2017-09-18T12:00:00.000Z",
                 "end_date": null,
                 "free": false,
-                "identifier": null,
-                "identifiers": []
+                "identifiers": [
+                    "emilys-list:NYC_Ignite_Change_Luncheon",
+                    "cta-aggregator:3b511fd6-3057-46a0-9bac-e6c1633019ba"
+                ]
             },
             "relationships": {
                 "location": {
                     "links": {
-                        "self": "http://localhost:3000/v1/events/4a9cf064-f6a4-4ac0-bdf9-bc94b51d5925/relationships/location",
-                        "related": "http://localhost:3000/v1/events/4a9cf064-f6a4-4ac0-bdf9-bc94b51d5925/location"
+                        "self": "http://localhost:3000/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/relationships/location",
+                        "related": "http://localhost:3000/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/location"
                     }
                 },
                 "user": {
                     "links": {
-                        "self": "http://localhost:3000/v1/events/4a9cf064-f6a4-4ac0-bdf9-bc94b51d5925/relationships/user",
-                        "related": "http://localhost:3000/v1/events/4a9cf064-f6a4-4ac0-bdf9-bc94b51d5925/user"
+                        "self": "http://localhost:3000/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/relationships/user",
+                        "related": "http://localhost:3000/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/user"
                     }
                 }
             }
         },
         {
-            "id": "2c2841e5-330a-4bf2-9a2b-63b62b3672d0",
+            "id": "b0e86149-c781-417e-a96f-1a57c3ed863b",
             "type": "events",
             "links": {
-                "self": "http://localhost:3000/v1/events/2c2841e5-330a-4bf2-9a2b-63b62b3672d0"
+                "self": "http://localhost:3000/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b"
             },
             "attributes": {
-                "title": "Luncheon",
+                "title": "Join EMILY's List President Stephanie Schriock and special guest Congresswoman Jacky Rosen at our 2017 Ignite Change Luncheon in San Francisco!",
                 "description": null,
                 "browser_url": "https://secure.emilyslist.org/page/contribute/western-regional-luncheon",
-                "origin_system": "emilyslist:western-regional-luncheon",
+                "origin_system": "Emily's List",
                 "featured_image_url": null,
-                "start_date": "2017-10-13T00:00:00.000Z",
+                "start_date": "2017-10-13T11:00:00.000Z",
                 "end_date": null,
                 "free": false,
-                "identifier": null,
-                "identifiers": []
+                "identifiers": [
+                    "emilys-list:western-regional-luncheon",
+                    "cta-aggregator:b0e86149-c781-417e-a96f-1a57c3ed863b"
+                ]
             },
             "relationships": {
                 "location": {
                     "links": {
-                        "self": "http://localhost:3000/v1/events/2c2841e5-330a-4bf2-9a2b-63b62b3672d0/relationships/location",
-                        "related": "http://localhost:3000/v1/events/2c2841e5-330a-4bf2-9a2b-63b62b3672d0/location"
+                        "self": "http://localhost:3000/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/relationships/location",
+                        "related": "http://localhost:3000/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/location"
                     }
                 },
                 "user": {
                     "links": {
-                        "self": "http://localhost:3000/v1/events/2c2841e5-330a-4bf2-9a2b-63b62b3672d0/relationships/user",
-                        "related": "http://localhost:3000/v1/events/2c2841e5-330a-4bf2-9a2b-63b62b3672d0/user"
-                    }
-                }
-            }
-        },
-        {
-            "id": "7c2bfc80-030b-4864-83f2-3852209f7e0c",
-            "type": "events",
-            "links": {
-                "self": "http://localhost:3000/v1/events/7c2bfc80-030b-4864-83f2-3852209f7e0c"
-            },
-            "attributes": {
-                "title": "Night Out for Safety and Liberation",
-                "description": null,
-                "browser_url": "http://facebook.com/events/124363648167925",
-                "origin_system": "Facebook",
-                "featured_image_url": null,
-                "start_date": "2017-08-01T22:00:00.000Z",
-                "end_date": null,
-                "free": false,
-                "identifier": null,
-                "identifiers": []
-            },
-            "relationships": {
-                "location": {
-                    "links": {
-                        "self": "http://localhost:3000/v1/events/7c2bfc80-030b-4864-83f2-3852209f7e0c/relationships/location",
-                        "related": "http://localhost:3000/v1/events/7c2bfc80-030b-4864-83f2-3852209f7e0c/location"
-                    }
-                },
-                "user": {
-                    "links": {
-                        "self": "http://localhost:3000/v1/events/7c2bfc80-030b-4864-83f2-3852209f7e0c/relationships/user",
-                        "related": "http://localhost:3000/v1/events/7c2bfc80-030b-4864-83f2-3852209f7e0c/user"
-                    }
-                }
-            }
-        },
-        {
-            "id": "05166da1-d88a-4e28-844a-dad88716ee94",
-            "type": "events",
-            "links": {
-                "self": "http://localhost:3000/v1/events/05166da1-d88a-4e28-844a-dad88716ee94"
-            },
-            "attributes": {
-                "title": "D3 Monthly Meeting - August",
-                "description": null,
-                "browser_url": "http://facebook.com/events/808441485976208",
-                "origin_system": "Facebook",
-                "featured_image_url": null,
-                "start_date": "2017-08-02T00:30:00.000Z",
-                "end_date": null,
-                "free": false,
-                "identifier": null,
-                "identifiers": []
-            },
-            "relationships": {
-                "location": {
-                    "links": {
-                        "self": "http://localhost:3000/v1/events/05166da1-d88a-4e28-844a-dad88716ee94/relationships/location",
-                        "related": "http://localhost:3000/v1/events/05166da1-d88a-4e28-844a-dad88716ee94/location"
-                    }
-                },
-                "user": {
-                    "links": {
-                        "self": "http://localhost:3000/v1/events/05166da1-d88a-4e28-844a-dad88716ee94/relationships/user",
-                        "related": "http://localhost:3000/v1/events/05166da1-d88a-4e28-844a-dad88716ee94/user"
-                    }
-                }
-            }
-        },
-        {
-            "id": "9dd21b59-11ef-4626-8646-af7950b57e92",
-            "type": "events",
-            "links": {
-                "self": "http://localhost:3000/v1/events/9dd21b59-11ef-4626-8646-af7950b57e92"
-            },
-            "attributes": {
-                "title": "August 2017 Bay County Democratic Veterans Caucus",
-                "description": null,
-                "browser_url": "http://facebook.com/events/396096687404412",
-                "origin_system": "Facebook",
-                "featured_image_url": null,
-                "start_date": "2017-08-02T01:00:00.000Z",
-                "end_date": null,
-                "free": false,
-                "identifier": null,
-                "identifiers": []
-            },
-            "relationships": {
-                "location": {
-                    "links": {
-                        "self": "http://localhost:3000/v1/events/9dd21b59-11ef-4626-8646-af7950b57e92/relationships/location",
-                        "related": "http://localhost:3000/v1/events/9dd21b59-11ef-4626-8646-af7950b57e92/location"
-                    }
-                },
-                "user": {
-                    "links": {
-                        "self": "http://localhost:3000/v1/events/9dd21b59-11ef-4626-8646-af7950b57e92/relationships/user",
-                        "related": "http://localhost:3000/v1/events/9dd21b59-11ef-4626-8646-af7950b57e92/user"
-                    }
-                }
-            }
-        },
-        {
-            "id": "8d2ba324-5849-425a-8c03-540f26982881",
-            "type": "events",
-            "links": {
-                "self": "http://localhost:3000/v1/events/8d2ba324-5849-425a-8c03-540f26982881"
-            },
-            "attributes": {
-                "title": "LD 28 monthly meeting-AUGUST (no July meeting)",
-                "description": null,
-                "browser_url": "http://facebook.com/events/318853201874086",
-                "origin_system": "Facebook",
-                "featured_image_url": null,
-                "start_date": "2017-08-02T02:00:00.000Z",
-                "end_date": null,
-                "free": false,
-                "identifier": null,
-                "identifiers": []
-            },
-            "relationships": {
-                "location": {
-                    "links": {
-                        "self": "http://localhost:3000/v1/events/8d2ba324-5849-425a-8c03-540f26982881/relationships/location",
-                        "related": "http://localhost:3000/v1/events/8d2ba324-5849-425a-8c03-540f26982881/location"
-                    }
-                },
-                "user": {
-                    "links": {
-                        "self": "http://localhost:3000/v1/events/8d2ba324-5849-425a-8c03-540f26982881/relationships/user",
-                        "related": "http://localhost:3000/v1/events/8d2ba324-5849-425a-8c03-540f26982881/user"
-                    }
-                }
-            }
-        },
-        {
-            "id": "66a3e13d-f438-4b3d-a28e-0e960963101e",
-            "type": "events",
-            "links": {
-                "self": "http://localhost:3000/v1/events/66a3e13d-f438-4b3d-a28e-0e960963101e"
-            },
-            "attributes": {
-                "title": "Democracy Convention 2017",
-                "description": null,
-                "browser_url": "http://facebook.com/events/979847085463838",
-                "origin_system": "Facebook",
-                "featured_image_url": null,
-                "start_date": "2017-08-02T13:00:00.000Z",
-                "end_date": null,
-                "free": false,
-                "identifier": null,
-                "identifiers": []
-            },
-            "relationships": {
-                "location": {
-                    "links": {
-                        "self": "http://localhost:3000/v1/events/66a3e13d-f438-4b3d-a28e-0e960963101e/relationships/location",
-                        "related": "http://localhost:3000/v1/events/66a3e13d-f438-4b3d-a28e-0e960963101e/location"
-                    }
-                },
-                "user": {
-                    "links": {
-                        "self": "http://localhost:3000/v1/events/66a3e13d-f438-4b3d-a28e-0e960963101e/relationships/user",
-                        "related": "http://localhost:3000/v1/events/66a3e13d-f438-4b3d-a28e-0e960963101e/user"
-                    }
-                }
-            }
-        },
-        {
-            "id": "2f6f43ef-8b7b-4340-8953-afb6733cfb4b",
-            "type": "events",
-            "links": {
-                "self": "http://localhost:3000/v1/events/2f6f43ef-8b7b-4340-8953-afb6733cfb4b"
-            },
-            "attributes": {
-                "title": "Philly - Gerrymandering: Film and Discussion",
-                "description": null,
-                "browser_url": "http://facebook.com/events/743518679189815",
-                "origin_system": "Facebook",
-                "featured_image_url": null,
-                "start_date": "2017-08-02T22:00:00.000Z",
-                "end_date": null,
-                "free": false,
-                "identifier": null,
-                "identifiers": []
-            },
-            "relationships": {
-                "location": {
-                    "links": {
-                        "self": "http://localhost:3000/v1/events/2f6f43ef-8b7b-4340-8953-afb6733cfb4b/relationships/location",
-                        "related": "http://localhost:3000/v1/events/2f6f43ef-8b7b-4340-8953-afb6733cfb4b/location"
-                    }
-                },
-                "user": {
-                    "links": {
-                        "self": "http://localhost:3000/v1/events/2f6f43ef-8b7b-4340-8953-afb6733cfb4b/relationships/user",
-                        "related": "http://localhost:3000/v1/events/2f6f43ef-8b7b-4340-8953-afb6733cfb4b/user"
-                    }
-                }
-            }
-        },
-        {
-            "id": "91d671d6-cb8e-4597-a525-ece68deed075",
-            "type": "events",
-            "links": {
-                "self": "http://localhost:3000/v1/events/91d671d6-cb8e-4597-a525-ece68deed075"
-            },
-            "attributes": {
-                "title": "Building Empathy and Addressing Racial Oppression (Session 2)",
-                "description": null,
-                "browser_url": "http://facebook.com/events/1426807630717923",
-                "origin_system": "Facebook",
-                "featured_image_url": null,
-                "start_date": "2017-08-02T22:30:00.000Z",
-                "end_date": null,
-                "free": false,
-                "identifier": null,
-                "identifiers": []
-            },
-            "relationships": {
-                "location": {
-                    "links": {
-                        "self": "http://localhost:3000/v1/events/91d671d6-cb8e-4597-a525-ece68deed075/relationships/location",
-                        "related": "http://localhost:3000/v1/events/91d671d6-cb8e-4597-a525-ece68deed075/location"
-                    }
-                },
-                "user": {
-                    "links": {
-                        "self": "http://localhost:3000/v1/events/91d671d6-cb8e-4597-a525-ece68deed075/relationships/user",
-                        "related": "http://localhost:3000/v1/events/91d671d6-cb8e-4597-a525-ece68deed075/user"
+                        "self": "http://localhost:3000/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/relationships/user",
+                        "related": "http://localhost:3000/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/user"
                     }
                 }
             }
@@ -370,8 +145,7 @@ curl -X GET "http://localhost:3000/v1/events"
     ],
     "links": {
         "first": "http://localhost:3000/v1/events?page%5Bnumber%5D=1&page%5Bsize%5D=10",
-        "next": "http://localhost:3000/v1/events?page%5Bnumber%5D=2&page%5Bsize%5D=10",
-        "last": "http://localhost:3000/v1/events?page%5Bnumber%5D=3&page%5Bsize%5D=10"
+        "last": "http://localhost:3000/v1/events?page%5Bnumber%5D=1&page%5Bsize%5D=10"
     }
 }
 ```
@@ -396,7 +170,7 @@ free     | true, false |  filter by free events | `GET "http://localhost:3000/v1
 
 
 ```shell
-curl -X GET  "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba"
+curl -X GET  "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad"
   -H "Accept: application/vnd.api+json"
   -H "Content-Type: application/vnd.api+json"
 ```
@@ -406,34 +180,36 @@ curl -X GET  "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56d
 ```json
 {
     "data": {
-        "id": "b22dec03-2542-41da-a412-2642b76895ce",
+        "id": "d9aa62d4-3d06-46d4-b855-d0a200b420ad",
         "type": "events",
         "links": {
-            "self": "http://localhost:3000/v1/events/b22dec03-2542-41da-a412-2642b76895ce"
+            "self": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad"
         },
         "attributes": {
-            "title": "Reception",
+            "title": "Join EMILY's List President Stephanie Schriock for a special reception in Santa Fe!",
             "description": null,
             "browser_url": "https://secure.emilyslist.org/page/contribute/Events_Test",
-            "origin_system": "emilyslist:Events_Test",
+            "origin_system": "Emily's List",
             "featured_image_url": null,
-            "start_date": "2017-07-27T00:00:00.000Z",
+            "start_date": "2017-07-27T05:30:00.000Z",
             "end_date": null,
             "free": false,
-            "identifier": null,
-            "identifiers": []
+            "identifiers": [
+                "emilys-list:Events_Test",
+                "cta-aggregator:d9aa62d4-3d06-46d4-b855-d0a200b420ad"
+            ]
         },
         "relationships": {
             "location": {
                 "links": {
-                    "self": "http://localhost:3000/v1/events/b22dec03-2542-41da-a412-2642b76895ce/relationships/location",
-                    "related": "http://localhost:3000/v1/events/b22dec03-2542-41da-a412-2642b76895ce/location"
+                    "self": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/location",
+                    "related": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/location"
                 }
             },
             "user": {
                 "links": {
-                    "self": "http://localhost:3000/v1/events/b22dec03-2542-41da-a412-2642b76895ce/relationships/user",
-                    "related": "http://localhost:3000/v1/events/b22dec03-2542-41da-a412-2642b76895ce/user"
+                    "self": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/user",
+                    "related": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/user"
                 }
             }
         }
@@ -455,7 +231,10 @@ ID | The ID of the event to retrieve
 ## Create an Event
 
 ```shell
-{
+curl -X POST "http://localhost:3000/v1/events"
+  -H "Content-Type: application/vnd.api+json" 
+  -H "Accept: application/vnd.api+json" 
+  -d ' {
     "data": {
         "type": "events",
         "attributes": {
@@ -467,7 +246,6 @@ ID | The ID of the event to retrieve
             "start_date": "2017-07-27T00:00:00.000Z",
             "end_date": null,
             "free": false,
-            "identifier": null,
             "identifiers": ["emilyslist:cityhallsitin"]
         },
         "relationships": {
@@ -479,7 +257,7 @@ ID | The ID of the event to retrieve
             }
         }
     }
-}
+} '
 ```
 
 > The above command returns JSON structured like this:
@@ -501,8 +279,7 @@ ID | The ID of the event to retrieve
             "start_date": "2017-07-27T00:00:00.000Z",
             "end_date": null,
             "free": false,
-            "identifier": null,
-            "identifiers": ["emilyslist:cityhallsitin"]
+            "identifiers": ["emilyslist:cityhallsitin", "cta-aggregator:6ef4013f-e016-4ca0-bb28-d2d3e39286d6" ]
         },
         "relationships": {
             "location": {
@@ -526,6 +303,6 @@ This endpoint creates a new event.
 
 ### HTTP Request
 
-`POST "http://localhost:3000/v1/events/`
+`POST "http://localhost:3000/v1/events/"`
 
 

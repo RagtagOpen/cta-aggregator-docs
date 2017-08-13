@@ -227,35 +227,39 @@ ID | The ID of the targets to retrieve
 ## Create a Target
 
 ```shell
-{
+
+curl -X POST "http://localhost:3000/v1/targets"
+  -H "Content-Type: application/vnd.api+json" 
+  -H "Accept: application/vnd.api+json" 
+  -d ' {
     "data": {
         "type": "targets",
         "attributes": {
-            "organization": " Department of Education",
-            "given_name": "Betsy",
-            "family_name": "DeVos",
-            "ocdid": null,
-            "postal_addresses": [ {
-            	"address_lines": "123 Fake Street",
-            	"locality": "Grand Rapids",
-            	"region": "MI",
-            	"postal_code": "49504"
-            	}],
-            "email_addresses": [ {
-            	"primary": "true",
-            	"address": "insano@example.com",
-            	"address_type": "work"
-            	} ],
-            "phone_numbers": [
-                {
-                    "primary": true,
-                    "number": "202-401-3000",	
-                    "number_type": "work"
-                }
-            ]
+          "organization": " Department of Education",
+          "given_name": "Betsy",
+          "family_name": "DeVos",
+          "ocdid": null,
+          "postal_addresses": [ {
+            "address_lines": "123 Fake Street",
+            "locality": "Grand Rapids",
+            "region": "MI",
+            "postal_code": "49504"
+          }],
+          "email_addresses": [ {
+            "primary": "true",
+            "address": "insano@example.com",
+            "address_type": "work"
+          } ],
+          "phone_numbers": [
+          {
+            "primary": true,
+            "number": "202-401-3000",	
+            "number_type": "work"
+          }
+          ]
         }
     }
-}
+  } '
 ```
 
 > The above command returns JSON structured like this:
@@ -311,6 +315,6 @@ This endpoint creates a new target
 
 ### HTTP Request
 
-`POST "http://localhost:3000/v1/targets/`
+`POST "http://localhost:3000/v1/targets/"`
 
 

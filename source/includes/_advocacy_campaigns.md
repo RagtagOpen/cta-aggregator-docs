@@ -454,35 +454,38 @@ ID | The ID of the advocay campaign to retrieve
 ## Create an Advocacy Campaign
 
 ```shell
-{
+curl -X POST "http://localhost:3000/v1/advocacy_campaigns"
+  -H "Content-Type: application/vnd.api+json" 
+  -H "Accept: application/vnd.api+json" 
+  -d ' {
     "data": {
-        "type": "advocacy_campaigns",
+      "type": "advocacy_campaigns",
         "attributes": {
-            "title": "Express Outrage at Open White Supremacy Rally in Charlottesville",
-            "description": "Update (8/12): The 'Unite The Right' rally has turned violent after a car intentionally drove into a group of counter-protestors, leaving one dead and 19 others injured. We must stand up against this violence and hate.\n\nOn August 11th in Charlottesville, Virginia, a group of white protesters (mostly men) marched through the University of Virginia campus carrying torches and chanting “White Lives Matter” and “Jews Will Not Replace Us.\" As disturbing as this modern day KKK rally was, it was only a preview of the next day’s larger event in Emancipation Park: the \"Unite the Right” rally and march. No longer expecting consequences, these extremists did not bother to conceal their faces behind white hoods as in years past. Instead, they proudly raised their hands in Nazi salutes and used other anti-LGBT, anti-black, anti-Muslim chants and symbols. Attended by openly racist leaders like David Duke and Richard Spencer, there were multiple skirmishes between those carrying Nazi and Confederate flags and those counter protestings. Millions around the nation and world watch as American society is pummeled yet again by the destructive forces of hate.\n\nAlthough speech of all kinds is protected by the 1st Amendment, that protection does not require silence on the part of those who disagree. The American people need and deserve leadership that affirms the values of acceptance and inclusion that our country was founded upon and that we have struggled to extend to all people over the past 240+ years. The American people deserve leaders that stand up to hate and promote unity at a time when our President employs multiple openly racist advisors like Sebastian Gorka, Steven Miller, Steven Bannon, and appointed Jeff Sessions as Attorney General. Both the Governor of Virginia and Mayor of Charlottesville were quick to denounce these gatherings, as were some other members of Congress, but Trump only tweeted 3 vague and generic sentences about unspecified \"hate.\" All elected officials in our government must join what should be a deafening chorus of denunciation against this kind of racist and hate-fueled speech.",
-            "browser_url": null,
-            "origin_system": "5Calls",
-            "featured_image_url": null,
-            "action_type": "phone",
-            "template": "Hi, my name is [NAME] and I’m a constituent from [CITY, ZIP].\n\nI'm calling to express my outrage about the ugly demonstrations in Charlottesville. I demand that [REP/SEN NAME] join [his/her] colleagues on both sides of the aisle in denouncing the 'Unite the Right' white supremacist rally in Charlottesville. Protecting free speech does not equate to silence on matters of racism, hate, and violence.\n\nThank you for your time and attention.\n\n[IF LEAVING A VOICEMAIL: please leave your full street address to ensure your call is tallied]",
-            "target_list": [],
-            "identifiers": [
-                "5Calls:reco1LA9EU4aQeoLu",
-                "cta-aggregator:3c29ff31-d859-42fd-a786-c69306eadb86"
-            ]
+          "title": "Express Outrage at Open White Supremacy Rally in Charlottesville",
+          "description": "Update (8/12): The 'Unite The Right' rally has turned violent after a car intentionally drove into a group of counter-protestors, leaving one dead and 19 others injured. We must stand up against this violence and hate.\n\nOn August 11th in Charlottesville, Virginia, a group of white protesters (mostly men) marched through the University of Virginia campus carrying torches and chanting “White Lives Matter” and “Jews Will Not Replace Us.\" As disturbing as this modern day KKK rally was, it was only a preview of the next day’s larger event in Emancipation Park: the \"Unite the Right” rally and march. No longer expecting consequences, these extremists did not bother to conceal their faces behind white hoods as in years past. Instead, they proudly raised their hands in Nazi salutes and used other anti-LGBT, anti-black, anti-Muslim chants and symbols. Attended by openly racist leaders like David Duke and Richard Spencer, there were multiple skirmishes between those carrying Nazi and Confederate flags and those counter protestings. Millions around the nation and world watch as American society is pummeled yet again by the destructive forces of hate.\n\nAlthough speech of all kinds is protected by the 1st Amendment, that protection does not require silence on the part of those who disagree. The American people need and deserve leadership that affirms the values of acceptance and inclusion that our country was founded upon and that we have struggled to extend to all people over the past 240+ years. The American people deserve leaders that stand up to hate and promote unity at a time when our President employs multiple openly racist advisors like Sebastian Gorka, Steven Miller, Steven Bannon, and appointed Jeff Sessions as Attorney General. Both the Governor of Virginia and Mayor of Charlottesville were quick to denounce these gatherings, as were some other members of Congress, but Trump only tweeted 3 vague and generic sentences about unspecified \"hate.\" All elected officials in our government must join what should be a deafening chorus of denunciation against this kind of racist and hate-fueled speech.",
+          "browser_url": null,
+          "origin_system": "5Calls",
+          "featured_image_url": null,
+          "action_type": "phone",
+          "template": "Hi, my name is [NAME] and I’m a constituent from [CITY, ZIP].\n\nI'm calling to express my outrage about the ugly demonstrations in Charlottesville. I demand that [REP/SEN NAME] join [his/her] colleagues on both sides of the aisle in denouncing the 'Unite the Right' white supremacist rally in Charlottesville. Protecting free speech does not equate to silence on matters of racism, hate, and violence.\n\nThank you for your time and attention.\n\n[IF LEAVING A VOICEMAIL: please leave your full street address to ensure your call is tallied]",
+          "target_list": [],
+          "identifiers": [
+            "5Calls:reco1LA9EU4aQeoLu",
+          "cta-aggregator:3c29ff31-d859-42fd-a786-c69306eadb86"
+          ]
         },
         "relationships": {
-            "targets": {
-                "data": [
-                		{
-                    		"type": "targets",
-                    		"id": "3c29ff31-d859-42fd-a786-c69306eadb86"
-                		}
-                ]
-        	}
-    	}
+          "targets": {
+            "data": [
+            {
+              "type": "targets",
+              "id": "3c29ff31-d859-42fd-a786-c69306eadb86"
+            }
+          ]
+        }
+      }
     }
-}
+  } '
 ```
 
 > The above command returns JSON structured like this:
@@ -537,6 +540,6 @@ This endpoint creates a new advocacy campaign.
 
 ### HTTP Request
 
-`POST "http://localhost:3000/v1/advocacy_campaigns/`
+`POST "http://localhost:3000/v1/advocacy_campaigns/"`
 
 

@@ -292,8 +292,8 @@ The above command returns JSON structured like this:
             "self": "http://localhost:3000/v1/locations/cf2e490a-7bed-46d5-8e0a-386dfb365cc8"
         },
         "attributes": {
-            "venue": "Riverfront park,
-            "address_lines": '123 Fake Stree',
+            "venue": "Riverfront park",
+            "address_lines": '123 Fake Street',
             "locality": "Santa Fe",
             "region": "NM",
             "postal_code": "87501"
@@ -373,4 +373,4 @@ curl -X POST "http://localhost:3000/v1/locations"
 
 ### HTTP Request
 
-`POST "http://localhost:3000/v1/locations`
+`POST "http://localhost:3000/v1/locations"`
