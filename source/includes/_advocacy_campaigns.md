@@ -440,6 +440,8 @@ curl -X GET  "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a78
 }
 ```
 
+This endpoint retrieves a specific advocacy campagins.
+
 ### HTTP Request
 
 `GET "http://localhost:3000/v1/advocacy_campaigns/<UUID>`

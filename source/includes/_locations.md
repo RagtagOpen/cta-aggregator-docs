@@ -276,7 +276,7 @@ postal_code | `GET "http://localhost:3000/v1/locations?filter[postal_code]=66001
 
 
 ```shell
-curl -X GET  "http://localhost:3000/v1/locations/83911d17-b56e-4c11-bc5b-485c8cba8513"
+curl -X GET  "http://localhost:3000/v1/locations/cf2e490a-7bed-46d5-8e0a-386dfb365cc8"
   -H "Accept: application/vnd.api+json"
   -H "Content-Type: application/vnd.api+json"
 ```
@@ -310,6 +310,8 @@ The above command returns JSON structured like this:
 }
 
 ```
+
+This endpoint retrieves a specific location.
 
 ### HTTP Request
 
@@ -371,6 +373,8 @@ curl -X POST "http://localhost:3000/v1/locations"
     }
 }
 ```
+
+This endpoint creates an evernt.
 
 ### HTTP Request
 

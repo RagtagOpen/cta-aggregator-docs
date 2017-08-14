@@ -18,7 +18,7 @@ email_addresses | array | see https://opensupporter.github.io/osdi-docs/advocacy
 phone_numbers | array | see https://opensupporter.github.io/osdi-docs/advocacy_campaigns.html#phone-numbers
 
 
-For more information on OSDI's Target resource, follow this link: [https://opensupporter.github.io/osdi-docs/advocacy_campaigns.html#target]( https://opensupporter.github.io/osdi-docs/advocacy_campaigns.html#target)
+For more information on OSDI's Target resource, follow this link: [https://opensupporter.github.io/osdi-docs/advocacy_campaigns.html#target]( https://opensupporter.github.io/osdi-docs/advocacy_campaigns.html#target).
 
 ## Get All Targets
 
@@ -161,7 +161,7 @@ curl -X GET "http://localhost:3000/v1/targets"
 }
 ```
 
-This endpoint retrieves al targets 
+This endpoint retrieves all targets.
 
 ### HTTP Request
 
@@ -212,6 +212,8 @@ curl -X GET  "http://localhost:3000/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5
     }
 }
 ```
+
+This endpoint retrieves a specific target.
 
 ### HTTP Request
 
@@ -312,7 +314,7 @@ curl -X POST "http://localhost:3000/v1/targets"
 }
 ```
 
-This endpoint creates a new target
+This endpoint creates a new target.
 
 ### HTTP Request
 

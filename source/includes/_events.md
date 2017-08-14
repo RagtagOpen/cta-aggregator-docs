@@ -1,10 +1,8 @@
 # Events
 
-An Event Resource is a top-level resource that represents a call to action that has a locaiton.
+An Event Resource is a top-level resource that represents a call to action that has a location.
 
-kk
-
- contains the following attributes.
+It contains the following attributes.
 
 Name    | Type | Description
 --------- |  ----------- |  -----------
@@ -216,6 +214,8 @@ curl -X GET  "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420
     }
 }
 ```
+
+This endpoint retrieves a specific event.
 
 ### HTTP Request
 
