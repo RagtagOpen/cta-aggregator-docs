@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.4.1'
+ruby File.read('.ruby-version').chomp
 
 # Middleman
 gem 'middleman', '~>4.2.1'
