@@ -3,6 +3,7 @@ title: API Reference
 
 language_tabs:
   - shell
+  - ruby
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
@@ -36,3 +37,5 @@ The CTA Aggregator has to top-level resources: Events and Advocacy Campaigns.
 An event is a call to action that asks people to show up a particular location.
 And advocacy campaign is a call to action that requests that people send an email or make a
 phone call.
+
+You can interact with the API directly or use the Ruby gem, located here: [https://github.com/Ragtagteam/cta-aggregator-client-ruby](https://github.com/Ragtagteam/cta-aggregator-client-ruby/).

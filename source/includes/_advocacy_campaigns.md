@@ -25,6 +25,14 @@ curl -X GET "http://localhost:3000/v1/advocacy_campaigns"
   -H "Content-Type: application/vnd.api+json"
 ```
 
+```ruby
+require 'cta_aggregator_client'
+# Configure gem (for directions, see gem's README)
+
+response = CTAAggregatorClient::AdvocacyCampaign.list
+JSON.parse(response.body)
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -392,6 +400,15 @@ curl -X GET  "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a78
   -H "Content-Type: application/vnd.api+json"
 ```
 
+```ruby
+require 'cta_aggregator_client'
+# Configure gem (for directions, see gem's README)
+
+uuid = '3c29ff31-d859-42fd-a786-c69306eadb86'
+response = CTAAggregatorClient::AdvocacyCampaign.find(uuid)
+JSON.parse(response.body)
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -489,6 +506,26 @@ curl -X POST "http://localhost:3000/v1/advocacy_campaigns"
       }
     }
   } '
+```
+
+```ruby
+require 'cta_aggregator_client'
+# Configure gem (for directions, see gem's README)
+
+campaign_attrs = {
+  title: 'Email Congressman - 1',
+  description: 'Voluptas delectus distinctio maiores consequatur aspernatur.',
+  browser_url: 'http://example.com/nya.lang',
+  origin_system: '5Calls',
+  featured_image_url: 'http://lorempixel.com/300/300',
+  action_type: 'email',
+  template: 'Eum itaque et nisi dolores assumenda ipsum. Voluptates qui aut nobis veniam maxime qui. Illum saepe eum corporis vero qui soluta aliquam.\nTemporibus reiciendis velit fugiat. Facere laborum quia ea laboriosam necessitatibus quisquam eligendi. Et est dolorem eligendi id aut sint.\nAnimi qui totam voluptatem nesciunt iure et dolorem. Eos ut dolorum et quo illum fuga atque. Facere a ipsa corrupti assumenda provident commodi facilis. Eligendi officia est et.',
+}
+target_attrs = { targets: ['a2f6f86b-a214-4892-8c06-8caece820fb0', '215ed993-3cd1-4fbc-b8af-7e2082813d06'] }
+# targets must exist prior to creating the Advocacy Campaign
+
+response = CTAAggregatorClient::AdvocacyCampaign.create(campaign_attrs, target_attrs)
+JSON.parse(response.body)
 ```
 
 > The above command returns JSON structured like this:

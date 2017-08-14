@@ -30,6 +30,14 @@ curl -X GET "http://localhost:3000/v1/events"
   -H "Content-Type: application/vnd.api+json"
 ```
 
+```ruby
+require 'cta_aggregator_client'
+# Configure gem (for directions, see gem's README)
+
+response = CTAAggregatorClient::Event.list
+JSON.parse(response.body)
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -158,7 +166,7 @@ This endpoint retrieves all events.
 
 You can filter based on the following attribteus
 
-Filter 		| Values | Description|  Example
+Filter | Values | Description|  Example
 --------- |  ----------- |  ----------- |  -----------
 upcoming     | true, false |  filter by events in the future | `GET "http://localhost:3000/v1/events?filter[upcoming]=true"`
 free     | true, false |  filter by free events | `GET "http://localhost:3000/v1/events?filter[free]=true"`
@@ -171,6 +179,15 @@ free     | true, false |  filter by free events | `GET "http://localhost:3000/v1
 curl -X GET  "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad"
   -H "Accept: application/vnd.api+json"
   -H "Content-Type: application/vnd.api+json"
+```
+
+```ruby
+require 'cta_aggregator_client'
+# Configure gem (for directions, see gem's README)
+
+uuid = 'd9aa62d4-3d06-46d4-b855-d0a200b420ad'
+response = CTAAggregatorClient::Event.find(uuid)
+JSON.parse(response.body)
 ```
 
 > The above command returns JSON structured like this:
@@ -259,6 +276,26 @@ curl -X POST "http://localhost:3000/v1/events"
         }
     }
 } '
+```
+
+```ruby
+require 'cta_aggregator_client'
+# Configure gem (for directions, see gem's README)
+
+event_attrs = {
+  title: 'March on Washington',
+  description: 'Illum molestiae aut ullam non qui consequatur magni.',
+  browser_url: 'http://example.com/marge',
+  origin_system: '5Calls',
+  featured_image_url: 'http://lorempixel.com/300/300',
+  start_date: '2017-07-08T03:58:25.098Z',
+  end_date: '2017-07-13T03:58:25.098Z',
+  free: false,
+}
+location_attrs = { location: '215ed993-3cd1-4fbc-b8af-7e2082813d06' }
+# location must exist prior to creating the Event
+
+CTAAggregatorClient::Event.create(event_attrs, location_attrs)
 ```
 
 > The above command returns JSON structured like this:

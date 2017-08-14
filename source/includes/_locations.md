@@ -21,6 +21,14 @@ curl -X GET  "http://localhost:3000/v1/locations"
   -H "Content-Type: application/vnd.api+json"
 ```
 
+```ruby
+require 'cta_aggregator_client'
+# Configure gem (for directions, see gem's README)
+
+response = CTAAggregatorClient::Location.list
+JSON.parse(response.body)
+
+```
 > The above command returns JSON structured like this:
 
 ```json
@@ -281,6 +289,15 @@ curl -X GET  "http://localhost:3000/v1/locations/cf2e490a-7bed-46d5-8e0a-386dfb3
   -H "Content-Type: application/vnd.api+json"
 ```
 
+```ruby
+require 'cta_aggregator_client'
+# Configure gem (for directions, see gem's README)
+
+uuid = 'cf2e490a-7bed-46d5-8e0a-386dfb365cc8'
+response = CTAAggregatorClient::Location.find(uuid)
+JSON.parse(response.body)
+```
+
 The above command returns JSON structured like this:
 
 ```json
@@ -343,6 +360,22 @@ curl -X POST "http://localhost:3000/v1/locations"
         }
     }
 } '
+```
+
+```ruby
+require 'cta_aggregator_client'
+# Configure gem (for directions, see gem's README)
+
+
+location_attrs = {
+  venue: 'Eastern Kemmer University',
+  address_lines: ['684 Schinner Trail', 'Apt. 512'],
+  locality: 'Rosenbaumville',
+  region: 'VA',
+  postal_code: '78183-3430'
+}
+response = CTAAggregatorClient::Location.create(location_attrs)
+JSON.parse(response.body)
 ```
 
 > The above command returns JSON structured like this:

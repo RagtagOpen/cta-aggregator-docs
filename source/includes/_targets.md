@@ -28,6 +28,14 @@ curl -X GET "http://localhost:3000/v1/targets"
   -H "Content-Type: application/vnd.api+json"
 ```
 
+```ruby
+require 'cta_aggregator_client'
+# Configure gem (for directions, see gem's README)
+
+response = CTAAggregatorClient::Target.list
+JSON.parse(response.body)
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -176,6 +184,14 @@ curl -X GET  "http://localhost:3000/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5
   -H "Content-Type: application/vnd.api+json"
 ```
 
+```ruby
+require 'cta_aggregator_client'
+# Configure gem (for directions, see gem's README)
+
+uuid = '3718fcd2-4317-4ed2-8548-bba7af7d5d2a'
+response = CTAAggregatorClient::Target.find(uuid)
+JSON.parse(response.body)
+```
 > The above command returns JSON structured like this:
 
 ```json
@@ -263,6 +279,51 @@ curl -X POST "http://localhost:3000/v1/targets"
         }
     }
   } '
+```
+
+```ruby
+require 'cta_aggregator_client'
+# Configure gem (for directions, see gem's README)
+
+target_attributes = {
+  organization: 'Mohr Inc',
+  given_name: 'Pascale',
+  family_name: 'White',
+  ocdid: 'b4503418-6aab-451a-8e55-11ffd575bc85',
+  postal_addresses: [
+    {
+      primary: true,
+      address_type: 'Office',
+      venue: 'Southern Nitzsche',
+      address_lines: [
+       '36261 Kovacek Prairie',
+        'Apt. 760'
+      ],
+      locality: 'West Brandynfort',
+      region: 'WV',
+      postal_code: '66900-1309',
+      country: 'US'
+    }
+  ],
+  email_addresses: [
+    {
+      primary: true,
+      address: 'jeffry_durgan@rutherfordcarroll.net',
+      address_type: 'work'
+     }
+  ],
+  phone_numbers: [
+    {
+      primary: true,
+      number: '(606) 087-8543 x254',
+      extension: '4594',
+      number_type: 'work'
+    }
+ ]
+}
+
+response = CTAAggregatorClient::Target.create(target_attrs)
+JSON.parse(response.body)
 ```
 
 > The above command returns JSON structured like this:
