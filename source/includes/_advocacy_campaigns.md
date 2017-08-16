@@ -582,6 +582,6 @@ This endpoint creates a new advocacy campaign.
 
 `POST "http://localhost:3000/v1/advocacy_campaigns/"`
 
-Requests to create a resource must include a valid JWT token. This token can be obtained from the `authantication` endpoint.
+Requests to create a resource must include a valid JWT token. This token can be obtained from the `authentication` endpoint.
 
 
