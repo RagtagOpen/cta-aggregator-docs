@@ -1,6 +1,15 @@
 # Authentication
-This API follows the [JWT spec.](https://tools.ietf.org/html/rfc7519) For more information regarding this standard consult RFC7519.
+
+Reading from the CTA Aggregator requires no authentication.  However, if you want to create a resource, you
+will need to register your app and obtain a developer key and secret.
+
+To get these, to send an email to <a href='mailto:ctaaggregator@ragtag.org'>ctaaggregator@ragtag.org</a>.
+
+Once you have these, you can obtain authentication tokens from the `/authorize` endpoint.
+
+The CTA Aggregator API follows the [JWT spec.](https://tools.ietf.org/html/rfc7519) For more information regarding this standard consult RFC7519.
 The authentication flow for the cta-aggregator proceeds as follows:
+
 ## Successful Authentication
 > To authenticate, use the following example.
 > Make sure to replace `api-key` with your API key and `api-secret` with your API secret

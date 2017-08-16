@@ -1,5 +1,27 @@
 # Events
 
+An Event Resource is a top-level resource that represents a call to action that has a location.
+
+It contains the following attributes.
+
+Name    | Type | Description
+--------- |  ----------- |  -----------
+identifiers | array | A unique string array of identifiers in the format [system name]:[id].
+start_date | datetime | The start time for the event.
+end_date | datetime | date  The date for all day events.
+created_at | datetime | A read-only property representing the date and time the resource was created on the local system.
+updated_at | datetime | A read-only property representing the date and time the resource was last modified on the local system.
+title | string | The title of the event. Intended for public display rather than administrative purposes.
+description | string |  description of the event, usually displayed publicly. May contain text and/or HTML.
+browser_url | string | A URL string pointing to the publicly available event page on the web.
+origin_system | string | A human readable identifier of the system where this event was created. (ex: “OSDI System”)
+featured_image_url | string | A URL string pointing to a publicly available featured image file for this event on the web.
+free | boolean | Indicator of whether there is a cost associated with attending the event
+location_id | integer | Identifier for location associated with event
+
+For more information on OSDI's Event resource, follow this link: 
+[https://opensupporter.github.io/osdi-docs/events.html](https://opensupporter.github.io/osdi-docs/events).
+
 ## Get All Events
 
 ```shell
@@ -8,317 +30,129 @@ curl -X GET "http://localhost:3000/v1/events"
   -H "Content-Type: application/vnd.api+json"
 ```
 
+```ruby
+require 'cta_aggregator_client'
+# Configure gem (for directions, see gem's README)
+
+response = CTAAggregatorClient::Event.list
+JSON.parse(response.body)
+```
+
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "data": [
-    {
-      "id": "a94af705-c389-4c33-8b25-e35a42062949",
-      "type": "events",
-      "links": {
-        "self": "http://localhost:3000/v1/events/a94af705-c389-4c33-8b25-e35a42062949"
-      },
-      "attributes": {
-        "title": "occaecat sed nulla ea consectetur",
-        "description": "magna adipiscing id aute consectetur ut incididunt mollit non Duis dolore elit reprehenderit laboris sed dolore Excepteur ut est nostrud officia deserunt ipsum sunt culpa",
-        "free": false,
-        "start-time": 1526236740,
-        "end-time": 1526247540,
-        "event-type": "onsite",
-        "website": "www.consectetur.com"
-      },
-      "relationships": {
-        "location": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/a94af705-c389-4c33-8b25-e35a42062949/relationships/location",
-            "related": "http://localhost:3000/v1/events/a94af705-c389-4c33-8b25-e35a42062949/location"
-          }
+    "data": [
+        {
+            "id": "d9aa62d4-3d06-46d4-b855-d0a200b420ad",
+            "type": "events",
+            "links": {
+                "self": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad"
+            },
+            "attributes": {
+                "title": "Join EMILY's List President Stephanie Schriock for a special reception in Santa Fe!",
+                "description": null,
+                "browser_url": "https://secure.emilyslist.org/page/contribute/Events_Test",
+                "origin_system": "Emily's List",
+                "featured_image_url": null,
+                "start_date": "2017-07-27T05:30:00.000Z",
+                "end_date": null,
+                "free": false,
+                "identifiers": [
+                    "emilys-list:Events_Test",
+                    "cta-aggregator:d9aa62d4-3d06-46d4-b855-d0a200b420ad"
+                ]
+            },
+            "relationships": {
+                "location": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/location",
+                        "related": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/location"
+                    }
+                },
+                "user": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/user",
+                        "related": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/user"
+                    }
+                }
+            }
         },
-        "contact": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/a94af705-c389-4c33-8b25-e35a42062949/relationships/contact",
-            "related": "http://localhost:3000/v1/events/a94af705-c389-4c33-8b25-e35a42062949/contact"
-          }
-        }
-      }
-    },
-    {
-      "id": "5ddc36fd-ccd8-41e4-a454-c1b008e264a7",
-      "type": "events",
-      "links": {
-        "self": "http://localhost:3000/v1/events/5ddc36fd-ccd8-41e4-a454-c1b008e264a7"
-      },
-      "attributes": {
-        "title": "pariatur non amet dolor sunt",
-        "description": "Excepteur est ea elit in minim dolor incididunt occaecat amet in fugiat ullamco sunt Duis sint sit anim reprehenderit id eu consequat nulla ut laborum",
-        "free": false,
-        "start-time": 1507813620,
-        "end-time": 1507824420,
-        "event-type": "onsite",
-        "website": "www.non.com"
-      },
-      "relationships": {
-        "location": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/5ddc36fd-ccd8-41e4-a454-c1b008e264a7/relationships/location",
-            "related": "http://localhost:3000/v1/events/5ddc36fd-ccd8-41e4-a454-c1b008e264a7/location"
-          }
+        {
+            "id": "3b511fd6-3057-46a0-9bac-e6c1633019ba",
+            "type": "events",
+            "links": {
+                "self": "http://localhost:3000/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba"
+            },
+            "attributes": {
+                "title": "Join EMILY's List President Stephanie Schriock and featured speakers Senator Kirsten Gillibrand and Rep. Jacky Rosen at our Ignite Change Luncheon in New York!",
+                "description": null,
+                "browser_url": "https://secure.emilyslist.org/page/contribute/NYC_Ignite_Change_Luncheon",
+                "origin_system": "Emily's List",
+                "featured_image_url": null,
+                "start_date": "2017-09-18T12:00:00.000Z",
+                "end_date": null,
+                "free": false,
+                "identifiers": [
+                    "emilys-list:NYC_Ignite_Change_Luncheon",
+                    "cta-aggregator:3b511fd6-3057-46a0-9bac-e6c1633019ba"
+                ]
+            },
+            "relationships": {
+                "location": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/relationships/location",
+                        "related": "http://localhost:3000/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/location"
+                    }
+                },
+                "user": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/relationships/user",
+                        "related": "http://localhost:3000/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/user"
+                    }
+                }
+            }
         },
-        "contact": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/5ddc36fd-ccd8-41e4-a454-c1b008e264a7/relationships/contact",
-            "related": "http://localhost:3000/v1/events/5ddc36fd-ccd8-41e4-a454-c1b008e264a7/contact"
-          }
+        {
+            "id": "b0e86149-c781-417e-a96f-1a57c3ed863b",
+            "type": "events",
+            "links": {
+                "self": "http://localhost:3000/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b"
+            },
+            "attributes": {
+                "title": "Join EMILY's List President Stephanie Schriock and special guest Congresswoman Jacky Rosen at our 2017 Ignite Change Luncheon in San Francisco!",
+                "description": null,
+                "browser_url": "https://secure.emilyslist.org/page/contribute/western-regional-luncheon",
+                "origin_system": "Emily's List",
+                "featured_image_url": null,
+                "start_date": "2017-10-13T11:00:00.000Z",
+                "end_date": null,
+                "free": false,
+                "identifiers": [
+                    "emilys-list:western-regional-luncheon",
+                    "cta-aggregator:b0e86149-c781-417e-a96f-1a57c3ed863b"
+                ]
+            },
+            "relationships": {
+                "location": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/relationships/location",
+                        "related": "http://localhost:3000/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/location"
+                    }
+                },
+                "user": {
+                    "links": {
+                        "self": "http://localhost:3000/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/relationships/user",
+                        "related": "http://localhost:3000/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/user"
+                    }
+                }
+            }
         }
-      }
-    },
-    {
-      "id": "3b2aa5cc-430d-42ec-9a3f-ddac99957584",
-      "type": "events",
-      "links": {
-        "self": "http://localhost:3000/v1/events/3b2aa5cc-430d-42ec-9a3f-ddac99957584"
-      },
-      "attributes": {
-        "title": "ex cillum ut quis pariatur",
-        "description": "sit aliqua reprehenderit amet sed ut enim occaecat adipiscing aute aliquip minim deserunt et officia quis eu proident ut nulla fugiat eiusmod in do qui",
-        "free": false,
-        "start-time": 1498284480,
-        "end-time": 1498295280,
-        "event-type": "onsite",
-        "website": "www.pariatur.com"
-      },
-      "relationships": {
-        "location": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/3b2aa5cc-430d-42ec-9a3f-ddac99957584/relationships/location",
-            "related": "http://localhost:3000/v1/events/3b2aa5cc-430d-42ec-9a3f-ddac99957584/location"
-          }
-        },
-        "contact": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/3b2aa5cc-430d-42ec-9a3f-ddac99957584/relationships/contact",
-            "related": "http://localhost:3000/v1/events/3b2aa5cc-430d-42ec-9a3f-ddac99957584/contact"
-          }
-        }
-      }
-    },
-    {
-      "id": "79eb5360-ad92-4fcd-96f8-7b64a8ec16a1",
-      "type": "events",
-      "links": {
-        "self": "http://localhost:3000/v1/events/79eb5360-ad92-4fcd-96f8-7b64a8ec16a1"
-      },
-      "attributes": {
-        "title": "deserunt sint labore dolore in",
-        "description": "do Ut occaecat sint dolore sed minim nisi amet pariatur aliqua elit commodo dolor ea ullamco dolor labore irure adipiscing qui Duis aute deserunt nulla",
-        "free": false,
-        "start-time": 1555809000,
-        "end-time": 1555823400,
-        "event-type": "onsite",
-        "website": "www.aute.com"
-      },
-      "relationships": {
-        "location": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/79eb5360-ad92-4fcd-96f8-7b64a8ec16a1/relationships/location",
-            "related": "http://localhost:3000/v1/events/79eb5360-ad92-4fcd-96f8-7b64a8ec16a1/location"
-          }
-        },
-        "contact": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/79eb5360-ad92-4fcd-96f8-7b64a8ec16a1/relationships/contact",
-            "related": "http://localhost:3000/v1/events/79eb5360-ad92-4fcd-96f8-7b64a8ec16a1/contact"
-          }
-        }
-      }
-    },
-    {
-      "id": "5d28b127-d7ff-4ef0-9215-b1029f4eefb0",
-      "type": "events",
-      "links": {
-        "self": "http://localhost:3000/v1/events/5d28b127-d7ff-4ef0-9215-b1029f4eefb0"
-      },
-      "attributes": {
-        "title": "consectetur do velit sed anim",
-        "description": "exercitation laboris in nulla Duis eu nisi ex in consequat quis proident ut anim dolor culpa est dolore aliquip ad magna in esse do ea",
-        "free": true,
-        "start-time": 1576524120,
-        "end-time": 1576527720,
-        "event-type": "onsite",
-        "website": "www.sit.com"
-      },
-      "relationships": {
-        "location": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/5d28b127-d7ff-4ef0-9215-b1029f4eefb0/relationships/location",
-            "related": "http://localhost:3000/v1/events/5d28b127-d7ff-4ef0-9215-b1029f4eefb0/location"
-          }
-        },
-        "contact": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/5d28b127-d7ff-4ef0-9215-b1029f4eefb0/relationships/contact",
-            "related": "http://localhost:3000/v1/events/5d28b127-d7ff-4ef0-9215-b1029f4eefb0/contact"
-          }
-        }
-      }
-    },
-    {
-      "id": "8ec14d5b-1565-43a9-bbbb-fa66a8f1b875",
-      "type": "events",
-      "links": {
-        "self": "http://localhost:3000/v1/events/8ec14d5b-1565-43a9-bbbb-fa66a8f1b875"
-      },
-      "attributes": {
-        "title": "incididunt in officia dolor laborum",
-        "description": "quis cillum ipsum eu dolor esse pariatur Excepteur in aliquip sint anim officia do cupidatat sunt sit dolore in incididunt laboris ut magna veniam ut",
-        "free": true,
-        "start-time": 1509701760,
-        "end-time": 1509705360,
-        "event-type": "onsite",
-        "website": "www.adipiscing.com"
-      },
-      "relationships": {
-        "location": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/8ec14d5b-1565-43a9-bbbb-fa66a8f1b875/relationships/location",
-            "related": "http://localhost:3000/v1/events/8ec14d5b-1565-43a9-bbbb-fa66a8f1b875/location"
-          }
-        },
-        "contact": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/8ec14d5b-1565-43a9-bbbb-fa66a8f1b875/relationships/contact",
-            "related": "http://localhost:3000/v1/events/8ec14d5b-1565-43a9-bbbb-fa66a8f1b875/contact"
-          }
-        }
-      }
-    },
-    {
-      "id": "5ccd793f-02df-4fee-8ab6-d2f87fcda52e",
-      "type": "events",
-      "links": {
-        "self": "http://localhost:3000/v1/events/5ccd793f-02df-4fee-8ab6-d2f87fcda52e"
-      },
-      "attributes": {
-        "title": "occaecat nostrud exercitation eiusmod aute",
-        "description": "cillum consequat nisi dolor labore deserunt Excepteur ullamco proident laboris ut aliqua in Duis cupidatat enim ad sed qui occaecat minim reprehenderit fugiat exercitation dolore",
-        "free": false,
-        "start-time": 1534443720,
-        "end-time": 1534450920,
-        "event-type": "onsite",
-        "website": "www.non.com"
-      },
-      "relationships": {
-        "location": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/5ccd793f-02df-4fee-8ab6-d2f87fcda52e/relationships/location",
-            "related": "http://localhost:3000/v1/events/5ccd793f-02df-4fee-8ab6-d2f87fcda52e/location"
-          }
-        },
-        "contact": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/5ccd793f-02df-4fee-8ab6-d2f87fcda52e/relationships/contact",
-            "related": "http://localhost:3000/v1/events/5ccd793f-02df-4fee-8ab6-d2f87fcda52e/contact"
-          }
-        }
-      }
-    },
-    {
-      "id": "ee626b19-351d-4948-a21f-61682bc4c047",
-      "type": "events",
-      "links": {
-        "self": "http://localhost:3000/v1/events/ee626b19-351d-4948-a21f-61682bc4c047"
-      },
-      "attributes": {
-        "title": "magna Duis officia sed dolore",
-        "description": "qui ipsum Ut aliqua labore consectetur exercitation id veniam anim quis mollit do amet aute sit fugiat eu commodo dolore in ut est irure tempor",
-        "free": true,
-        "start-time": 1536480180,
-        "end-time": 1536494580,
-        "event-type": "onsite",
-        "website": "www.nostrud.com"
-      },
-      "relationships": {
-        "location": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/ee626b19-351d-4948-a21f-61682bc4c047/relationships/location",
-            "related": "http://localhost:3000/v1/events/ee626b19-351d-4948-a21f-61682bc4c047/location"
-          }
-        },
-        "contact": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/ee626b19-351d-4948-a21f-61682bc4c047/relationships/contact",
-            "related": "http://localhost:3000/v1/events/ee626b19-351d-4948-a21f-61682bc4c047/contact"
-          }
-        }
-      }
-    },
-    {
-      "id": "e91a408f-6b84-4a7c-a3f9-f527fe030e9a",
-      "type": "events",
-      "links": {
-        "self": "http://localhost:3000/v1/events/e91a408f-6b84-4a7c-a3f9-f527fe030e9a"
-      },
-      "attributes": {
-        "title": "tempor in nisi in enim",
-        "description": "pariatur magna aliquip et veniam cillum nisi adipiscing mollit ut anim commodo ex in reprehenderit esse sit quis occaecat Lorem exercitation Excepteur irure ullamco nulla",
-        "free": true,
-        "start-time": 1553486640,
-        "end-time": 1553497440,
-        "event-type": "onsite",
-        "website": "www.laboris.com"
-      },
-      "relationships": {
-        "location": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/e91a408f-6b84-4a7c-a3f9-f527fe030e9a/relationships/location",
-            "related": "http://localhost:3000/v1/events/e91a408f-6b84-4a7c-a3f9-f527fe030e9a/location"
-          }
-        },
-        "contact": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/e91a408f-6b84-4a7c-a3f9-f527fe030e9a/relationships/contact",
-            "related": "http://localhost:3000/v1/events/e91a408f-6b84-4a7c-a3f9-f527fe030e9a/contact"
-          }
-        }
-      }
-    },
-    {
-      "id": "8319d43b-e8ca-4b15-b6a8-fa475089a790",
-      "type": "events",
-      "links": {
-        "self": "http://localhost:3000/v1/events/8319d43b-e8ca-4b15-b6a8-fa475089a790"
-      },
-      "attributes": {
-        "title": "esse elit cillum consectetur do",
-        "description": "sint dolore id sunt officia labore nulla et dolor exercitation ipsum Ut ex enim nisi non commodo ut tempor in elit aute dolor nostrud cupidatat",
-        "free": false,
-        "start-time": 1519024680,
-        "end-time": 1519028280,
-        "event-type": "onsite",
-        "website": "www.dolore.com"
-      },
-      "relationships": {
-        "location": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/8319d43b-e8ca-4b15-b6a8-fa475089a790/relationships/location",
-            "related": "http://localhost:3000/v1/events/8319d43b-e8ca-4b15-b6a8-fa475089a790/location"
-          }
-        },
-        "contact": {
-          "links": {
-            "self": "http://localhost:3000/v1/events/8319d43b-e8ca-4b15-b6a8-fa475089a790/relationships/contact",
-            "related": "http://localhost:3000/v1/events/8319d43b-e8ca-4b15-b6a8-fa475089a790/contact"
-          }
-        }
-      }
+    ],
+    "links": {
+        "first": "http://localhost:3000/v1/events?page%5Bnumber%5D=1&page%5Bsize%5D=10",
+        "last": "http://localhost:3000/v1/events?page%5Bnumber%5D=1&page%5Bsize%5D=10"
     }
-  ],
-  "links": {
-    "first": "http://localhost:3000/v1/events?page%5Bnumber%5D=1&page%5Bsize%5D=10",
-    "next": "http://localhost:3000/v1/events?page%5Bnumber%5D=2&page%5Bsize%5D=10",
-    "last": "http://localhost:3000/v1/events?page%5Bnumber%5D=6&page%5Bsize%5D=10"
-  }
 }
 ```
 
@@ -332,57 +166,73 @@ This endpoint retrieves all events.
 
 You can filter based on the following attribteus
 
-Filter 		| Values | Description|  Example
+Filter | Values | Description|  Example
 --------- |  ----------- |  ----------- |  -----------
-upcoming     | true |  filter by events in the future | `GET "http://localhost:3000/v1/events?filter[upcoming]=true"` 
-event type     | onsite, phone |  filter by events type | `GET "http://localhost:3000/v1/events?filter[event_type]=onsite"` 
+upcoming     | true, false |  filter by events in the future | `GET "http://localhost:3000/v1/events?filter[upcoming]=true"`
+free     | true, false |  filter by free events | `GET "http://localhost:3000/v1/events?filter[free]=true"`
 
 
 ## Get a Specific Event
 
 
 ```shell
-curl -X GET  "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba"
+curl -X GET  "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad"
   -H "Accept: application/vnd.api+json"
   -H "Content-Type: application/vnd.api+json"
+```
+
+```ruby
+require 'cta_aggregator_client'
+# Configure gem (for directions, see gem's README)
+
+uuid = 'd9aa62d4-3d06-46d4-b855-d0a200b420ad'
+response = CTAAggregatorClient::Event.find(uuid)
+JSON.parse(response.body)
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "data": {
-    "id": "31a22b00-8e7d-4194-b260-162439f56dba",
-    "type": "events",
-    "links": {
-      "self": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba"
-    },
-    "attributes": {
-      "title": "pizza pizza pizza",
-      "description": "desc",
-      "free": true,
-      "start-time": 1526725814,
-      "end-time": 1526740214,
-      "event-type": "onsite",
-      "website": "www.example.com"
-    },
-    "relationships": {
-      "location": {
+    "data": {
+        "id": "d9aa62d4-3d06-46d4-b855-d0a200b420ad",
+        "type": "events",
         "links": {
-          "self": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/relationships/location",
-          "related": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/location"
+            "self": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad"
+        },
+        "attributes": {
+            "title": "Join EMILY's List President Stephanie Schriock for a special reception in Santa Fe!",
+            "description": null,
+            "browser_url": "https://secure.emilyslist.org/page/contribute/Events_Test",
+            "origin_system": "Emily's List",
+            "featured_image_url": null,
+            "start_date": "2017-07-27T05:30:00.000Z",
+            "end_date": null,
+            "free": false,
+            "identifiers": [
+                "emilys-list:Events_Test",
+                "cta-aggregator:d9aa62d4-3d06-46d4-b855-d0a200b420ad"
+            ]
+        },
+        "relationships": {
+            "location": {
+                "links": {
+                    "self": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/location",
+                    "related": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/location"
+                }
+            },
+            "user": {
+                "links": {
+                    "self": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/user",
+                    "related": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/user"
+                }
+            }
         }
-      },
-      "contact": {
-        "links": {
-          "self": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/relationships/contact",
-          "related": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/contact"
-        }
-      }
     }
-  }
 }
 ```
+
+This endpoint retrieves a specific event.
 
 ### HTTP Request
 
@@ -399,58 +249,91 @@ ID | The ID of the event to retrieve
 
 ```shell
 curl -X POST "http://localhost:3000/v1/events"
-  -H "Accept: application/vnd.api+json" 
   -H "Content-Type: application/vnd.api+json" 
+  -H "Accept: application/vnd.api+json" 
+  -H "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1MDI2NjMwMjEsInN1YiI6ImI0ZDQ5MDAzLWEyMWYtNGVjZi1hYjM3LTQzMmRkMWM4MzE4MiJ9.Q_QeKrpgvelRZ-XB8gM1B1SSrjeGVEK93HLW2p4SoFJv5zICQV6aFiKyA1lJ8qhrPBzqIPtTgqQBTN9ng0c0PA"
   -d ' {
     "data": {
-      "type": "events",
+        "type": "events",
         "attributes": {
-          "title": "pizza pizza pizza",
-          "description": "desc",
-          "free": true,
-          "website": "www.example.com",
-          "event-type": "onsite",
-          "start-time": "1526725814",
-          "end-time": "1526740214"  
+            "title": "Sitin at city hall",
+            "description": null,
+            "browser_url": "https://secure.emilyslist.org/page/contribute/cityhallsitin",
+            "origin_system": "emilyslist",
+            "featured_image_url": null,
+            "start_date": "2017-07-27T00:00:00.000Z",
+            "end_date": null,
+            "free": false,
+            "identifiers": ["emilyslist:cityhallsitin"]
+        },
+        "relationships": {
+            "location": {
+                "data": {
+                    "type": "locations",
+                    "id": "cf2e490a-7bed-46d5-8e0a-386dfb365cc8"
+                }
+            }
         }
     }
-  }'
+} '
+```
+
+```ruby
+require 'cta_aggregator_client'
+# Configure gem (for directions, see gem's README)
+
+event_attrs = {
+  title: 'March on Washington',
+  description: 'Illum molestiae aut ullam non qui consequatur magni.',
+  browser_url: 'http://example.com/marge',
+  origin_system: '5Calls',
+  featured_image_url: 'http://lorempixel.com/300/300',
+  start_date: '2017-07-08T03:58:25.098Z',
+  end_date: '2017-07-13T03:58:25.098Z',
+  free: false,
+}
+location_attrs = { location: '215ed993-3cd1-4fbc-b8af-7e2082813d06' }
+# location must exist prior to creating the Event
+
+CTAAggregatorClient::Event.create(event_attrs, location_attrs)
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "data": {
-    "id": "31a22b00-8e7d-4194-b260-162439f56dba",
-    "type": "events",
-    "links": {
-      "self": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba"
-    },
-    "attributes": {
-      "title": "pizza pizza pizza",
-      "description": "desc",
-      "free": true,
-      "start-time": 1526725814,
-      "end-time": 1526740214,
-      "event-type": "onsite",
-      "website": "www.example.com"
-    },
-    "relationships": {
-      "location": {
+    "data": {
+        "id": "6ef4013f-e016-4ca0-bb28-d2d3e39286d6",
+        "type": "events",
         "links": {
-          "self": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/relationships/location",
-          "related": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/location"
+            "self": "http://localhost:3000/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6"
+        },
+        "attributes": {
+            "title": "Sit in at city hall",
+            "description": null,
+            "browser_url": "https://secure.emilyslist.org/page/contribute/cityhallsitin",
+            "origin_system": "emilyslist:cityhallsitin",
+            "featured_image_url": null,
+            "start_date": "2017-07-27T00:00:00.000Z",
+            "end_date": null,
+            "free": false,
+            "identifiers": ["emilyslist:cityhallsitin", "cta-aggregator:6ef4013f-e016-4ca0-bb28-d2d3e39286d6" ]
+        },
+        "relationships": {
+            "location": {
+                "links": {
+                    "self": "http://localhost:3000/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/relationships/location",
+                    "related": "http://localhost:3000/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/location"
+                }
+            },
+            "user": {
+                "links": {
+                    "self": "http://localhost:3000/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/relationships/user",
+                    "related": "http://localhost:3000/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/user"
+                }
+            }
         }
-      },
-      "contact": {
-        "links": {
-          "self": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/relationships/contact",
-          "related": "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/contact"
-        }
- 			}
     }
-  }
 }
 ```
 
@@ -458,58 +341,7 @@ This endpoint creates a new event.
 
 ### HTTP Request
 
-`POST "http://localhost:3000/v1/events/`
+`POST "http://localhost:3000/v1/events/"`
 
+Requests to create a resource must include a valid JWT token. This token can be obtained from the `authentication` endpoint.
 
-## Add a Contact to an Event
-
-```shell
-curl -X PUT "http://localhost:3000/v1/events/25c96b80-6dbe-4dda-85a6-d760aa82f5a9/relationships/contacts"
-  -H "Content-Type: application/vnd.api+json" 
-	-H "Accept: application/vnd.api+json" 
-	-d '{
-    "data": {
-      "id": "9efce530-4e6d-458c-93ad-22e42c3c8aa5",
-      "type": "contacts"
-    }
-  }'
-```
-
-> The above command returns JSON structured like this:
-
-```json
-status: 204
-```
-
-This endpoint allows you to add a contact to an event.
-
-### HTTP Request
-
-`PUT http://localhost:3000/v1/events/<UUID>/relationships/contacts`
-
-
-## Add a Location to an Event
-
-```shell
-curl -X PUT "http://localhost:3000/v1/events/31a22b00-8e7d-4194-b260-162439f56dba/relationships/location"
-  -H "Content-Type: application/vnd.api+json" 
-	-H "Accept: application/vnd.api+json" 
-	-d '{
-    "data": {
-      "id": "9efce530-4e6d-458c-93ad-22e42c3c8aa5",
-        "type": "locations"
-    }
-  }'
-```
-
-> The above command returns JSON structured like this:
-
-```json
-status: 204
-```
-
-This endpoint allows you to add a location to an event.
-
-### HTTP Request
-
-`PUT http://localhost:3000/v1/events/<UUID>/relationships/location`
