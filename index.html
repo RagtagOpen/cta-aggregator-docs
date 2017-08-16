@@ -227,13 +227,100 @@
       <div class="content">
         <h1 id="introduction">Introduction</h1>
 
-<p>This API provides information about calls to action.  A call to action is 
-represented by the event resource.  An event resource has two related 
+<p>This API provides information about calls to action.  A call to action is
+represented by the event resource.  An event resource has two related
 resources: a contact and (optionally) a location.</p>
 
 <p>The API follows the <a href="http://jsonapi.org/">JSON API spec</a>.  Feature like
-pagination, filtering, and CRUDing resrouces are all implemented following the 
+pagination, filtering, and CRUDing resrouces are all implemented following the
 conventions established in this spec.</p>
+
+          <h1 id="authentication">Authentication</h1>
+
+<p>This API follows the <a href="https://tools.ietf.org/html/rfc7519">JWT spec.</a> For more information regarding this standard consult RFC7519.
+The authentication flow for the cta-aggregator proceeds as follows:</p>
+
+<h2 id="successful-authentication">Successful Authentication</h2>
+
+<blockquote>
+<p>To authenticate, use the following example.
+Make sure to replace <code class="prettyprint">api-key</code> with your API key and <code class="prettyprint">api-secret</code> with your API secret</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="c"># Set the api key and secret in the authorization header</span>
+curl -X POST <span class="s2">"http://localhost:3000/v1/authorize"</span>
+  -H <span class="s2">"AUTHORIZATION: api-key:api-secret"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"jwt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxxx.yyyy"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Subsequent Authenticated Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="c"># set the JWT in the authorization header</span>
+curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</span>
+  -H <span class="s2">"AUTHORIZATION: Bearer xxxx.yyyy"</span>
+</code></pre>
+<blockquote>
+<p>The above request should return a 200 status response if authentication is successful</p>
+</blockquote>
+
+<p>Authentication starts with an <code class="prettyprint">api-key</code> and an <code class="prettyprint">api-secret</code> set in an authorization header as such:</p>
+
+<p><code class="prettyprint">Authorization: api-key:api-secret</code></p>
+
+<p>If the server can successfully validate that the key and secret belong to a requesting user, it will respond with a 201, with a body containing a JWT token.</p>
+
+<p>The returned token represents a <code class="prettyprint">sub</code> claim which can be used to successfully authenticate a user. Setting that token to the <code class="prettyprint">HTTP_AUTHORIZATION</code> header of subsequent requests will result in 200 level response.</p>
+
+<p><img src="images/successful_auth.svg" title="successful authentication ladder diagram" alt="Successful Authentication" /></p>
+
+<p><em>NOTE: For security purposes, this API will only respond to https requests</em></p>
+
+<aside class="notice">
+You must replace <code>api-key</code> with your personal API key and <code>api-secret</code> with your personal API secret
+</aside>
+
+<h2 id="unsuccessful-authentication">Unsuccessful Authentication:</h2>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/authorize"</span>
+  -H <span class="s2">"AUTHORIZATION: wrong-api-key:or-secret"</span>
+</code></pre>
+<blockquote>
+<p>The above command will return a 404 when the api key or secret is invalid</p>
+</blockquote>
+
+<p>If the server cannot successfully validate that the key and secret belong to a requesting user, it will respond with a 404.</p>
+
+<p><img src="images/unsuccessful_auth.svg" title="unsuccessful authentication ladder diagram" alt="Unsuccessful Authentication" /></p>
+
+<h2 id="jwt-expiration">JWT Expiration:</h2>
+<pre class="highlight shell tab-shell"><code><span class="c"># set the JWT in the authorization header</span>
+curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</span>
+  -H <span class="s2">"AUTHORIZATION: Bearer xxxx.yyyy"</span>
+</code></pre>
+<blockquote>
+<p>The above command will return a 401 when the JWT has expired</p>
+</blockquote>
+
+<p>All JWTs issued by the server will expire after 24 hours. When a token expires, subsequent requests using that token will result in a 401 response.</p>
+
+<p><img src="images/jwt_expires.svg" title="expired jwt ladder diagram" alt="JWT Expires" /></p>
+
+<h2 id="incorrect-jwt-sent">Incorrect JWT Sent:</h2>
+<pre class="highlight shell tab-shell"><code><span class="c"># set a bad JWT in the authorization header</span>
+curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</span>
+  -H <span class="s2">"AUTHORIZATION: Bearer abcd.efgh"</span>
+</code></pre>
+<blockquote>
+<p>The above command will return a 401 when the JWT is incorrect.</p>
+</blockquote>
+
+<p>An incorrect JWT will also result in a 401 response.</p>
+
+<p><img src="images/bad_jwt.svg" title="bad jwt ladder diagram" alt="Bad JWT" /></p>
 
           <h1 id="events">Events</h1>
 
@@ -1353,6 +1440,62 @@ conventions established in this spec.</p>
 <td>Service Unavailable &ndash; We&rsquo;re temporarily offline for maintenance. Please try again later.</td>
 </tr>
 </tbody></table>
+
+          <h1 id="embedding-cta">Embedding CTA</h1>
+
+<p>The Call to Action feed can be embedded in your web site using
+<a href="https://developer.mozilla.org/en-US/docs/AJAX/Getting_Started">AJAX</a>
+calls. The API automatically sets
+<a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">Cross-origin resource sharing (CORS)</a>
+headers allowing AJAX calls from browsers visiting your domain to the
+API&rsquo;s domain. Note, this feature depends on the HTTP <em>Origin</em> header being
+sent.  Web browsers do this automatically, however when debugging with
+tools like <em>curl</em> or Postman, you may need to explicitly set it,
+e.g. <code class="prettyprint">curl -H &#39;Origin: example.com&#39;</code>.</p>
+
+<h3 id="calling-the-api-with-pure-javascript">Calling the API with pure JavaScript</h3>
+
+<p>To call the API in JavaScript you use
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest">XMLHttpRequest()</a>. The
+<em>onload</em> function will be called with the API data.</p>
+
+<blockquote>
+<p>Basic JavaScript Call</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="nx">req</span><span class="o">=</span><span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">onload</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">response</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">"GET"</span><span class="p">,</span><span class="s1">'http://localhost:3000/v1/events'</span><span class="p">,</span><span class="kc">true</span><span class="p">);</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+</code></pre>
+<p>The actual events will be an array returned in <code class="prettyprint">response.data</code>,
+<code class="prettyprint">response.data[0].title</code> would contain the first event&rsquo;s
+title. Typically, you would loop over this data add it to your page.</p>
+
+<blockquote>
+<p>Loop Through Events</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">+=</span> <span class="s1">'&lt;p&gt;'</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">title</span> <span class="o">+</span> <span class="s1">'&lt;/p&gt;'</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre>
+<p><a href="samples/simple.html">This example</a> use the above JavaScript to fetch
+events and adds them to the page in a simple <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl">definition list</a>.</p>
+
+<p>It&rsquo;s a bit easier to use the API with libraries like <a href="https://jquery.com/">jQuery</a>:</p>
+
+<blockquote>
+<p>jQuery Version</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span> <span class="s2">"http://localhost:3000/v1/events"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span> <span class="p">{</span>
+   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+<p><a href="samples/jquery-bootstrap.html">This example</a> fetches the events with
+jQuery and styles them using the <a href="http://getbootstrap.com/">Bootstrap</a>
+framework.</p>
 
       </div>
       <div class="dark-box">
