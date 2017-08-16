@@ -1,15 +1,15 @@
 # Locations
 
 A Location resource is a sub-resource related to an Event.  Each Event has one Location. 
-A location resource contains the following attributes.
+Every Location resource contains the following attributes.
 
 Name    | Type | Description
 --------- |  ----------- |  -----------
 venue | string | Optional venue name at the event address, useful for names of buildings. (ex: Smith Hall)
-address_lines | Array | An array of strings representing the event’s street address.
-locality |string | A city or other local administrative area.
-region |string | State or subdivision codes according to ISO 3166-2 (Final 2 alpha digits).
-postal_code |string | The region specific postal code, such as a zip code.
+address_lines | array | An array of strings representing the event’s street address.
+locality | string | A city or other local administrative area.
+region | string | State or subdivision codes according to [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) (Final 2 alpha digits).
+postal_code | string | The region specific postal code, such as a zip code.
 
 For more information on OSDI's Location resource, follow this link: [https://opensupporter.github.io/osdi-docs/events.html#location](https://opensupporter.github.io/osdi-docs/events.html#location).
 
@@ -271,7 +271,7 @@ This endpoint retrieves all locations.
 
 ### Filter
 
-You can filter based on the following attributes.
+You can filter based on the attributes below.
 
 Filter    | Example
 --------- |  -----------
@@ -328,7 +328,7 @@ The above command returns JSON structured like this:
 
 ```
 
-This endpoint retrieves a specific location.
+This endpoint retrieves a specific Location.
 
 ### HTTP Request
 
@@ -407,10 +407,10 @@ JSON.parse(response.body)
 }
 ```
 
-This endpoint creates an evernt.
+This endpoint creates a Location.
 
 ### HTTP Request
 
 `POST "http://localhost:3000/v1/locations"`
 
-Requests to create a resource must include a valid JWT token. This token can be obtained from the `authantication` endpoint.
+Requests to create a resource must include a valid JWT token. This token can be obtained from the `authentication` endpoint.

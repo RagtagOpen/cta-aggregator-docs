@@ -6,18 +6,18 @@ It contains the following attributes.
 
 Name    | Type | Description
 --------- |  ----------- |  -----------
-identifiers | array | A unique string array of identifiers in the format [system name]:[id]. See the general concepts document for more information about identifiers.
+identifiers | array | A unique string array of identifiers in the format [system name]:[id].
 start_date | datetime | The start time for the event.
 end_date | datetime | date  The date for all day events.
 created_at | datetime | A read-only property representing the date and time the resource was created on the local system.
-updated_at | datetime |A read-only property representing the date and time the resource was last modified on the local system.
+updated_at | datetime | A read-only property representing the date and time the resource was last modified on the local system.
 title | string | The title of the event. Intended for public display rather than administrative purposes.
 description | string |  description of the event, usually displayed publicly. May contain text and/or HTML.
 browser_url | string | A URL string pointing to the publicly available event page on the web.
-origin_system| string | A human readable identifier of the system where this event was created. (ex: “OSDI System”)
-featured_image_url| string | A URL string pointing to a publicly available featured image file for this event on the web.
+origin_system | string | A human readable identifier of the system where this event was created. (ex: “OSDI System”)
+featured_image_url | string | A URL string pointing to a publicly available featured image file for this event on the web.
 free | boolean | Indicator of whether there is a cost associated with attending the event
-location_id| integer | identifier for location associated with event
+location_id | integer | Identifier for location associated with event
 
 For more information on OSDI's Event resource, follow this link: 
 [https://opensupporter.github.io/osdi-docs/events.html](https://opensupporter.github.io/osdi-docs/events).
@@ -343,5 +343,5 @@ This endpoint creates a new event.
 
 `POST "http://localhost:3000/v1/events/"`
 
-Requests to create a resource must include a valid JWT token. This token can be obtained from the `authantication` endpoint.
+Requests to create a resource must include a valid JWT token. This token can be obtained from the `authentication` endpoint.
 

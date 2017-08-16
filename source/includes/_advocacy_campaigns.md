@@ -5,7 +5,7 @@ It contains the following attributes.
 
 Name    | Type | Description
 --------- |  ----------- |  -----------
-identifiers | array | A unique string array of identifiers in the format [system name]:[id]. See the general concepts document for more information about identifiers.
+identifiers | array | A unique string array of identifiers in the format [system name]:[id].
 created_at | datetime | A read-only property representing the date and time the resource was created on the local system.
 updated_at | datetime |A read-only property representing the date and time the resource was last modified on the local system.
 origin_system | string | A human readable identifier of the system where this advocacy campaign was created. (ex: “OSDI System”)
