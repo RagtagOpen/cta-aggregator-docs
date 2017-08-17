@@ -1,6 +1,6 @@
 # Advocacy Campaigns
 
-An Advocacy Campaign resource is a top-level resource that represents a call to action that involves reaching out by phone or eamil.
+An Advocacy Campaign resource is a top-level resource that represents a call to action that involves reaching out by phone or email.
 It contains the following attributes.
 
 Name    | Type | Description
@@ -383,7 +383,7 @@ This endpoint retrieves all advocacy campaigns.
 
 ### Filter
 
-You can filter based on the following attribteus
+You can filter based on the following attributes
 
 Filter 		| Values | Description|  Example
 --------- |  ----------- |  ----------- |  -----------
@@ -457,7 +457,7 @@ JSON.parse(response.body)
 }
 ```
 
-This endpoint retrieves a specific advocacy campagins.
+This endpoint retrieves a specific advocacy campaign.
 
 ### HTTP Request
 
@@ -467,7 +467,7 @@ This endpoint retrieves a specific advocacy campagins.
 
 Parameter | Description
 --------- | -----------
-ID | The ID of the advocay campaign to retrieve
+ID | The ID of the advocacy campaign to retrieve
 
 
 ## Create an Advocacy Campaign
