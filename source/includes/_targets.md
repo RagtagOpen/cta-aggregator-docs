@@ -15,7 +15,7 @@ ocdid | string | array | The Open Civic Data Division ID for this target’s pol
 identifiers | array | A unique string array of identifiers in the format [system name]:[id].
 postal_addresses | array | Array of postal address info. See [OSDI documentation](https://opensupporter.github.io/osdi-docs/advocacy_campaigns.html#postal-addresses)
 email_addresses | array | Email address, type, fields. See [OSDI documentation](hhttps://opensupporter.github.io/osdi-docs/advocacy_campaigns.html#email-addresses)
-phone_numbers | array | Any phone numebrs for target. See [OSDI documentation](hhttps://opensupporter.github.io/osdi-docs/advocacy_campaigns.html#phone-numbers)
+phone_numbers | array | Any phone numbers for target. See [OSDI documentation](hhttps://opensupporter.github.io/osdi-docs/advocacy_campaigns.html#phone-numbers)
 
 For more information on OSDI's Target resource, follow this link: [https://opensupporter.github.io/osdi-docs/advocacy_campaigns.html#target]( https://opensupporter.github.io/osdi-docs/advocacy_campaigns.html#target).
 
