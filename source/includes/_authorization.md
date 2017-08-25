@@ -12,6 +12,6 @@ The API will reject your request.
 HTTP Method   | Authentication Required? | Notes
 --------- |  ----------- |  -----------
 Get | No | No authentication required to read any resource(s).
-POST | Yes | Authentication required but anyone with API credentials can create a resource.
+POST | Yes | Authentication required, but anyone with API credentials can create a resource.
 PUT | Yes | Request will be accepted if you created the resource you are updating. 
-DELETE | N/A | Deleting not currently permitted.  To get a resource removed, conctact the Ragtag team at <a href='mailto:ctaaggregator@ragtag.org'>ctaaggregator@ragtag.org</a>).
+DELETE | N/A | Deleting a resource is not currently permitted.  To get a resource removed, contact the Ragtag team at <a href='mailto:ctaaggregator@ragtag.org'>ctaaggregator@ragtag.org</a>).
