@@ -7,7 +7,7 @@ To get these, to send an email to <a href='mailto:ctaaggregator@ragtag.org'>ctaa
 
 Once you have these, you can obtain authentication tokens from the `/authorize` endpoint.
 
-The CTA Aggregator API follows the [JWT spec.](https://tools.ietf.org/html/rfc7519) For more information regarding this standard consult RFC7519.
+The CTA Aggregator API follows the [JWT spec.](https://tools.ietf.org/html/rfc7519) For more information regarding this standard, consult RFC7519.
 The authentication flow for the cta-aggregator proceeds as follows:
 
 ## Successful Authentication
@@ -53,7 +53,7 @@ The returned token represents a `sub` claim which can be used to successfully au
 <aside class="notice">
 You must replace <code>api-key</code> with your personal API key and <code>api-secret</code> with your personal API secret
 </aside>
-## Unsuccessful Authentication:
+## Unsuccessful Authentication
 
 ```shell
 curl -X POST "http://localhost:3000/v1/authorize"
@@ -64,7 +64,7 @@ curl -X POST "http://localhost:3000/v1/authorize"
 If the server cannot successfully validate that the key and secret belong to a requesting user, it will respond with a 404.
 
 ![Unsuccessful Authentication](images/unsuccessful_auth.svg "unsuccessful authentication ladder diagram")
-## JWT Expiration:
+## JWT Expiration
 
 ```shell
 # set the JWT in the authorization header
@@ -76,7 +76,7 @@ curl -X POST "http://localhost:3000/some-protected-endpoint"
 All JWTs issued by the server will expire after 24 hours. When a token expires, subsequent requests using that token will result in a 401 response.
 
 ![JWT Expires](images/jwt_expires.svg "expired jwt ladder diagram")
-## Incorrect JWT Sent:
+## Incorrect JWT Sent
 
 ```shell
 # set a bad JWT in the authorization header
