@@ -11,7 +11,8 @@ updated_at | datetime |A read-only property representing the date and time the r
 origin_system | string | A human readable identifier of the system where this advocacy campaign was created. (ex: “OSDI System”)
 title | string | The title of the advocacy campaign. Intended for public display rather than administrative purposes.
 description | string |A description of the advocacy campaign, usually displayed publicly. May contain text and/or HTML.
-template | string | A script to read over the phone, or a general template for a postcard or email. These may be captured in the description, but putting it in the templates field allows it to be highlighted by clients. May contain text and/or HTML.  browser_url | string | A URL string pointing to the publicly available advocacy campaign page on the web.
+template | string | A script to read over the phone, or a general template for a postcard or email. These may be captured in the description, but putting it in the templates field allows it to be highlighted by clients. May contain text and/or HTML. 
+browser_url | string | A URL string pointing to the publicly available advocacy campaign page on the web.
 featured_image_url | string | A URL string pointing to a publicly available featured image file for this advocacy campaign on the web.
 action_type | string | The type of advocacy campaign, specifying how users perform outreaches to targets. Either "email" or "phone."
 target_list | string | An array of target object hashes representing the targets of the advocacy campaign.
