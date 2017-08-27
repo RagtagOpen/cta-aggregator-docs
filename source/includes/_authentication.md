@@ -5,7 +5,7 @@ will need to register your app and obtain a developer key and secret.
 
 To get these, to send an email to <a href='mailto:ctaaggregator@ragtag.org'>ctaaggregator@ragtag.org</a>.
 
-Once you have these, you can obtain authentication tokens from the `/authorize` endpoint.
+Once you have these, you can obtain authentication tokens from the `/authentications` endpoint.
 
 The CTA Aggregator API follows the [JWT spec.](https://tools.ietf.org/html/rfc7519) For more information regarding this standard, consult RFC7519.
 The authentication flow for the cta-aggregator proceeds as follows:
@@ -16,7 +16,7 @@ The authentication flow for the cta-aggregator proceeds as follows:
 
 ```shell
 # Set the api key and secret in the authorization header
-curl -X POST "http://localhost:3000/v1/authorize"
+curl -X POST "http://localhost:3000/v1/authentications"
   -H "AUTHORIZATION: api-key:api-secret"
 ```
 
@@ -56,7 +56,7 @@ You must replace <code>api-key</code> with your personal API key and <code>api-s
 ## Unsuccessful Authentication
 
 ```shell
-curl -X POST "http://localhost:3000/v1/authorize"
+curl -X POST "http://localhost:3000/v1/authentications"
   -H "AUTHORIZATION: wrong-api-key:or-secret"
 ```
 > The above command will return a 404 when the api key or secret is invalid
