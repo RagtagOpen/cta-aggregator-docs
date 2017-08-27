@@ -291,11 +291,10 @@ event_attrs = {
   start_date: '2017-07-08T03:58:25.098Z',
   end_date: '2017-07-13T03:58:25.098Z',
   free: false,
+  location: '215ed993-3cd1-4fbc-b8af-7e2082813d06'
 }
-location_attrs = { location: '215ed993-3cd1-4fbc-b8af-7e2082813d06' }
-# location must exist prior to creating the Event
 
-CTAAggregatorClient::Event.create(event_attrs, location_attrs)
+CTAAggregatorClient::Event.create(event_attrs)
 ```
 
 > The above command returns JSON structured like this:
