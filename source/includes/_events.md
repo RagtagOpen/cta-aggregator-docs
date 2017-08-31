@@ -4,25 +4,25 @@ An Event Resource is a top-level resource that represents a call to action that 
 
 It contains the following attributes.
 
-Name    | Type | Description
---------- |  ----------- |  -----------
-identifiers | array | A unique string array of identifiers in the format [system name]:[id].
-start_date | datetime | The start time for the event.
-end_date | datetime | date  The date for all day events.
-created_at | datetime | A read-only property representing the date and time the resource was created on the local system.
-updated_at | datetime | A read-only property representing the date and time the resource was last modified on the local system.
-title | string | The title of the event. Intended for public display rather than administrative purposes.
-description | string |  description of the event, usually displayed publicly. May contain text and/or HTML.
-browser_url | string | A URL string pointing to the publicly available event page on the web.
-origin_system | string | A human readable identifier of the system where this event was created. (ex: “OSDI System”)
-featured_image_url | string | A URL string pointing to a publicly available featured image file for this event on the web.
-free | boolean | Indicator of whether there is a cost associated with attending the event
-location_id | integer | Identifier for location associated with event
+Name               | Type        | Description
+---------          | ----------- | -----------
+identifiers        | array       | A unique string array of identifiers in the format [system name]:[id].
+start_date         | datetime    | The start time for the event.
+end_date           | datetime    | date  The date for all day events.
+created_at         | datetime    | A read-only property representing the date and time the resource was created on the local system.
+updated_at         | datetime    | A read-only property representing the date and time the resource was last modified on the local system.
+title              | string      | The title of the event. Intended for public display rather than administrative purposes.
+description        | string      | description of the event, usually displayed publicly. May contain text and/or HTML.
+browser_url        | string      | A URL string pointing to the publicly available event page on the web.
+origin_system      | string      | A human readable identifier of the system where this event was created. (ex: “OSDI System”)
+featured_image_url | string      | A URL string pointing to a publicly available featured image file for this event on the web.
+free               | boolean     | Indicator of whether there is a cost associated with attending the event
+location_id        | integer     | Identifier for location associated with event
 
-For more information on OSDI's Event resource, follow this link: 
+For more information on OSDI's Event resource, follow this link:
 [https://opensupporter.github.io/osdi-docs/events.html](https://opensupporter.github.io/osdi-docs/events).
 
-## Get All Events
+## Get All Future Events
 
 ```shell
 curl -X GET "http://localhost:3000/v1/events"
@@ -156,7 +156,7 @@ JSON.parse(response.body)
 }
 ```
 
-This endpoint retrieves all events.
+This endpoint retrieves all future events.
 
 ### HTTP Request
 
@@ -166,10 +166,10 @@ This endpoint retrieves all events.
 
 You can filter based on the following attribteus
 
-Filter | Values | Description|  Example
---------- |  ----------- |  ----------- |  -----------
-upcoming     | true, false |  filter by events in the future | `GET "http://localhost:3000/v1/events?filter[upcoming]=true"`
-free     | true, false |  filter by free events | `GET "http://localhost:3000/v1/events?filter[free]=true"`
+Filter    | Values      | Description                  | Example
+--------- | ----------- | -----------                  | -----------
+past      | true        | filter by events in the past | `GET "http://localhost:3000/v1/events?filter[past]=true"`
+free      | true, false | filter by free events        | `GET "http://localhost:3000/v1/events?filter[free]=true"`
 
 
 ## Get a Specific Event
@@ -242,15 +242,15 @@ This endpoint retrieves a specific event.
 
 Parameter | Description
 --------- | -----------
-ID | The ID of the event to retrieve
+ID        | The ID of the event to retrieve
 
 
 ## Create an Event
 
 ```shell
 curl -X POST "http://localhost:3000/v1/events"
-  -H "Content-Type: application/vnd.api+json" 
-  -H "Accept: application/vnd.api+json" 
+  -H "Content-Type: application/vnd.api+json"
+  -H "Accept: application/vnd.api+json"
   -H "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1MDI2NjMwMjEsInN1YiI6ImI0ZDQ5MDAzLWEyMWYtNGVjZi1hYjM3LTQzMmRkMWM4MzE4MiJ9.Q_QeKrpgvelRZ-XB8gM1B1SSrjeGVEK93HLW2p4SoFJv5zICQV6aFiKyA1lJ8qhrPBzqIPtTgqQBTN9ng0c0PA"
   -d ' {
     "data": {
