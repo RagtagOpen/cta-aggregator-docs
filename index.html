@@ -419,19 +419,10 @@ curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</s
 </tr>
 </tbody></table>
 
-<p>For more information on OSDI&rsquo;s Event resource, follow this link: 
+<p>For more information on OSDI&rsquo;s Event resource, follow this link:
 <a href="https://opensupporter.github.io/osdi-docs/events">https://opensupporter.github.io/osdi-docs/events.html</a>.</p>
 
-<p>The API is capable of sorting results by any of the attributes above.
-For instance, to sort events by start_date, run this command.</p>
-
-<p>https://cta-aggregator.herokuapp.com/v1/events?sort=start_date</p>
-
-<p>Currently, sorting by dates is limited to ordering them in ascending order (oldest to newest).</p>
-
-<p>Also, you&rsquo;ll probable want to filter for upcoming events, rather that attempting to get all of them</p>
-
-<h2 id="get-all-events">Get All Events</h2>
+<h2 id="get-all-future-events">Get All Future Events</h2>
 <pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/events"</span>
   -H <span class="s2">"Accept: application/vnd.api+json"</span>
   -H <span class="s2">"Content-Type: application/vnd.api+json"</span>
@@ -558,7 +549,7 @@ For instance, to sort events by start_date, run this command.</p>
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves all events.</p>
+<p>This endpoint retrieves all future events.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -577,10 +568,10 @@ For instance, to sort events by start_date, run this command.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>upcoming</td>
-<td>true, false</td>
-<td>filter by events in the future</td>
-<td><code class="prettyprint">GET &quot;http://localhost:3000/v1/events?filter[upcoming]=true&quot;</code></td>
+<td>past</td>
+<td>true</td>
+<td>filter by events in the past</td>
+<td><code class="prettyprint">GET &quot;http://localhost:3000/v1/events?filter[past]=true&quot;</code></td>
 </tr>
 <tr>
 <td>free</td>
@@ -664,8 +655,8 @@ For instance, to sort events by start_date, run this command.</p>
 
 <h2 id="create-an-event">Create an Event</h2>
 <pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/events"</span>
-  -H <span class="s2">"Content-Type: application/vnd.api+json"</span> 
-  -H <span class="s2">"Accept: application/vnd.api+json"</span> 
+  -H <span class="s2">"Content-Type: application/vnd.api+json"</span>
+  -H <span class="s2">"Accept: application/vnd.api+json"</span>
   -H <span class="s2">"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1MDI2NjMwMjEsInN1YiI6ImI0ZDQ5MDAzLWEyMWYtNGVjZi1hYjM3LTQzMmRkMWM4MzE4MiJ9.Q_QeKrpgvelRZ-XB8gM1B1SSrjeGVEK93HLW2p4SoFJv5zICQV6aFiKyA1lJ8qhrPBzqIPtTgqQBTN9ng0c0PA"</span>
   -d <span class="s1">' {
     "data": {
