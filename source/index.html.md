@@ -1,5 +1,5 @@
 ---
-title: API Reference
+title: CTA Aggregator Reference
 
 language_tabs:
   - shell
@@ -11,6 +11,7 @@ toc_footers:
 
 includes:
   - authentication
+  - authorization
   - events
   - locations
   - advocacy_campaigns
