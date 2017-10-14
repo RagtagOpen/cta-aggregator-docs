@@ -4,9 +4,9 @@ Documentation for the cta-aggregator project
 This repo uses [slate](https://github.com/lord/slate) to allow markdown-driven 
 documentation.  
 
-The codebase for the CTA Aggregator is located here: https://github.com/Ragtagteam/cta-aggregator.
+The codebase for the CTA Aggregator is located here: https://github.com/RagtagOpen/cta-aggregator.
 
-This docs site is deployed at https://ragtagteam.github.io/cta-aggregator-docs/.
+This docs site is deployed at https://ragtagopen.github.io/cta-aggregator-docs/.
 
 ## Setup
 
@@ -24,7 +24,7 @@ pull the changes down to your local master branch and then run the deploy script
 
 * In your terminal, get on your master branch and make sure it's up to date with the remote.
 * Run `bash deploy.sh`.
-* In your browser, navigate [here](https://ragtagteam.github.io/cta-aggregator-docs) and verify that everyhing looks correct.
+* In your browser, navigate [here](https://ragtagopen.github.io/cta-aggregator-docs) and verify that everyhing looks correct.
 
 
 ## To Do

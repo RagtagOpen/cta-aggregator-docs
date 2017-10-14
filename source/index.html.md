@@ -41,7 +41,7 @@ phone call.
 
 The API presents data in JSON.  You can write consumers or scrapers in any language you want.
 If you're working in Ruby, then you may want to leverage the Ruby gem,
-located here: [https://github.com/Ragtagteam/cta-aggregator-client-ruby](https://github.com/Ragtagteam/cta-aggregator-client-ruby/).
+located here: [https://github.com/RagtagOpen/cta-aggregator-client-ruby](https://github.com/RagtagOpen/cta-aggregator-client-ruby/).
 This gem provides simple interface for reading and writing data from the API. It's especially
 helpful for creating resoucres, since you can just pass it Ruby hashes and the gem will take care
 of constructing the JSON payload.
