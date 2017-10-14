@@ -39,7 +39,7 @@
         <script>
          $(function() {
              // Fetch all events from the API
-             $.get( "http://localhost:3000/v1/events", function( response ) {
+             $.get( "https://www.resistr.tech/v1/events", function( response ) {
                  $events = $('#events'); // Events div
                  $.each(response.data, function( index, event ) {
                      // Copy the template

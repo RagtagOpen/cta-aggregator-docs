@@ -25,7 +25,7 @@ For more information on OSDI's Event resource, follow this link:
 ## Get All Future Events
 
 ```shell
-curl -X GET "http://localhost:3000/v1/events"
+curl -X GET "https://www.resistr.tech/v1/events"
   -H "Accept: application/vnd.api+json"
   -H "Content-Type: application/vnd.api+json"
 ```
@@ -47,7 +47,7 @@ JSON.parse(response.body)
             "id": "d9aa62d4-3d06-46d4-b855-d0a200b420ad",
             "type": "events",
             "links": {
-                "self": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad"
+                "self": "https://www.resistr.tech/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad"
             },
             "attributes": {
                 "title": "Join EMILY's List President Stephanie Schriock for a special reception in Santa Fe!",
@@ -66,14 +66,14 @@ JSON.parse(response.body)
             "relationships": {
                 "location": {
                     "links": {
-                        "self": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/location",
-                        "related": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/location"
+                        "self": "https://www.resistr.tech/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/location",
+                        "related": "https://www.resistr.tech/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/location"
                     }
                 },
                 "user": {
                     "links": {
-                        "self": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/user",
-                        "related": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/user"
+                        "self": "https://www.resistr.tech/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/user",
+                        "related": "https://www.resistr.tech/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/user"
                     }
                 }
             }
@@ -82,7 +82,7 @@ JSON.parse(response.body)
             "id": "3b511fd6-3057-46a0-9bac-e6c1633019ba",
             "type": "events",
             "links": {
-                "self": "http://localhost:3000/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba"
+                "self": "https://www.resistr.tech/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba"
             },
             "attributes": {
                 "title": "Join EMILY's List President Stephanie Schriock and featured speakers Senator Kirsten Gillibrand and Rep. Jacky Rosen at our Ignite Change Luncheon in New York!",
@@ -101,14 +101,14 @@ JSON.parse(response.body)
             "relationships": {
                 "location": {
                     "links": {
-                        "self": "http://localhost:3000/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/relationships/location",
-                        "related": "http://localhost:3000/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/location"
+                        "self": "https://www.resistr.tech/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/relationships/location",
+                        "related": "https://www.resistr.tech/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/location"
                     }
                 },
                 "user": {
                     "links": {
-                        "self": "http://localhost:3000/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/relationships/user",
-                        "related": "http://localhost:3000/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/user"
+                        "self": "https://www.resistr.tech/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/relationships/user",
+                        "related": "https://www.resistr.tech/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/user"
                     }
                 }
             }
@@ -117,7 +117,7 @@ JSON.parse(response.body)
             "id": "b0e86149-c781-417e-a96f-1a57c3ed863b",
             "type": "events",
             "links": {
-                "self": "http://localhost:3000/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b"
+                "self": "https://www.resistr.tech/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b"
             },
             "attributes": {
                 "title": "Join EMILY's List President Stephanie Schriock and special guest Congresswoman Jacky Rosen at our 2017 Ignite Change Luncheon in San Francisco!",
@@ -136,22 +136,22 @@ JSON.parse(response.body)
             "relationships": {
                 "location": {
                     "links": {
-                        "self": "http://localhost:3000/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/relationships/location",
-                        "related": "http://localhost:3000/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/location"
+                        "self": "https://www.resistr.tech/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/relationships/location",
+                        "related": "https://www.resistr.tech/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/location"
                     }
                 },
                 "user": {
                     "links": {
-                        "self": "http://localhost:3000/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/relationships/user",
-                        "related": "http://localhost:3000/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/user"
+                        "self": "https://www.resistr.tech/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/relationships/user",
+                        "related": "https://www.resistr.tech/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/user"
                     }
                 }
             }
         }
     ],
     "links": {
-        "first": "http://localhost:3000/v1/events?page%5Bnumber%5D=1&page%5Bsize%5D=10",
-        "last": "http://localhost:3000/v1/events?page%5Bnumber%5D=1&page%5Bsize%5D=10"
+        "first": "https://www.resistr.tech/v1/events?page%5Bnumber%5D=1&page%5Bsize%5D=10",
+        "last": "https://www.resistr.tech/v1/events?page%5Bnumber%5D=1&page%5Bsize%5D=10"
     }
 }
 ```
@@ -160,7 +160,7 @@ This endpoint retrieves all future events.
 
 ### HTTP Request
 
-`GET http://localhost:3000/v1/events`
+`GET https://www.resistr.tech/v1/events`
 
 ### Filter
 
@@ -168,15 +168,15 @@ You can filter based on the following attribteus
 
 Filter    | Values      | Description                  | Example
 --------- | ----------- | -----------                  | -----------
-past      | true        | filter by events in the past | `GET "http://localhost:3000/v1/events?filter[past]=true"`
-free      | true, false | filter by free events        | `GET "http://localhost:3000/v1/events?filter[free]=true"`
+past      | true        | filter by events in the past | `GET "https://www.resistr.tech/v1/events?filter[past]=true"`
+free      | true, false | filter by free events        | `GET "https://www.resistr.tech/v1/events?filter[free]=true"`
 
 
 ## Get a Specific Event
 
 
 ```shell
-curl -X GET  "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad"
+curl -X GET  "https://www.resistr.tech/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad"
   -H "Accept: application/vnd.api+json"
   -H "Content-Type: application/vnd.api+json"
 ```
@@ -198,7 +198,7 @@ JSON.parse(response.body)
         "id": "d9aa62d4-3d06-46d4-b855-d0a200b420ad",
         "type": "events",
         "links": {
-            "self": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad"
+            "self": "https://www.resistr.tech/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad"
         },
         "attributes": {
             "title": "Join EMILY's List President Stephanie Schriock for a special reception in Santa Fe!",
@@ -217,14 +217,14 @@ JSON.parse(response.body)
         "relationships": {
             "location": {
                 "links": {
-                    "self": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/location",
-                    "related": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/location"
+                    "self": "https://www.resistr.tech/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/location",
+                    "related": "https://www.resistr.tech/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/location"
                 }
             },
             "user": {
                 "links": {
-                    "self": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/user",
-                    "related": "http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/user"
+                    "self": "https://www.resistr.tech/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/user",
+                    "related": "https://www.resistr.tech/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/user"
                 }
             }
         }
@@ -236,7 +236,7 @@ This endpoint retrieves a specific event.
 
 ### HTTP Request
 
-`GET "http://localhost:3000/v1/events/<UUID>`
+`GET "https://www.resistr.tech/v1/events/<UUID>`
 
 ### URL Parameters
 
@@ -248,7 +248,7 @@ ID        | The ID of the event to retrieve
 ## Create an Event
 
 ```shell
-curl -X POST "http://localhost:3000/v1/events"
+curl -X POST "https://www.resistr.tech/v1/events"
   -H "Content-Type: application/vnd.api+json"
   -H "Accept: application/vnd.api+json"
   -H "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1MDI2NjMwMjEsInN1YiI6ImI0ZDQ5MDAzLWEyMWYtNGVjZi1hYjM3LTQzMmRkMWM4MzE4MiJ9.Q_QeKrpgvelRZ-XB8gM1B1SSrjeGVEK93HLW2p4SoFJv5zICQV6aFiKyA1lJ8qhrPBzqIPtTgqQBTN9ng0c0PA"
@@ -305,7 +305,7 @@ CTAAggregatorClient::Event.create(event_attrs)
         "id": "6ef4013f-e016-4ca0-bb28-d2d3e39286d6",
         "type": "events",
         "links": {
-            "self": "http://localhost:3000/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6"
+            "self": "https://www.resistr.tech/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6"
         },
         "attributes": {
             "title": "Sit in at city hall",
@@ -321,14 +321,14 @@ CTAAggregatorClient::Event.create(event_attrs)
         "relationships": {
             "location": {
                 "links": {
-                    "self": "http://localhost:3000/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/relationships/location",
-                    "related": "http://localhost:3000/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/location"
+                    "self": "https://www.resistr.tech/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/relationships/location",
+                    "related": "https://www.resistr.tech/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/location"
                 }
             },
             "user": {
                 "links": {
-                    "self": "http://localhost:3000/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/relationships/user",
-                    "related": "http://localhost:3000/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/user"
+                    "self": "https://www.resistr.tech/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/relationships/user",
+                    "related": "https://www.resistr.tech/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/user"
                 }
             }
         }
@@ -340,7 +340,7 @@ This endpoint creates a new event.
 
 ### HTTP Request
 
-`POST "http://localhost:3000/v1/events/"`
+`POST "https://www.resistr.tech/v1/events/"`
 
 Requests to create a resource must include a valid JWT token. This token can be obtained from the `authentication` endpoint.
 

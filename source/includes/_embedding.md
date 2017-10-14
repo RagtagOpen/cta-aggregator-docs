@@ -24,7 +24,7 @@ req.onload=function(){
     response = JSON.parse(req.responseText);
     console.log(response);
 };
-req.open("GET",'http://localhost:3000/v1/events',true);
+req.open("GET",'https://www.resistr.tech/v1/events',true);
 req.send();
 ```
 
@@ -48,7 +48,7 @@ It's a bit easier to use the API with libraries like [jQuery](https://jquery.com
 > jQuery Version
 
 ```javascript
-$.get( "http://localhost:3000/v1/events", function( response ) {
+$.get( "https://www.resistr.tech/v1/events", function( response ) {
    console.log(response);
 });
 ```
