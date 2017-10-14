@@ -28,6 +28,5 @@ pull the changes down to your local master branch and then run the deploy script
 
 
 ## To Do
-* Swap out references to `localhost:3000` with references to prod host name
 * Show examples of what happens when user attempts to create duplicate record
 * Show examples of what happens when user attempts to provide malformed request

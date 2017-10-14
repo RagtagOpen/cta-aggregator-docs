@@ -21,7 +21,7 @@ For more information on OSDI's Advocacy Campaign resource, follow this link: [ht
 ## Get All Advocacy Campaigns
 
 ```shell
-curl -X GET "http://localhost:3000/v1/advocacy_campaigns"
+curl -X GET "https://www.resistr.tech/v1/advocacy_campaigns"
   -H "Accept: application/vnd.api+json"
   -H "Content-Type: application/vnd.api+json"
 ```
@@ -43,7 +43,7 @@ JSON.parse(response.body)
             "id": "3c29ff31-d859-42fd-a786-c69306eadb86",
             "type": "advocacy_campaigns",
             "links": {
-                "self": "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86"
+                "self": "https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86"
             },
             "attributes": {
                 "title": "Express Outrage at Open White Supremacy Rally in Charlottesville",
@@ -62,20 +62,20 @@ JSON.parse(response.body)
             "relationships": {
                 "user": {
                     "links": {
-                        "self": "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/user",
-                        "related": "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/user"
+                        "self": "https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/user",
+                        "related": "https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/user"
                     }
                 },
                 "targets": {
                     "links": {
-                        "self": "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/targets",
-                        "related": "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/targets"
+                        "self": "https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/targets",
+                        "related": "https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/targets"
                     }
                 },
                 "target_list": {
                     "links": {
-                        "self": "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/target_list",
-                        "related": "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/target_list"
+                        "self": "https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/target_list",
+                        "related": "https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/target_list"
                     }
                 }
             }
@@ -84,7 +84,7 @@ JSON.parse(response.body)
             "id": "8cd8e9ac-f684-4cdf-8e67-60c40e386eff",
             "type": "advocacy_campaigns",
             "links": {
-                "self": "http://localhost:3000/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff"
+                "self": "https://www.resistr.tech/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff"
             },
             "attributes": {
                 "title": " Demand the Removal of Bannon, Gorka, and Miller from the White House",
@@ -103,20 +103,20 @@ JSON.parse(response.body)
             "relationships": {
                 "user": {
                     "links": {
-                        "self": "http://localhost:3000/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/relationships/user",
-                        "related": "http://localhost:3000/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/user"
+                        "self": "https://www.resistr.tech/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/relationships/user",
+                        "related": "https://www.resistr.tech/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/user"
                     }
                 },
                 "targets": {
                     "links": {
-                        "self": "http://localhost:3000/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/relationships/targets",
-                        "related": "http://localhost:3000/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/targets"
+                        "self": "https://www.resistr.tech/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/relationships/targets",
+                        "related": "https://www.resistr.tech/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/targets"
                     }
                 },
                 "target_list": {
                     "links": {
-                        "self": "http://localhost:3000/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/relationships/target_list",
-                        "related": "http://localhost:3000/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/target_list"
+                        "self": "https://www.resistr.tech/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/relationships/target_list",
+                        "related": "https://www.resistr.tech/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/target_list"
                     }
                 }
             }
@@ -125,7 +125,7 @@ JSON.parse(response.body)
             "id": "e895f3c4-d4f4-47fe-aeaa-1f4745287d04",
             "type": "advocacy_campaigns",
             "links": {
-                "self": "http://localhost:3000/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04"
+                "self": "https://www.resistr.tech/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04"
             },
             "attributes": {
                 "title": "Prevent Military Action Against North Korea",
@@ -144,20 +144,20 @@ JSON.parse(response.body)
             "relationships": {
                 "user": {
                     "links": {
-                        "self": "http://localhost:3000/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/relationships/user",
-                        "related": "http://localhost:3000/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/user"
+                        "self": "https://www.resistr.tech/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/relationships/user",
+                        "related": "https://www.resistr.tech/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/user"
                     }
                 },
                 "targets": {
                     "links": {
-                        "self": "http://localhost:3000/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/relationships/targets",
-                        "related": "http://localhost:3000/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/targets"
+                        "self": "https://www.resistr.tech/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/relationships/targets",
+                        "related": "https://www.resistr.tech/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/targets"
                     }
                 },
                 "target_list": {
                     "links": {
-                        "self": "http://localhost:3000/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/relationships/target_list",
-                        "related": "http://localhost:3000/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/target_list"
+                        "self": "https://www.resistr.tech/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/relationships/target_list",
+                        "related": "https://www.resistr.tech/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/target_list"
                     }
                 }
             }
@@ -166,7 +166,7 @@ JSON.parse(response.body)
             "id": "8a09df4c-cc63-47f8-a723-9f9b2886e83c",
             "type": "advocacy_campaigns",
             "links": {
-                "self": "http://localhost:3000/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c"
+                "self": "https://www.resistr.tech/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c"
             },
             "attributes": {
                 "title": "Support the College for All Act   ",
@@ -226,20 +226,20 @@ JSON.parse(response.body)
             "relationships": {
                 "user": {
                     "links": {
-                        "self": "http://localhost:3000/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/relationships/user",
-                        "related": "http://localhost:3000/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/user"
+                        "self": "https://www.resistr.tech/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/relationships/user",
+                        "related": "https://www.resistr.tech/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/user"
                     }
                 },
                 "targets": {
                     "links": {
-                        "self": "http://localhost:3000/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/relationships/targets",
-                        "related": "http://localhost:3000/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/targets"
+                        "self": "https://www.resistr.tech/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/relationships/targets",
+                        "related": "https://www.resistr.tech/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/targets"
                     }
                 },
                 "target_list": {
                     "links": {
-                        "self": "http://localhost:3000/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/relationships/target_list",
-                        "related": "http://localhost:3000/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/target_list"
+                        "self": "https://www.resistr.tech/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/relationships/target_list",
+                        "related": "https://www.resistr.tech/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/target_list"
                     }
                 }
             }
@@ -248,7 +248,7 @@ JSON.parse(response.body)
             "id": "884ebdeb-5980-465e-bfd5-c0011240230d",
             "type": "advocacy_campaigns",
             "links": {
-                "self": "http://localhost:3000/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d"
+                "self": "https://www.resistr.tech/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d"
             },
             "attributes": {
                 "title": "Protect Voting Rights with 2020 Census Funding",
@@ -267,20 +267,20 @@ JSON.parse(response.body)
             "relationships": {
                 "user": {
                     "links": {
-                        "self": "http://localhost:3000/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/relationships/user",
-                        "related": "http://localhost:3000/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/user"
+                        "self": "https://www.resistr.tech/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/relationships/user",
+                        "related": "https://www.resistr.tech/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/user"
                     }
                 },
                 "targets": {
                     "links": {
-                        "self": "http://localhost:3000/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/relationships/targets",
-                        "related": "http://localhost:3000/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/targets"
+                        "self": "https://www.resistr.tech/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/relationships/targets",
+                        "related": "https://www.resistr.tech/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/targets"
                     }
                 },
                 "target_list": {
                     "links": {
-                        "self": "http://localhost:3000/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/relationships/target_list",
-                        "related": "http://localhost:3000/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/target_list"
+                        "self": "https://www.resistr.tech/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/relationships/target_list",
+                        "related": "https://www.resistr.tech/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/target_list"
                     }
                 }
             }
@@ -289,7 +289,7 @@ JSON.parse(response.body)
             "id": "6722e7a2-79e2-483e-b210-6a2ed68a79a1",
             "type": "advocacy_campaigns",
             "links": {
-                "self": "http://localhost:3000/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1"
+                "self": "https://www.resistr.tech/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1"
             },
             "attributes": {
                 "title": "Oppose the RAISE Act's Attack on Legal Immigration",
@@ -308,20 +308,20 @@ JSON.parse(response.body)
             "relationships": {
                 "user": {
                     "links": {
-                        "self": "http://localhost:3000/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/relationships/user",
-                        "related": "http://localhost:3000/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/user"
+                        "self": "https://www.resistr.tech/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/relationships/user",
+                        "related": "https://www.resistr.tech/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/user"
                     }
                 },
                 "targets": {
                     "links": {
-                        "self": "http://localhost:3000/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/relationships/targets",
-                        "related": "http://localhost:3000/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/targets"
+                        "self": "https://www.resistr.tech/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/relationships/targets",
+                        "related": "https://www.resistr.tech/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/targets"
                     }
                 },
                 "target_list": {
                     "links": {
-                        "self": "http://localhost:3000/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/relationships/target_list",
-                        "related": "http://localhost:3000/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/target_list"
+                        "self": "https://www.resistr.tech/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/relationships/target_list",
+                        "related": "https://www.resistr.tech/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/target_list"
                     }
                 }
             }
@@ -330,7 +330,7 @@ JSON.parse(response.body)
             "id": "32cd480a-0d71-446f-a4d1-3ebcb1cdbf30",
             "type": "advocacy_campaigns",
             "links": {
-                "self": "http://localhost:3000/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30"
+                "self": "https://www.resistr.tech/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30"
             },
             "attributes": {
                 "title": "Demand Fair Tax Reform ",
@@ -349,29 +349,29 @@ JSON.parse(response.body)
             "relationships": {
                 "user": {
                     "links": {
-                        "self": "http://localhost:3000/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/relationships/user",
-                        "related": "http://localhost:3000/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/user"
+                        "self": "https://www.resistr.tech/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/relationships/user",
+                        "related": "https://www.resistr.tech/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/user"
                     }
                 },
                 "targets": {
                     "links": {
-                        "self": "http://localhost:3000/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/relationships/targets",
-                        "related": "http://localhost:3000/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/targets"
+                        "self": "https://www.resistr.tech/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/relationships/targets",
+                        "related": "https://www.resistr.tech/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/targets"
                     }
                 },
                 "target_list": {
                     "links": {
-                        "self": "http://localhost:3000/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/relationships/target_list",
-                        "related": "http://localhost:3000/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/target_list"
+                        "self": "https://www.resistr.tech/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/relationships/target_list",
+                        "related": "https://www.resistr.tech/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/target_list"
                     }
                 }
             }
         }
     ],
     "links": {
-        "first": "http://localhost:3000/v1/advocacy_campaigns?page%5Bnumber%5D=1&page%5Bsize%5D=10",
-        "next": "http://localhost:3000/v1/advocacy_campaigns?page%5Bnumber%5D=2&page%5Bsize%5D=10",
-        "last": "http://localhost:3000/v1/advocacy_campaigns?page%5Bnumber%5D=2&page%5Bsize%5D=10"
+        "first": "https://www.resistr.tech/v1/advocacy_campaigns?page%5Bnumber%5D=1&page%5Bsize%5D=10",
+        "next": "https://www.resistr.tech/v1/advocacy_campaigns?page%5Bnumber%5D=2&page%5Bsize%5D=10",
+        "last": "https://www.resistr.tech/v1/advocacy_campaigns?page%5Bnumber%5D=2&page%5Bsize%5D=10"
     }
 }
 ```
@@ -380,7 +380,7 @@ This endpoint retrieves all advocacy campaigns.
 
 ### HTTP Request
 
-`GET http://localhost:3000/v1/advocacy_campaigns`
+`GET https://www.resistr.tech/v1/advocacy_campaigns`
 
 ### Filter
 
@@ -388,7 +388,7 @@ You can filter based on the following attributes
 
 Filter 		| Values | Description|  Example
 --------- |  ----------- |  ----------- |  -----------
-action_type | email, phone | action type for advocacy campaign  | http://localhost:3000/v1/advocacy_campaigns?filter[advocacy_campaign_type]=phone
+action_type | email, phone | action type for advocacy campaign  | https://www.resistr.tech/v1/advocacy_campaigns?filter[advocacy_campaign_type]=phone
 
 
 
@@ -396,7 +396,7 @@ action_type | email, phone | action type for advocacy campaign  | http://localho
 
 
 ```shell
-curl -X GET  "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86"
+curl -X GET  "https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86"
   -H "Accept: application/vnd.api+json"
   -H "Content-Type: application/vnd.api+json"
 ```
@@ -418,7 +418,7 @@ JSON.parse(response.body)
         "id": "3c29ff31-d859-42fd-a786-c69306eadb86",
         "type": "advocacy_campaigns",
         "links": {
-            "self": "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86"
+            "self": "https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86"
         },
         "attributes": {
             "title": "Express Outrage at Open White Supremacy Rally in Charlottesville",
@@ -437,20 +437,20 @@ JSON.parse(response.body)
         "relationships": {
             "user": {
                 "links": {
-                    "self": "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/user",
-                    "related": "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/user"
+                    "self": "https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/user",
+                    "related": "https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/user"
                 }
             },
             "targets": {
                 "links": {
-                    "self": "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/targets",
-                    "related": "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/targets"
+                    "self": "https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/targets",
+                    "related": "https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/targets"
                 }
             },
             "target_list": {
                 "links": {
-                    "self": "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/target_list",
-                    "related": "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/target_list"
+                    "self": "https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/target_list",
+                    "related": "https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/target_list"
                 }
             }
         }
@@ -462,7 +462,7 @@ This endpoint retrieves a specific advocacy campaign.
 
 ### HTTP Request
 
-`GET "http://localhost:3000/v1/advocacy_campaigns/<UUID>`
+`GET "https://www.resistr.tech/v1/advocacy_campaigns/<UUID>`
 
 ### URL Parameters
 
@@ -474,7 +474,7 @@ ID | The ID of the advocacy campaign to retrieve
 ## Create an Advocacy Campaign
 
 ```shell
-curl -X POST "http://localhost:3000/v1/advocacy_campaigns"
+curl -X POST "https://www.resistr.tech/v1/advocacy_campaigns"
   -H "Content-Type: application/vnd.api+json" 
   -H "Accept: application/vnd.api+json" 
   -H "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1MDI2NjMwMjEsInN1YiI6ImI0ZDQ5MDAzLWEyMWYtNGVjZi1hYjM3LTQzMmRkMWM4MzE4MiJ9.Q_QeKrpgvelRZ-XB8gM1B1SSrjeGVEK93HLW2p4SoFJv5zICQV6aFiKyA1lJ8qhrPBzqIPtTgqQBTN9ng0c0PA"
@@ -537,7 +537,7 @@ JSON.parse(response.body)
         "id": "3c29ff31-d859-42fd-a786-c69306eadb86",
         "type": "advocacy_campaigns",
         "links": {
-            "self": "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86"
+            "self": "https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86"
         },
         "attributes": {
             "title": "Express Outrage at Open White Supremacy Rally in Charlottesville",
@@ -556,20 +556,20 @@ JSON.parse(response.body)
         "relationships": {
             "user": {
                 "links": {
-                    "self": "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/user",
-                    "related": "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/user"
+                    "self": "https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/user",
+                    "related": "https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/user"
                 }
             },
             "targets": {
                 "links": {
-                    "self": "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/targets",
-                    "related": "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/targets"
+                    "self": "https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/targets",
+                    "related": "https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/targets"
                 }
             },
             "target_list": {
                 "links": {
-                    "self": "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/target_list",
-                    "related": "http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/target_list"
+                    "self": "https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/target_list",
+                    "related": "https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/target_list"
                 }
             }
         }
@@ -581,7 +581,7 @@ This endpoint creates a new advocacy campaign.
 
 ### HTTP Request
 
-`POST "http://localhost:3000/v1/advocacy_campaigns/"`
+`POST "https://www.resistr.tech/v1/advocacy_campaigns/"`
 
 Requests to create a resource must include a valid JWT token. This token can be obtained from the `authentication` endpoint.
 

@@ -22,7 +22,7 @@ For more information on OSDI's Target resource, follow this link: [https://opens
 ## Get All Targets
 
 ```shell
-curl -X GET "http://localhost:3000/v1/targets"
+curl -X GET "https://www.resistr.tech/v1/targets"
   -H "Accept: application/vnd.api+json"
   -H "Content-Type: application/vnd.api+json"
 ```
@@ -44,7 +44,7 @@ JSON.parse(response.body)
             "id": "360cda45-6d93-42ae-a0fb-e1f6ebdba564",
             "type": "targets",
             "links": {
-                "self": "http://localhost:3000/v1/targets/360cda45-6d93-42ae-a0fb-e1f6ebdba564"
+                "self": "https://www.resistr.tech/v1/targets/360cda45-6d93-42ae-a0fb-e1f6ebdba564"
             },
             "attributes": {
                 "organization": "Senate Committee on Health",
@@ -64,8 +64,8 @@ JSON.parse(response.body)
             "relationships": {
                 "user": {
                     "links": {
-                        "self": "http://localhost:3000/v1/targets/360cda45-6d93-42ae-a0fb-e1f6ebdba564/relationships/user",
-                        "related": "http://localhost:3000/v1/targets/360cda45-6d93-42ae-a0fb-e1f6ebdba564/user"
+                        "self": "https://www.resistr.tech/v1/targets/360cda45-6d93-42ae-a0fb-e1f6ebdba564/relationships/user",
+                        "related": "https://www.resistr.tech/v1/targets/360cda45-6d93-42ae-a0fb-e1f6ebdba564/user"
                     }
                 }
             }
@@ -74,7 +74,7 @@ JSON.parse(response.body)
             "id": "b92ff013-174d-4767-8892-645898cc5778",
             "type": "targets",
             "links": {
-                "self": "http://localhost:3000/v1/targets/b92ff013-174d-4767-8892-645898cc5778"
+                "self": "https://www.resistr.tech/v1/targets/b92ff013-174d-4767-8892-645898cc5778"
             },
             "attributes": {
                 "organization": "House Committee on Education and the Workforce",
@@ -94,8 +94,8 @@ JSON.parse(response.body)
             "relationships": {
                 "user": {
                     "links": {
-                        "self": "http://localhost:3000/v1/targets/b92ff013-174d-4767-8892-645898cc5778/relationships/user",
-                        "related": "http://localhost:3000/v1/targets/b92ff013-174d-4767-8892-645898cc5778/user"
+                        "self": "https://www.resistr.tech/v1/targets/b92ff013-174d-4767-8892-645898cc5778/relationships/user",
+                        "related": "https://www.resistr.tech/v1/targets/b92ff013-174d-4767-8892-645898cc5778/user"
                     }
                 }
             }
@@ -104,7 +104,7 @@ JSON.parse(response.body)
             "id": "3718fcd2-4317-4ed2-8548-bba7af7d5d2a",
             "type": "targets",
             "links": {
-                "self": "http://localhost:3000/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a"
+                "self": "https://www.resistr.tech/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a"
             },
             "attributes": {
                 "organization": " Department of Education",
@@ -124,8 +124,8 @@ JSON.parse(response.body)
             "relationships": {
                 "user": {
                     "links": {
-                        "self": "http://localhost:3000/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a/relationships/user",
-                        "related": "http://localhost:3000/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a/user"
+                        "self": "https://www.resistr.tech/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a/relationships/user",
+                        "related": "https://www.resistr.tech/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a/user"
                     }
                 }
             }
@@ -134,7 +134,7 @@ JSON.parse(response.body)
             "id": "e696019e-f2d5-4097-b046-1a9efe2d2965",
             "type": "targets",
             "links": {
-                "self": "http://localhost:3000/v1/targets/e696019e-f2d5-4097-b046-1a9efe2d2965"
+                "self": "https://www.resistr.tech/v1/targets/e696019e-f2d5-4097-b046-1a9efe2d2965"
             },
             "attributes": {
                 "organization": "House Judiciary Committee",
@@ -154,16 +154,16 @@ JSON.parse(response.body)
             "relationships": {
                 "user": {
                     "links": {
-                        "self": "http://localhost:3000/v1/targets/e696019e-f2d5-4097-b046-1a9efe2d2965/relationships/user",
-                        "related": "http://localhost:3000/v1/targets/e696019e-f2d5-4097-b046-1a9efe2d2965/user"
+                        "self": "https://www.resistr.tech/v1/targets/e696019e-f2d5-4097-b046-1a9efe2d2965/relationships/user",
+                        "related": "https://www.resistr.tech/v1/targets/e696019e-f2d5-4097-b046-1a9efe2d2965/user"
                     }
                 }
             }
         }
     ],
     "links": {
-        "first": "http://localhost:3000/v1/targets?page%5Bnumber%5D=1&page%5Bsize%5D=10",
-        "last": "http://localhost:3000/v1/targets?page%5Bnumber%5D=1&page%5Bsize%5D=10"
+        "first": "https://www.resistr.tech/v1/targets?page%5Bnumber%5D=1&page%5Bsize%5D=10",
+        "last": "https://www.resistr.tech/v1/targets?page%5Bnumber%5D=1&page%5Bsize%5D=10"
     }
 }
 ```
@@ -172,13 +172,13 @@ This endpoint retrieves all targets.
 
 ### HTTP Request
 
-`GET http://localhost:3000/v1/targets`
+`GET https://www.resistr.tech/v1/targets`
 
 ## Get a Specific Target
 
 
 ```shell
-curl -X GET  "http://localhost:3000/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a",
+curl -X GET  "https://www.resistr.tech/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a",
   -H "Accept: application/vnd.api+json"
   -H "Content-Type: application/vnd.api+json"
 ```
@@ -199,7 +199,7 @@ JSON.parse(response.body)
         "id": "3718fcd2-4317-4ed2-8548-bba7af7d5d2a",
         "type": "targets",
         "links": {
-            "self": "http://localhost:3000/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a"
+            "self": "https://www.resistr.tech/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a"
         },
         "attributes": {
             "organization": " Department of Education",
@@ -219,8 +219,8 @@ JSON.parse(response.body)
         "relationships": {
             "user": {
                 "links": {
-                    "self": "http://localhost:3000/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a/relationships/user",
-                    "related": "http://localhost:3000/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a/user"
+                    "self": "https://www.resistr.tech/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a/relationships/user",
+                    "related": "https://www.resistr.tech/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a/user"
                 }
             }
         }
@@ -232,7 +232,7 @@ This endpoint retrieves a specific target.
 
 ### HTTP Request
 
-`GET "http://localhost:3000/v1/targets/<UUID>`
+`GET "https://www.resistr.tech/v1/targets/<UUID>`
 
 ### URL Parameters
 
@@ -245,7 +245,7 @@ ID | The ID of the targets to retrieve
 
 ```shell
 
-curl -X POST "http://localhost:3000/v1/targets"
+curl -X POST "https://www.resistr.tech/v1/targets"
   -H "Content-Type: application/vnd.api+json" 
   -H "Accept: application/vnd.api+json" 
   -H "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1MDI2NjMwMjEsInN1YiI6ImI0ZDQ5MDAzLWEyMWYtNGVjZi1hYjM3LTQzMmRkMWM4MzE4MiJ9.Q_QeKrpgvelRZ-XB8gM1B1SSrjeGVEK93HLW2p4SoFJv5zICQV6aFiKyA1lJ8qhrPBzqIPtTgqQBTN9ng0c0PA"
@@ -333,7 +333,7 @@ JSON.parse(response.body)
         "id": "9927bf38-dcaa-448c-acc7-4a4920466188",
         "type": "targets",
         "links": {
-            "self": "http://localhost:3000/v1/targets/9927bf38-dcaa-448c-acc7-4a4920466188"
+            "self": "https://www.resistr.tech/v1/targets/9927bf38-dcaa-448c-acc7-4a4920466188"
         },
         "attributes": {
             "organization": " Department of Education",
@@ -365,8 +365,8 @@ JSON.parse(response.body)
         "relationships": {
             "user": {
                 "links": {
-                    "self": "http://localhost:3000/v1/targets/9927bf38-dcaa-448c-acc7-4a4920466188/relationships/user",
-                    "related": "http://localhost:3000/v1/targets/9927bf38-dcaa-448c-acc7-4a4920466188/user"
+                    "self": "https://www.resistr.tech/v1/targets/9927bf38-dcaa-448c-acc7-4a4920466188/relationships/user",
+                    "related": "https://www.resistr.tech/v1/targets/9927bf38-dcaa-448c-acc7-4a4920466188/user"
                 }
             }
         }
@@ -378,6 +378,6 @@ This endpoint creates a new target.
 
 ### HTTP Request
 
-`POST "http://localhost:3000/v1/targets/"`
+`POST "https://www.resistr.tech/v1/targets/"`
 
 Requests to create a resource must include a valid JWT token. This token can be obtained from the `authentication` endpoint.
