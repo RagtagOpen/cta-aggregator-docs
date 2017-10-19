@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>CTA Aggregator Reference</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -245,7 +245,7 @@ phone call.</p>
 
 <p>The API presents data in JSON.  You can write consumers or scrapers in any language you want.
 If you&rsquo;re working in Ruby, then you may want to leverage the Ruby gem,
-located here: <a href="https://github.com/Ragtagteam/cta-aggregator-client-ruby/">https://github.com/Ragtagteam/cta-aggregator-client-ruby</a>.
+located here: <a href="https://github.com/RagtagOpen/cta-aggregator-client-ruby/">https://github.com/RagtagOpen/cta-aggregator-client-ruby</a>.
 This gem provides simple interface for reading and writing data from the API. It&rsquo;s especially
 helpful for creating resoucres, since you can just pass it Ruby hashes and the gem will take care
 of constructing the JSON payload.</p>
@@ -257,7 +257,7 @@ will need to register your app and obtain a developer key and secret.</p>
 
 <p>To get these, to send an email to <a href='mailto:ctaaggregator@ragtag.org'>ctaaggregator@ragtag.org</a>.</p>
 
-<p>Once you have these, you can obtain authentication tokens from the <code class="prettyprint">/authorize</code> endpoint.</p>
+<p>Once you have these, you can obtain authentication tokens from the <code class="prettyprint">/authentications</code> endpoint.</p>
 
 <p>The CTA Aggregator API follows the <a href="https://tools.ietf.org/html/rfc7519">JWT spec.</a> For more information regarding this standard, consult RFC7519.
 The authentication flow for the cta-aggregator proceeds as follows:</p>
@@ -269,7 +269,7 @@ The authentication flow for the cta-aggregator proceeds as follows:</p>
 Make sure to replace <code class="prettyprint">api-key</code> with your API key and <code class="prettyprint">api-secret</code> with your API secret</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># Set the api key and secret in the authorization header</span>
-curl -X POST <span class="s2">"http://localhost:3000/v1/authorize"</span>
+curl -X POST <span class="s2">"https://www.resistr.tech/v1/authentications"</span>
   -H <span class="s2">"AUTHORIZATION: api-key:api-secret"</span>
 </code></pre>
 <blockquote>
@@ -283,7 +283,7 @@ curl -X POST <span class="s2">"http://localhost:3000/v1/authorize"</span>
 <p>Subsequent Authenticated Request:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># set the JWT in the authorization header</span>
-curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</span>
+curl -X POST <span class="s2">"https://www.resistr.tech/some-protected-endpoint"</span>
   -H <span class="s2">"AUTHORIZATION: Bearer xxxx.yyyy"</span>
 </code></pre>
 <blockquote>
@@ -307,7 +307,7 @@ You must replace <code>api-key</code> with your personal API key and <code>api-s
 </aside>
 
 <h2 id="unsuccessful-authentication">Unsuccessful Authentication</h2>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/authorize"</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://www.resistr.tech/v1/authentications"</span>
   -H <span class="s2">"AUTHORIZATION: wrong-api-key:or-secret"</span>
 </code></pre>
 <blockquote>
@@ -320,7 +320,7 @@ You must replace <code>api-key</code> with your personal API key and <code>api-s
 
 <h2 id="jwt-expiration">JWT Expiration</h2>
 <pre class="highlight shell tab-shell"><code><span class="c"># set the JWT in the authorization header</span>
-curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</span>
+curl -X POST <span class="s2">"https://www.resistr.tech/some-protected-endpoint"</span>
   -H <span class="s2">"AUTHORIZATION: Bearer xxxx.yyyy"</span>
 </code></pre>
 <blockquote>
@@ -333,7 +333,7 @@ curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</s
 
 <h2 id="incorrect-jwt-sent">Incorrect JWT Sent</h2>
 <pre class="highlight shell tab-shell"><code><span class="c"># set a bad JWT in the authorization header</span>
-curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</span>
+curl -X POST <span class="s2">"https://www.resistr.tech/some-protected-endpoint"</span>
   -H <span class="s2">"AUTHORIZATION: Bearer abcd.efgh"</span>
 </code></pre>
 <blockquote>
@@ -343,6 +343,46 @@ curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</s
 <p>An incorrect JWT will also result in a 401 response.</p>
 
 <p><img src="images/bad_jwt.svg" title="bad jwt ladder diagram" alt="Bad JWT" /></p>
+
+          <h1 id="authorization">Authorization</h1>
+
+<p>All resources currently obey the same authorization policy.</p>
+
+<p>You can view anything without needing any authentication. </p>
+
+<p>If you have API credentials, then you can create resources or update the resources you&rsquo;ve created.</p>
+
+<p>When updating a resource, you cannot make an update to a resource that was created by another contributor.
+The API will reject your request.</p>
+
+<table><thead>
+<tr>
+<th>HTTP Method</th>
+<th>Authentication Required?</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Get</td>
+<td>No</td>
+<td>No authentication required to read any resource(s).</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>Yes</td>
+<td>Authentication required, but anyone with API credentials can create a resource.</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>Yes</td>
+<td>Request will be accepted if you created the resource you are updating.</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>N/A</td>
+<td>Deleting a resource is not currently permitted.  To get a resource removed, contact the Ragtag team at <a href='mailto:ctaaggregator@ragtag.org'>ctaaggregator@ragtag.org</a>).</td>
+</tr>
+</tbody></table>
 
           <h1 id="events">Events</h1>
 
@@ -423,7 +463,7 @@ curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</s
 <a href="https://opensupporter.github.io/osdi-docs/events">https://opensupporter.github.io/osdi-docs/events.html</a>.</p>
 
 <h2 id="get-all-future-events">Get All Future Events</h2>
-<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/events"</span>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://www.resistr.tech/v1/events"</span>
   -H <span class="s2">"Accept: application/vnd.api+json"</span>
   -H <span class="s2">"Content-Type: application/vnd.api+json"</span>
 </code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'cta_aggregator_client'</span>
@@ -441,7 +481,7 @@ curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</s
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d9aa62d4-3d06-46d4-b855-d0a200b420ad"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"events"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Join EMILY's List President Stephanie Schriock for a special reception in Santa Fe!"</span><span class="p">,</span><span class="w">
@@ -460,14 +500,14 @@ curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</s
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/location"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/location"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/location"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/location"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
@@ -476,7 +516,7 @@ curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</s
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3b511fd6-3057-46a0-9bac-e6c1633019ba"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"events"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Join EMILY's List President Stephanie Schriock and featured speakers Senator Kirsten Gillibrand and Rep. Jacky Rosen at our Ignite Change Luncheon in New York!"</span><span class="p">,</span><span class="w">
@@ -495,14 +535,14 @@ curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</s
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/relationships/location"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/location"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/relationships/location"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/location"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/3b511fd6-3057-46a0-9bac-e6c1633019ba/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
@@ -511,7 +551,7 @@ curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</s
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b0e86149-c781-417e-a96f-1a57c3ed863b"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"events"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Join EMILY's List President Stephanie Schriock and special guest Congresswoman Jacky Rosen at our 2017 Ignite Change Luncheon in San Francisco!"</span><span class="p">,</span><span class="w">
@@ -530,22 +570,22 @@ curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</s
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/relationships/location"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/location"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/relationships/location"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/location"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/b0e86149-c781-417e-a96f-1a57c3ed863b/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"first"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events?page%5Bnumber%5D=1&amp;page%5Bsize%5D=10"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events?page%5Bnumber%5D=1&amp;page%5Bsize%5D=10"</span><span class="w">
+        </span><span class="s2">"first"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events?page%5Bnumber%5D=1&amp;page%5Bsize%5D=10"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events?page%5Bnumber%5D=1&amp;page%5Bsize%5D=10"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -553,7 +593,7 @@ curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</s
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://localhost:3000/v1/events</code></p>
+<p><code class="prettyprint">GET https://www.resistr.tech/v1/events</code></p>
 
 <h3 id="filter">Filter</h3>
 
@@ -571,18 +611,18 @@ curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</s
 <td>past</td>
 <td>true</td>
 <td>filter by events in the past</td>
-<td><code class="prettyprint">GET &quot;http://localhost:3000/v1/events?filter[past]=true&quot;</code></td>
+<td><code class="prettyprint">GET &quot;https://www.resistr.tech/v1/events?filter[past]=true&quot;</code></td>
 </tr>
 <tr>
 <td>free</td>
 <td>true, false</td>
 <td>filter by free events</td>
-<td><code class="prettyprint">GET &quot;http://localhost:3000/v1/events?filter[free]=true&quot;</code></td>
+<td><code class="prettyprint">GET &quot;https://www.resistr.tech/v1/events?filter[free]=true&quot;</code></td>
 </tr>
 </tbody></table>
 
 <h2 id="get-a-specific-event">Get a Specific Event</h2>
-<pre class="highlight shell tab-shell"><code>curl -X GET  <span class="s2">"http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad"</span>
+<pre class="highlight shell tab-shell"><code>curl -X GET  <span class="s2">"https://www.resistr.tech/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad"</span>
   -H <span class="s2">"Accept: application/vnd.api+json"</span>
   -H <span class="s2">"Content-Type: application/vnd.api+json"</span>
 </code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'cta_aggregator_client'</span>
@@ -600,7 +640,7 @@ curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</s
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d9aa62d4-3d06-46d4-b855-d0a200b420ad"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"events"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad"</span><span class="w">
+            </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Join EMILY's List President Stephanie Schriock for a special reception in Santa Fe!"</span><span class="p">,</span><span class="w">
@@ -619,14 +659,14 @@ curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</s
         </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/location"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/location"</span><span class="w">
+                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/location"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/location"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/user"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/user"</span><span class="w">
+                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/relationships/user"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/d9aa62d4-3d06-46d4-b855-d0a200b420ad/user"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
@@ -637,7 +677,7 @@ curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</s
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET &quot;http://localhost:3000/v1/events/&lt;UUID&gt;</code></p>
+<p><code class="prettyprint">GET &quot;https://www.resistr.tech/v1/events/&lt;UUID&gt;</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
@@ -654,7 +694,7 @@ curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</s
 </tbody></table>
 
 <h2 id="create-an-event">Create an Event</h2>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/events"</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://www.resistr.tech/v1/events"</span>
   -H <span class="s2">"Content-Type: application/vnd.api+json"</span>
   -H <span class="s2">"Accept: application/vnd.api+json"</span>
   -H <span class="s2">"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1MDI2NjMwMjEsInN1YiI6ImI0ZDQ5MDAzLWEyMWYtNGVjZi1hYjM3LTQzMmRkMWM4MzE4MiJ9.Q_QeKrpgvelRZ-XB8gM1B1SSrjeGVEK93HLW2p4SoFJv5zICQV6aFiKyA1lJ8qhrPBzqIPtTgqQBTN9ng0c0PA"</span>
@@ -694,11 +734,10 @@ curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</s
   <span class="ss">start_date: </span><span class="s1">'2017-07-08T03:58:25.098Z'</span><span class="p">,</span>
   <span class="ss">end_date: </span><span class="s1">'2017-07-13T03:58:25.098Z'</span><span class="p">,</span>
   <span class="ss">free: </span><span class="kp">false</span><span class="p">,</span>
+  <span class="ss">location: </span><span class="s1">'215ed993-3cd1-4fbc-b8af-7e2082813d06'</span>
 <span class="p">}</span>
-<span class="n">location_attrs</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">location: </span><span class="s1">'215ed993-3cd1-4fbc-b8af-7e2082813d06'</span> <span class="p">}</span>
-<span class="c1"># location must exist prior to creating the Event</span>
 
-<span class="no">CTAAggregatorClient</span><span class="o">::</span><span class="no">Event</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">event_attrs</span><span class="p">,</span> <span class="n">location_attrs</span><span class="p">)</span>
+<span class="no">CTAAggregatorClient</span><span class="o">::</span><span class="no">Event</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">event_attrs</span><span class="p">)</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -708,7 +747,7 @@ curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</s
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6ef4013f-e016-4ca0-bb28-d2d3e39286d6"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"events"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6"</span><span class="w">
+            </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sit in at city hall"</span><span class="p">,</span><span class="w">
@@ -724,14 +763,14 @@ curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</s
         </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/relationships/location"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/location"</span><span class="w">
+                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/relationships/location"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/location"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/relationships/user"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/user"</span><span class="w">
+                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/relationships/user"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/events/6ef4013f-e016-4ca0-bb28-d2d3e39286d6/user"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
@@ -742,7 +781,7 @@ curl -X POST <span class="s2">"http://localhost:3000/some-protected-endpoint"</s
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST &quot;http://localhost:3000/v1/events/&quot;</code></p>
+<p><code class="prettyprint">POST &quot;https://www.resistr.tech/v1/events/&quot;</code></p>
 
 <p>Requests to create a resource must include a valid JWT token. This token can be obtained from the <code class="prettyprint">authentication</code> endpoint.</p>
 
@@ -788,7 +827,7 @@ Every Location resource contains the following attributes.</p>
 <p>For more information on OSDI&rsquo;s Location resource, follow this link: <a href="https://opensupporter.github.io/osdi-docs/events.html#location">https://opensupporter.github.io/osdi-docs/events.html#location</a>.</p>
 
 <h2 id="get-all-locations">Get All Locations</h2>
-<pre class="highlight shell tab-shell"><code>curl -X GET  <span class="s2">"http://localhost:3000/v1/locations"</span>
+<pre class="highlight shell tab-shell"><code>curl -X GET  <span class="s2">"https://www.resistr.tech/v1/locations"</span>
   -H <span class="s2">"Accept: application/vnd.api+json"</span>
   -H <span class="s2">"Content-Type: application/vnd.api+json"</span>
 </code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'cta_aggregator_client'</span>
@@ -807,7 +846,7 @@ Every Location resource contains the following attributes.</p>
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cf2e490a-7bed-46d5-8e0a-386dfb365cc8"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"locations"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/cf2e490a-7bed-46d5-8e0a-386dfb365cc8"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/cf2e490a-7bed-46d5-8e0a-386dfb365cc8"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"venue"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -819,8 +858,8 @@ Every Location resource contains the following attributes.</p>
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/cf2e490a-7bed-46d5-8e0a-386dfb365cc8/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/cf2e490a-7bed-46d5-8e0a-386dfb365cc8/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/cf2e490a-7bed-46d5-8e0a-386dfb365cc8/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/cf2e490a-7bed-46d5-8e0a-386dfb365cc8/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
@@ -829,7 +868,7 @@ Every Location resource contains the following attributes.</p>
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dca1fc5b-a26b-4a7e-809a-26d8417921c8"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"locations"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/dca1fc5b-a26b-4a7e-809a-26d8417921c8"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/dca1fc5b-a26b-4a7e-809a-26d8417921c8"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"venue"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -841,8 +880,8 @@ Every Location resource contains the following attributes.</p>
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/dca1fc5b-a26b-4a7e-809a-26d8417921c8/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/dca1fc5b-a26b-4a7e-809a-26d8417921c8/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/dca1fc5b-a26b-4a7e-809a-26d8417921c8/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/dca1fc5b-a26b-4a7e-809a-26d8417921c8/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
@@ -851,7 +890,7 @@ Every Location resource contains the following attributes.</p>
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2bd08fff-2154-4eaf-8a05-b014f462fa1e"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"locations"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/2bd08fff-2154-4eaf-8a05-b014f462fa1e"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/2bd08fff-2154-4eaf-8a05-b014f462fa1e"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"venue"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -863,8 +902,8 @@ Every Location resource contains the following attributes.</p>
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/2bd08fff-2154-4eaf-8a05-b014f462fa1e/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/2bd08fff-2154-4eaf-8a05-b014f462fa1e/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/2bd08fff-2154-4eaf-8a05-b014f462fa1e/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/2bd08fff-2154-4eaf-8a05-b014f462fa1e/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
@@ -873,7 +912,7 @@ Every Location resource contains the following attributes.</p>
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58ad3adb-7cb5-4851-99e4-e9e3f7f6aee1"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"locations"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/58ad3adb-7cb5-4851-99e4-e9e3f7f6aee1"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/58ad3adb-7cb5-4851-99e4-e9e3f7f6aee1"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"venue"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -885,8 +924,8 @@ Every Location resource contains the following attributes.</p>
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/58ad3adb-7cb5-4851-99e4-e9e3f7f6aee1/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/58ad3adb-7cb5-4851-99e4-e9e3f7f6aee1/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/58ad3adb-7cb5-4851-99e4-e9e3f7f6aee1/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/58ad3adb-7cb5-4851-99e4-e9e3f7f6aee1/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
@@ -895,7 +934,7 @@ Every Location resource contains the following attributes.</p>
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45edada9-947f-4c00-922f-9aaffe0f23a7"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"locations"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/45edada9-947f-4c00-922f-9aaffe0f23a7"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/45edada9-947f-4c00-922f-9aaffe0f23a7"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"venue"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -907,8 +946,8 @@ Every Location resource contains the following attributes.</p>
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/45edada9-947f-4c00-922f-9aaffe0f23a7/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/45edada9-947f-4c00-922f-9aaffe0f23a7/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/45edada9-947f-4c00-922f-9aaffe0f23a7/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/45edada9-947f-4c00-922f-9aaffe0f23a7/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
@@ -917,7 +956,7 @@ Every Location resource contains the following attributes.</p>
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5539972b-9ea8-4c24-8718-4b9c3221a8c8"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"locations"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/5539972b-9ea8-4c24-8718-4b9c3221a8c8"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/5539972b-9ea8-4c24-8718-4b9c3221a8c8"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"venue"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -929,8 +968,8 @@ Every Location resource contains the following attributes.</p>
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/5539972b-9ea8-4c24-8718-4b9c3221a8c8/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/5539972b-9ea8-4c24-8718-4b9c3221a8c8/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/5539972b-9ea8-4c24-8718-4b9c3221a8c8/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/5539972b-9ea8-4c24-8718-4b9c3221a8c8/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
@@ -939,7 +978,7 @@ Every Location resource contains the following attributes.</p>
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f2765cdc-c4c8-469d-bc2f-93533e655acd"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"locations"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/f2765cdc-c4c8-469d-bc2f-93533e655acd"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/f2765cdc-c4c8-469d-bc2f-93533e655acd"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"venue"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -951,8 +990,8 @@ Every Location resource contains the following attributes.</p>
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/f2765cdc-c4c8-469d-bc2f-93533e655acd/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/f2765cdc-c4c8-469d-bc2f-93533e655acd/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/f2765cdc-c4c8-469d-bc2f-93533e655acd/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/f2765cdc-c4c8-469d-bc2f-93533e655acd/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
@@ -961,7 +1000,7 @@ Every Location resource contains the following attributes.</p>
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"954de3db-ef9e-4ed5-8809-d3fbd5bb168d"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"locations"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/954de3db-ef9e-4ed5-8809-d3fbd5bb168d"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/954de3db-ef9e-4ed5-8809-d3fbd5bb168d"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"venue"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -973,8 +1012,8 @@ Every Location resource contains the following attributes.</p>
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/954de3db-ef9e-4ed5-8809-d3fbd5bb168d/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/954de3db-ef9e-4ed5-8809-d3fbd5bb168d/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/954de3db-ef9e-4ed5-8809-d3fbd5bb168d/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/954de3db-ef9e-4ed5-8809-d3fbd5bb168d/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
@@ -983,7 +1022,7 @@ Every Location resource contains the following attributes.</p>
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f050ccea-acfd-48d1-a7e2-792773e853a5"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"locations"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/f050ccea-acfd-48d1-a7e2-792773e853a5"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/f050ccea-acfd-48d1-a7e2-792773e853a5"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"venue"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -995,8 +1034,8 @@ Every Location resource contains the following attributes.</p>
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/f050ccea-acfd-48d1-a7e2-792773e853a5/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/f050ccea-acfd-48d1-a7e2-792773e853a5/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/f050ccea-acfd-48d1-a7e2-792773e853a5/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/f050ccea-acfd-48d1-a7e2-792773e853a5/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
@@ -1005,7 +1044,7 @@ Every Location resource contains the following attributes.</p>
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c7b641b-2feb-48a3-b16c-4c1be029d440"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"locations"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/9c7b641b-2feb-48a3-b16c-4c1be029d440"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/9c7b641b-2feb-48a3-b16c-4c1be029d440"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"venue"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -1017,17 +1056,17 @@ Every Location resource contains the following attributes.</p>
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/9c7b641b-2feb-48a3-b16c-4c1be029d440/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/9c7b641b-2feb-48a3-b16c-4c1be029d440/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/9c7b641b-2feb-48a3-b16c-4c1be029d440/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/9c7b641b-2feb-48a3-b16c-4c1be029d440/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"first"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations?page%5Bnumber%5D=1&amp;page%5Bsize%5D=10"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations?page%5Bnumber%5D=2&amp;page%5Bsize%5D=10"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations?page%5Bnumber%5D=3&amp;page%5Bsize%5D=10"</span><span class="w">
+        </span><span class="s2">"first"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations?page%5Bnumber%5D=1&amp;page%5Bsize%5D=10"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations?page%5Bnumber%5D=2&amp;page%5Bsize%5D=10"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations?page%5Bnumber%5D=3&amp;page%5Bsize%5D=10"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -1035,7 +1074,7 @@ Every Location resource contains the following attributes.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://localhost:3000/v1/locations</code></p>
+<p><code class="prettyprint">GET https://www.resistr.tech/v1/locations</code></p>
 
 <h3 id="filter">Filter</h3>
 
@@ -1049,20 +1088,20 @@ Every Location resource contains the following attributes.</p>
 </thead><tbody>
 <tr>
 <td>locality</td>
-<td><code class="prettyprint">GET &quot;http://localhost:3000/v1/locations?filter[locality]=Detroit&quot;</code></td>
+<td><code class="prettyprint">GET &quot;https://www.resistr.tech/v1/locations?filter[locality]=Detroit&quot;</code></td>
 </tr>
 <tr>
 <td>region</td>
-<td><code class="prettyprint">GET &quot;http://localhost:3000/v1/locations?filter[region]=ID&quot;</code></td>
+<td><code class="prettyprint">GET &quot;https://www.resistr.tech/v1/locations?filter[region]=ID&quot;</code></td>
 </tr>
 <tr>
 <td>postal_code</td>
-<td><code class="prettyprint">GET &quot;http://localhost:3000/v1/locations?filter[postal_code]=66001&quot;</code></td>
+<td><code class="prettyprint">GET &quot;https://www.resistr.tech/v1/locations?filter[postal_code]=66001&quot;</code></td>
 </tr>
 </tbody></table>
 
 <h2 id="get-a-specific-location">Get a Specific Location</h2>
-<pre class="highlight shell tab-shell"><code>curl -X GET  <span class="s2">"http://localhost:3000/v1/locations/cf2e490a-7bed-46d5-8e0a-386dfb365cc8"</span>
+<pre class="highlight shell tab-shell"><code>curl -X GET  <span class="s2">"https://www.resistr.tech/v1/locations/cf2e490a-7bed-46d5-8e0a-386dfb365cc8"</span>
   -H <span class="s2">"Accept: application/vnd.api+json"</span>
   -H <span class="s2">"Content-Type: application/vnd.api+json"</span>
 </code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'cta_aggregator_client'</span>
@@ -1078,7 +1117,7 @@ Every Location resource contains the following attributes.</p>
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cf2e490a-7bed-46d5-8e0a-386dfb365cc8"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"locations"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/cf2e490a-7bed-46d5-8e0a-386dfb365cc8"</span><span class="w">
+            </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/cf2e490a-7bed-46d5-8e0a-386dfb365cc8"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"venue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Riverfront park"</span><span class="p">,</span><span class="w">
@@ -1090,8 +1129,8 @@ Every Location resource contains the following attributes.</p>
         </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/cf2e490a-7bed-46d5-8e0a-386dfb365cc8/relationships/user"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/cf2e490a-7bed-46d5-8e0a-386dfb365cc8/user"</span><span class="w">
+                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/cf2e490a-7bed-46d5-8e0a-386dfb365cc8/relationships/user"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/cf2e490a-7bed-46d5-8e0a-386dfb365cc8/user"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
@@ -1103,7 +1142,7 @@ Every Location resource contains the following attributes.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET &quot;http://localhost:3000/v1/locations/&lt;UUID&gt;</code></p>
+<p><code class="prettyprint">GET &quot;https://www.resistr.tech/v1/locations/&lt;UUID&gt;</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
@@ -1120,7 +1159,7 @@ Every Location resource contains the following attributes.</p>
 </tbody></table>
 
 <h2 id="create-a-location">Create a Location</h2>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/locations"</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://www.resistr.tech/v1/locations"</span>
   -H <span class="s2">"Content-Type: application/vnd.api+json"</span> 
   -H <span class="s2">"Accept: application/vnd.api+json"</span> 
   -H <span class="s2">"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1MDI2NjMwMjEsInN1YiI6ImI0ZDQ5MDAzLWEyMWYtNGVjZi1hYjM3LTQzMmRkMWM4MzE4MiJ9.Q_QeKrpgvelRZ-XB8gM1B1SSrjeGVEK93HLW2p4SoFJv5zICQV6aFiKyA1lJ8qhrPBzqIPtTgqQBTN9ng0c0PA"</span>
@@ -1158,7 +1197,7 @@ Every Location resource contains the following attributes.</p>
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a728f38a-623c-4342-aa89-7ab39fd83c35"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"locations"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/a728f38a-623c-4342-aa89-7ab39fd83c35"</span><span class="w">
+            </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/a728f38a-623c-4342-aa89-7ab39fd83c35"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"venue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Moe's Cantina"</span><span class="p">,</span><span class="w">
@@ -1170,8 +1209,8 @@ Every Location resource contains the following attributes.</p>
         </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/a728f38a-623c-4342-aa89-7ab39fd83c35/relationships/user"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/locations/a728f38a-623c-4342-aa89-7ab39fd83c35/user"</span><span class="w">
+                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/a728f38a-623c-4342-aa89-7ab39fd83c35/relationships/user"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/locations/a728f38a-623c-4342-aa89-7ab39fd83c35/user"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
@@ -1182,14 +1221,15 @@ Every Location resource contains the following attributes.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST &quot;http://localhost:3000/v1/locations&quot;</code></p>
+<p><code class="prettyprint">POST &quot;https://www.resistr.tech/v1/locations&quot;</code></p>
 
 <p>Requests to create a resource must include a valid JWT token. This token can be obtained from the <code class="prettyprint">authentication</code> endpoint.</p>
 
           <h1 id="advocacy-campaigns">Advocacy Campaigns</h1>
 
-<p>An Advocacy Campaign resource is a top-level resource that represents a call to action that involves reaching out by phone or email.
-It contains the following attributes.</p>
+<p>An Advocacy Campaign resource is a top-level resource that represents a call to action that involves reaching out via email, in-person, phone, postal, or social-media.</p>
+
+<p>It contains the following attributes.</p>
 
 <table><thead>
 <tr>
@@ -1246,7 +1286,7 @@ It contains the following attributes.</p>
 <tr>
 <td>action_type</td>
 <td>string</td>
-<td>The type of advocacy campaign, specifying how users perform outreaches to targets. Either &ldquo;email&rdquo; or &ldquo;phone.&rdquo;</td>
+<td>The type of advocacy campaign, specifying how users perform outreaches to targets. Options: &ldquo;email&rdquo;, &ldquo;in-person&rdquo;, &ldquo;phone&rdquo;, &ldquo;postal&rdquo;, &ldquo;social-media&rdquo;</td>
 </tr>
 <tr>
 <td>target_list</td>
@@ -1258,7 +1298,7 @@ It contains the following attributes.</p>
 <p>For more information on OSDI&rsquo;s Advocacy Campaign resource, follow this link: <a href="https://opensupporter.github.io/osdi-docs/advocacy_campaigns.html">https://opensupporter.github.io/osdi-docs/advocacy_campaigns.html</a>.</p>
 
 <h2 id="get-all-advocacy-campaigns">Get All Advocacy Campaigns</h2>
-<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/advocacy_campaigns"</span>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns"</span>
   -H <span class="s2">"Accept: application/vnd.api+json"</span>
   -H <span class="s2">"Content-Type: application/vnd.api+json"</span>
 </code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'cta_aggregator_client'</span>
@@ -1276,7 +1316,7 @@ It contains the following attributes.</p>
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3c29ff31-d859-42fd-a786-c69306eadb86"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"advocacy_campaigns"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Express Outrage at Open White Supremacy Rally in Charlottesville"</span><span class="p">,</span><span class="w">
@@ -1295,20 +1335,20 @@ It contains the following attributes.</p>
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/targets"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/targets"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/targets"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/targets"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="s2">"target_list"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/target_list"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/target_list"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/target_list"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/target_list"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
@@ -1317,7 +1357,7 @@ It contains the following attributes.</p>
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8cd8e9ac-f684-4cdf-8e67-60c40e386eff"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"advocacy_campaigns"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">" Demand the Removal of Bannon, Gorka, and Miller from the White House"</span><span class="p">,</span><span class="w">
@@ -1336,20 +1376,20 @@ It contains the following attributes.</p>
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/relationships/targets"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/targets"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/relationships/targets"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/targets"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="s2">"target_list"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/relationships/target_list"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/target_list"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/relationships/target_list"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/8cd8e9ac-f684-4cdf-8e67-60c40e386eff/target_list"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
@@ -1358,7 +1398,7 @@ It contains the following attributes.</p>
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e895f3c4-d4f4-47fe-aeaa-1f4745287d04"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"advocacy_campaigns"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Prevent Military Action Against North Korea"</span><span class="p">,</span><span class="w">
@@ -1377,20 +1417,20 @@ It contains the following attributes.</p>
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/relationships/targets"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/targets"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/relationships/targets"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/targets"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="s2">"target_list"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/relationships/target_list"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/target_list"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/relationships/target_list"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/e895f3c4-d4f4-47fe-aeaa-1f4745287d04/target_list"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
@@ -1399,7 +1439,7 @@ It contains the following attributes.</p>
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8a09df4c-cc63-47f8-a723-9f9b2886e83c"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"advocacy_campaigns"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Support the College for All Act   "</span><span class="p">,</span><span class="w">
@@ -1459,20 +1499,20 @@ It contains the following attributes.</p>
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/relationships/targets"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/targets"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/relationships/targets"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/targets"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="s2">"target_list"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/relationships/target_list"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/target_list"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/relationships/target_list"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/8a09df4c-cc63-47f8-a723-9f9b2886e83c/target_list"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
@@ -1481,7 +1521,7 @@ It contains the following attributes.</p>
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"884ebdeb-5980-465e-bfd5-c0011240230d"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"advocacy_campaigns"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Protect Voting Rights with 2020 Census Funding"</span><span class="p">,</span><span class="w">
@@ -1500,20 +1540,20 @@ It contains the following attributes.</p>
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/relationships/targets"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/targets"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/relationships/targets"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/targets"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="s2">"target_list"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/relationships/target_list"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/target_list"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/relationships/target_list"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/884ebdeb-5980-465e-bfd5-c0011240230d/target_list"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
@@ -1522,7 +1562,7 @@ It contains the following attributes.</p>
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6722e7a2-79e2-483e-b210-6a2ed68a79a1"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"advocacy_campaigns"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oppose the RAISE Act's Attack on Legal Immigration"</span><span class="p">,</span><span class="w">
@@ -1541,20 +1581,20 @@ It contains the following attributes.</p>
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/relationships/targets"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/targets"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/relationships/targets"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/targets"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="s2">"target_list"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/relationships/target_list"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/target_list"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/relationships/target_list"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/6722e7a2-79e2-483e-b210-6a2ed68a79a1/target_list"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
@@ -1563,7 +1603,7 @@ It contains the following attributes.</p>
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"32cd480a-0d71-446f-a4d1-3ebcb1cdbf30"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"advocacy_campaigns"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demand Fair Tax Reform "</span><span class="p">,</span><span class="w">
@@ -1582,29 +1622,29 @@ It contains the following attributes.</p>
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/relationships/targets"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/targets"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/relationships/targets"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/targets"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="s2">"target_list"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/relationships/target_list"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/target_list"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/relationships/target_list"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/32cd480a-0d71-446f-a4d1-3ebcb1cdbf30/target_list"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"first"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns?page%5Bnumber%5D=1&amp;page%5Bsize%5D=10"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns?page%5Bnumber%5D=2&amp;page%5Bsize%5D=10"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns?page%5Bnumber%5D=2&amp;page%5Bsize%5D=10"</span><span class="w">
+        </span><span class="s2">"first"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns?page%5Bnumber%5D=1&amp;page%5Bsize%5D=10"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns?page%5Bnumber%5D=2&amp;page%5Bsize%5D=10"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns?page%5Bnumber%5D=2&amp;page%5Bsize%5D=10"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -1612,7 +1652,7 @@ It contains the following attributes.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://localhost:3000/v1/advocacy_campaigns</code></p>
+<p><code class="prettyprint">GET https://www.resistr.tech/v1/advocacy_campaigns</code></p>
 
 <h3 id="filter">Filter</h3>
 
@@ -1630,12 +1670,12 @@ It contains the following attributes.</p>
 <td>action_type</td>
 <td>email, phone</td>
 <td>action type for advocacy campaign</td>
-<td>http://localhost:3000/v1/advocacy_campaigns?filter[advocacy_campaign_type]=phone</td>
+<td>https://www.resistr.tech/v1/advocacy_campaigns?filter[advocacy_campaign_type]=phone</td>
 </tr>
 </tbody></table>
 
 <h2 id="get-a-specific-advocacy-campaign">Get a Specific Advocacy Campaign</h2>
-<pre class="highlight shell tab-shell"><code>curl -X GET  <span class="s2">"http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86"</span>
+<pre class="highlight shell tab-shell"><code>curl -X GET  <span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86"</span>
   -H <span class="s2">"Accept: application/vnd.api+json"</span>
   -H <span class="s2">"Content-Type: application/vnd.api+json"</span>
 </code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'cta_aggregator_client'</span>
@@ -1653,7 +1693,7 @@ It contains the following attributes.</p>
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3c29ff31-d859-42fd-a786-c69306eadb86"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"advocacy_campaigns"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86"</span><span class="w">
+            </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Express Outrage at Open White Supremacy Rally in Charlottesville"</span><span class="p">,</span><span class="w">
@@ -1672,20 +1712,20 @@ It contains the following attributes.</p>
         </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/user"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/user"</span><span class="w">
+                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/user"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/user"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/targets"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/targets"</span><span class="w">
+                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/targets"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/targets"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"target_list"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/target_list"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/target_list"</span><span class="w">
+                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/target_list"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/target_list"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
@@ -1696,7 +1736,7 @@ It contains the following attributes.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET &quot;http://localhost:3000/v1/advocacy_campaigns/&lt;UUID&gt;</code></p>
+<p><code class="prettyprint">GET &quot;https://www.resistr.tech/v1/advocacy_campaigns/&lt;UUID&gt;</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
@@ -1713,7 +1753,7 @@ It contains the following attributes.</p>
 </tbody></table>
 
 <h2 id="create-an-advocacy-campaign">Create an Advocacy Campaign</h2>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/advocacy_campaigns"</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns"</span>
   -H <span class="s2">"Content-Type: application/vnd.api+json"</span> 
   -H <span class="s2">"Accept: application/vnd.api+json"</span> 
   -H <span class="s2">"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1MDI2NjMwMjEsInN1YiI6ImI0ZDQ5MDAzLWEyMWYtNGVjZi1hYjM3LTQzMmRkMWM4MzE4MiJ9.Q_QeKrpgvelRZ-XB8gM1B1SSrjeGVEK93HLW2p4SoFJv5zICQV6aFiKyA1lJ8qhrPBzqIPtTgqQBTN9ng0c0PA"</span>
@@ -1757,11 +1797,11 @@ It contains the following attributes.</p>
   <span class="ss">featured_image_url: </span><span class="s1">'http://lorempixel.com/300/300'</span><span class="p">,</span>
   <span class="ss">action_type: </span><span class="s1">'email'</span><span class="p">,</span>
   <span class="ss">template: </span><span class="s1">'Eum itaque et nisi dolores assumenda ipsum. Voluptates qui aut nobis veniam maxime qui. Illum saepe eum corporis vero qui soluta aliquam.\nTemporibus reiciendis velit fugiat. Facere laborum quia ea laboriosam necessitatibus quisquam eligendi. Et est dolorem eligendi id aut sint.\nAnimi qui totam voluptatem nesciunt iure et dolorem. Eos ut dolorum et quo illum fuga atque. Facere a ipsa corrupti assumenda provident commodi facilis. Eligendi officia est et.'</span><span class="p">,</span>
+  <span class="ss">targets: </span><span class="p">[</span><span class="s1">'a2f6f86b-a214-4892-8c06-8caece820fb0'</span><span class="p">,</span> <span class="s1">'215ed993-3cd1-4fbc-b8af-7e2082813d06'</span><span class="p">]</span>
 <span class="p">}</span>
-<span class="n">target_attrs</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">targets: </span><span class="p">[</span><span class="s1">'a2f6f86b-a214-4892-8c06-8caece820fb0'</span><span class="p">,</span> <span class="s1">'215ed993-3cd1-4fbc-b8af-7e2082813d06'</span><span class="p">]</span> <span class="p">}</span>
-<span class="c1"># targets must exist prior to creating the Advocacy Campaign</span>
+<span class="c1"># Note: targets must exist prior to creating the Advocacy Campaign</span>
 
-<span class="n">response</span> <span class="o">=</span> <span class="no">CTAAggregatorClient</span><span class="o">::</span><span class="no">AdvocacyCampaign</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">campaign_attrs</span><span class="p">,</span> <span class="n">target_attrs</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="no">CTAAggregatorClient</span><span class="o">::</span><span class="no">AdvocacyCampaign</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">campaign_attrs</span><span class="p">)</span>
 <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span>
 </code></pre>
 <blockquote>
@@ -1772,7 +1812,7 @@ It contains the following attributes.</p>
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3c29ff31-d859-42fd-a786-c69306eadb86"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"advocacy_campaigns"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86"</span><span class="w">
+            </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Express Outrage at Open White Supremacy Rally in Charlottesville"</span><span class="p">,</span><span class="w">
@@ -1791,20 +1831,20 @@ It contains the following attributes.</p>
         </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/user"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/user"</span><span class="w">
+                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/user"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/user"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/targets"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/targets"</span><span class="w">
+                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/targets"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/targets"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"target_list"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/target_list"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/target_list"</span><span class="w">
+                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/relationships/target_list"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns/3c29ff31-d859-42fd-a786-c69306eadb86/target_list"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
@@ -1815,7 +1855,7 @@ It contains the following attributes.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST &quot;http://localhost:3000/v1/advocacy_campaigns/&quot;</code></p>
+<p><code class="prettyprint">POST &quot;https://www.resistr.tech/v1/advocacy_campaigns/&quot;</code></p>
 
 <p>Requests to create a resource must include a valid JWT token. This token can be obtained from the <code class="prettyprint">authentication</code> endpoint.</p>
 
@@ -1891,7 +1931,7 @@ Each Advocacy Campaign contains an array of targets.  Each Target contains the f
 <p>For more information on OSDI&rsquo;s Target resource, follow this link: <a href="https://opensupporter.github.io/osdi-docs/advocacy_campaigns.html#target">https://opensupporter.github.io/osdi-docs/advocacy_campaigns.html#target</a>.</p>
 
 <h2 id="get-all-targets">Get All Targets</h2>
-<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/targets"</span>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://www.resistr.tech/v1/targets"</span>
   -H <span class="s2">"Accept: application/vnd.api+json"</span>
   -H <span class="s2">"Content-Type: application/vnd.api+json"</span>
 </code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'cta_aggregator_client'</span>
@@ -1909,7 +1949,7 @@ Each Advocacy Campaign contains an array of targets.  Each Target contains the f
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"360cda45-6d93-42ae-a0fb-e1f6ebdba564"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"targets"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/targets/360cda45-6d93-42ae-a0fb-e1f6ebdba564"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/targets/360cda45-6d93-42ae-a0fb-e1f6ebdba564"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"organization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Senate Committee on Health"</span><span class="p">,</span><span class="w">
@@ -1929,8 +1969,8 @@ Each Advocacy Campaign contains an array of targets.  Each Target contains the f
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/targets/360cda45-6d93-42ae-a0fb-e1f6ebdba564/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/targets/360cda45-6d93-42ae-a0fb-e1f6ebdba564/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/targets/360cda45-6d93-42ae-a0fb-e1f6ebdba564/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/targets/360cda45-6d93-42ae-a0fb-e1f6ebdba564/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
@@ -1939,7 +1979,7 @@ Each Advocacy Campaign contains an array of targets.  Each Target contains the f
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b92ff013-174d-4767-8892-645898cc5778"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"targets"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/targets/b92ff013-174d-4767-8892-645898cc5778"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/targets/b92ff013-174d-4767-8892-645898cc5778"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"organization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"House Committee on Education and the Workforce"</span><span class="p">,</span><span class="w">
@@ -1959,8 +1999,8 @@ Each Advocacy Campaign contains an array of targets.  Each Target contains the f
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/targets/b92ff013-174d-4767-8892-645898cc5778/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/targets/b92ff013-174d-4767-8892-645898cc5778/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/targets/b92ff013-174d-4767-8892-645898cc5778/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/targets/b92ff013-174d-4767-8892-645898cc5778/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
@@ -1969,7 +2009,7 @@ Each Advocacy Campaign contains an array of targets.  Each Target contains the f
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3718fcd2-4317-4ed2-8548-bba7af7d5d2a"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"targets"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"organization"</span><span class="p">:</span><span class="w"> </span><span class="s2">" Department of Education"</span><span class="p">,</span><span class="w">
@@ -1989,8 +2029,8 @@ Each Advocacy Campaign contains an array of targets.  Each Target contains the f
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
@@ -1999,7 +2039,7 @@ Each Advocacy Campaign contains an array of targets.  Each Target contains the f
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e696019e-f2d5-4097-b046-1a9efe2d2965"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"targets"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/targets/e696019e-f2d5-4097-b046-1a9efe2d2965"</span><span class="w">
+                </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/targets/e696019e-f2d5-4097-b046-1a9efe2d2965"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"organization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"House Judiciary Committee"</span><span class="p">,</span><span class="w">
@@ -2019,16 +2059,16 @@ Each Advocacy Campaign contains an array of targets.  Each Target contains the f
             </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/targets/e696019e-f2d5-4097-b046-1a9efe2d2965/relationships/user"</span><span class="p">,</span><span class="w">
-                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/targets/e696019e-f2d5-4097-b046-1a9efe2d2965/user"</span><span class="w">
+                        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/targets/e696019e-f2d5-4097-b046-1a9efe2d2965/relationships/user"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/targets/e696019e-f2d5-4097-b046-1a9efe2d2965/user"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"first"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/targets?page%5Bnumber%5D=1&amp;page%5Bsize%5D=10"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/targets?page%5Bnumber%5D=1&amp;page%5Bsize%5D=10"</span><span class="w">
+        </span><span class="s2">"first"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/targets?page%5Bnumber%5D=1&amp;page%5Bsize%5D=10"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/targets?page%5Bnumber%5D=1&amp;page%5Bsize%5D=10"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -2036,10 +2076,10 @@ Each Advocacy Campaign contains an array of targets.  Each Target contains the f
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://localhost:3000/v1/targets</code></p>
+<p><code class="prettyprint">GET https://www.resistr.tech/v1/targets</code></p>
 
 <h2 id="get-a-specific-target">Get a Specific Target</h2>
-<pre class="highlight shell tab-shell"><code>curl -X GET  <span class="s2">"http://localhost:3000/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a"</span>,
+<pre class="highlight shell tab-shell"><code>curl -X GET  <span class="s2">"https://www.resistr.tech/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a"</span>,
   -H <span class="s2">"Accept: application/vnd.api+json"</span>
   -H <span class="s2">"Content-Type: application/vnd.api+json"</span>
 </code></pre><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'cta_aggregator_client'</span>
@@ -2057,7 +2097,7 @@ Each Advocacy Campaign contains an array of targets.  Each Target contains the f
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3718fcd2-4317-4ed2-8548-bba7af7d5d2a"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"targets"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a"</span><span class="w">
+            </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"organization"</span><span class="p">:</span><span class="w"> </span><span class="s2">" Department of Education"</span><span class="p">,</span><span class="w">
@@ -2077,8 +2117,8 @@ Each Advocacy Campaign contains an array of targets.  Each Target contains the f
         </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a/relationships/user"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a/user"</span><span class="w">
+                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a/relationships/user"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/targets/3718fcd2-4317-4ed2-8548-bba7af7d5d2a/user"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
@@ -2089,7 +2129,7 @@ Each Advocacy Campaign contains an array of targets.  Each Target contains the f
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET &quot;http://localhost:3000/v1/targets/&lt;UUID&gt;</code></p>
+<p><code class="prettyprint">GET &quot;https://www.resistr.tech/v1/targets/&lt;UUID&gt;</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
@@ -2107,7 +2147,7 @@ Each Advocacy Campaign contains an array of targets.  Each Target contains the f
 
 <h2 id="create-a-target">Create a Target</h2>
 <pre class="highlight shell tab-shell"><code>
-curl -X POST <span class="s2">"http://localhost:3000/v1/targets"</span>
+curl -X POST <span class="s2">"https://www.resistr.tech/v1/targets"</span>
   -H <span class="s2">"Content-Type: application/vnd.api+json"</span> 
   -H <span class="s2">"Accept: application/vnd.api+json"</span> 
   -H <span class="s2">"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1MDI2NjMwMjEsInN1YiI6ImI0ZDQ5MDAzLWEyMWYtNGVjZi1hYjM3LTQzMmRkMWM4MzE4MiJ9.Q_QeKrpgvelRZ-XB8gM1B1SSrjeGVEK93HLW2p4SoFJv5zICQV6aFiKyA1lJ8qhrPBzqIPtTgqQBTN9ng0c0PA"</span>
@@ -2191,7 +2231,7 @@ curl -X POST <span class="s2">"http://localhost:3000/v1/targets"</span>
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9927bf38-dcaa-448c-acc7-4a4920466188"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"targets"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/targets/9927bf38-dcaa-448c-acc7-4a4920466188"</span><span class="w">
+            </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/targets/9927bf38-dcaa-448c-acc7-4a4920466188"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"organization"</span><span class="p">:</span><span class="w"> </span><span class="s2">" Department of Education"</span><span class="p">,</span><span class="w">
@@ -2223,8 +2263,8 @@ curl -X POST <span class="s2">"http://localhost:3000/v1/targets"</span>
         </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/targets/9927bf38-dcaa-448c-acc7-4a4920466188/relationships/user"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/v1/targets/9927bf38-dcaa-448c-acc7-4a4920466188/user"</span><span class="w">
+                    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/targets/9927bf38-dcaa-448c-acc7-4a4920466188/relationships/user"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.resistr.tech/v1/targets/9927bf38-dcaa-448c-acc7-4a4920466188/user"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
@@ -2235,7 +2275,7 @@ curl -X POST <span class="s2">"http://localhost:3000/v1/targets"</span>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST &quot;http://localhost:3000/v1/targets/&quot;</code></p>
+<p><code class="prettyprint">POST &quot;https://www.resistr.tech/v1/targets/&quot;</code></p>
 
 <p>Requests to create a resource must include a valid JWT token. This token can be obtained from the <code class="prettyprint">authentication</code> endpoint.</p>
 
@@ -2321,7 +2361,7 @@ e.g. <code class="prettyprint">curl -H &#39;Origin: example.com&#39;</code>.</p>
     <span class="nx">response</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
 <span class="p">};</span>
-<span class="nx">req</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">"GET"</span><span class="p">,</span><span class="s1">'http://localhost:3000/v1/events'</span><span class="p">,</span><span class="kc">true</span><span class="p">);</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">"GET"</span><span class="p">,</span><span class="s1">'https://www.resistr.tech/v1/events'</span><span class="p">,</span><span class="kc">true</span><span class="p">);</span>
 <span class="nx">req</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
 </code></pre>
 <p>The actual events will be an array returned in <code class="prettyprint">response.data</code>,
@@ -2343,7 +2383,7 @@ events and adds them to the page in a simple <a href="https://developer.mozilla.
 <blockquote>
 <p>jQuery Version</p>
 </blockquote>
-<pre class="highlight javascript tab-javascript"><code><span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span> <span class="s2">"http://localhost:3000/v1/events"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span> <span class="p">{</span>
+<pre class="highlight javascript tab-javascript"><code><span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span> <span class="s2">"https://www.resistr.tech/v1/events"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span> <span class="p">{</span>
    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre>
