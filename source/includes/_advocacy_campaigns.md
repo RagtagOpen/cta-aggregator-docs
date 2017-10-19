@@ -387,9 +387,9 @@ This endpoint retrieves all advocacy campaigns.
 
 You can filter based on the following attributes
 
-Filter 		| Values | Description|  Example
+Filter    | Values | Description|  Example
 --------- |  ----------- |  ----------- |  -----------
-action_type | email, phone | action type for advocacy campaign  | https://www.resistr.tech/v1/advocacy_campaigns?filter[advocacy_campaign_type]=phone
+action_type | email, in-person, phone, postal, social-media | action type for advocacy campaign  | https://www.resistr.tech/v1/advocacy_campaigns?filter[advocacy_campaign_type]=phone
 
 
 
