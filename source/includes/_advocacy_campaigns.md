@@ -1,6 +1,7 @@
 # Advocacy Campaigns
 
-An Advocacy Campaign resource is a top-level resource that represents a call to action that involves reaching out by phone or email.
+An Advocacy Campaign resource is a top-level resource that represents a call to action that involves reaching out via email, in-person, phone, postal, or social-media.
+
 It contains the following attributes.
 
 Name    | Type | Description
@@ -14,7 +15,7 @@ description | string |A description of the advocacy campaign, usually displayed 
 template | string | A script to read over the phone, or a general template for a postcard or email. These may be captured in the description, but putting it in the templates field allows it to be highlighted by clients. May contain text and/or HTML. 
 browser_url | string | A URL string pointing to the publicly available advocacy campaign page on the web.
 featured_image_url | string | A URL string pointing to a publicly available featured image file for this advocacy campaign on the web.
-action_type | string | The type of advocacy campaign, specifying how users perform outreaches to targets. Either "email" or "phone."
+action_type | string | The type of advocacy campaign, specifying how users perform outreaches to targets. Options: "email", "in-person", "phone", "postal", "social-media"
 target_list | string | An array of target object hashes representing the targets of the advocacy campaign.
 
 For more information on OSDI's Advocacy Campaign resource, follow this link: [https://opensupporter.github.io/osdi-docs/advocacy_campaigns.html](https://opensupporter.github.io/osdi-docs/advocacy_campaigns.html).
