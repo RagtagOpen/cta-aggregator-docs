@@ -12,7 +12,7 @@ updated_at | datetime |A read-only property representing the date and time the r
 origin_system | string | A human readable identifier of the system where this advocacy campaign was created. (ex: “OSDI System”)
 title | string | The title of the advocacy campaign. Intended for public display rather than administrative purposes.
 description | string |A description of the advocacy campaign, usually displayed publicly. May contain text and/or HTML.
-template | string | A script to read over the phone, or a general template for a postcard or email. These may be captured in the description, but putting it in the templates field allows it to be highlighted by clients. May contain text and/or HTML. 
+template | string | A script to read over the phone, or a general template for a postcard or email. These may be captured in the description, but putting it in the templates field allows it to be highlighted by clients. May contain text and/or HTML.
 browser_url | string | A URL string pointing to the publicly available advocacy campaign page on the web.
 featured_image_url | string | A URL string pointing to a publicly available featured image file for this advocacy campaign on the web.
 action_type | string | The type of advocacy campaign, specifying how users perform outreaches to targets. Options: "email", "in-person", "phone", "postal", "social-media"
@@ -387,9 +387,10 @@ This endpoint retrieves all advocacy campaigns.
 
 You can filter based on the following attributes
 
-Filter    | Values | Description|  Example
---------- |  ----------- |  ----------- |  -----------
-action_type | email, in-person, phone, postal, social-media | action type for advocacy campaign  | https://www.resistr.tech/v1/advocacy_campaigns?filter[advocacy_campaign_type]=phone
+Filter        | Values                                        | Description                       |  Example
+------------- | --------------------------------------------- | --------------------------------- |  -----------
+action_type   | email, in-person, phone, postal, social-media | action type for advocacy campaign | https://www.resistr.tech/v1/advocacy_campaigns?filter[advocacy_campaign_type]=phone
+origin_system | 5calls, Facebook, etc                         | filter by free events             | https://www.resistr.tech/v1/advocacy_campaigns?filter[origin_system]=5calls
 
 
 
@@ -476,8 +477,8 @@ ID | The ID of the advocacy campaign to retrieve
 
 ```shell
 curl -X POST "https://www.resistr.tech/v1/advocacy_campaigns"
-  -H "Content-Type: application/vnd.api+json" 
-  -H "Accept: application/vnd.api+json" 
+  -H "Content-Type: application/vnd.api+json"
+  -H "Accept: application/vnd.api+json"
   -H "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1MDI2NjMwMjEsInN1YiI6ImI0ZDQ5MDAzLWEyMWYtNGVjZi1hYjM3LTQzMmRkMWM4MzE4MiJ9.Q_QeKrpgvelRZ-XB8gM1B1SSrjeGVEK93HLW2p4SoFJv5zICQV6aFiKyA1lJ8qhrPBzqIPtTgqQBTN9ng0c0PA"
   -d ' {
     "data": {
@@ -585,5 +586,3 @@ This endpoint creates a new advocacy campaign.
 `POST "https://www.resistr.tech/v1/advocacy_campaigns/"`
 
 Requests to create a resource must include a valid JWT token. This token can be obtained from the `authentication` endpoint.
-
-
