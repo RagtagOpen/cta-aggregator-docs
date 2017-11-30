@@ -170,7 +170,7 @@ Filter          | Values                | Description                  | Example
 --------------- | --------------------- | ---------------------------- | -----------
 past            | true                  | filter by events in the past | `GET "https://www.resistr.tech/v1/events?filter[past]=true"`
 free            | true, false           | filter by free events        | `GET "https://www.resistr.tech/v1/events?filter[free]=true"`
-origin_system   | 5calls, Facebook, etc | filter by free events        | `GET "https://www.resistr.tech/v1/events?filter[origin_system]=5calls"`
+origin_system   | 5calls, Facebook, etc | filter by origin_system      | `GET "https://www.resistr.tech/v1/events?filter[origin_system]=5calls"`
 
 
 ## Get a Specific Event
