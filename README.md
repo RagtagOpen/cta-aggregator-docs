@@ -1,7 +1,7 @@
 # CTA Aggregator Docs
 Documentation for the cta-aggregator project
 
-This repo uses [slate](https://github.com/lord/slate) to allow markdown-driven 
+This repo uses [slate](https://github.com/lord/slate) to allow markdown-driven
 documentation.  
 
 The codebase for the CTA Aggregator is located here: https://github.com/RagtagOpen/cta-aggregator.
@@ -12,13 +12,13 @@ This docs site is deployed at https://ragtagopen.github.io/cta-aggregator-docs/.
 
 To run this project locally, install the dependencies and launch the server. To do this.
 * In your terminal, at the root of this project, run `bundle install`.
-* Once the depdencenies have been installed, run `bundle exec middleman server`.
+* Once the dependencies have been installed, run `bundle exec middleman server`.
 * In your browser, navigate to `http://localhost:4567`.
 
 ## Deployments
 
-There's a deployment script at the root of this project.  We do not currently 
-have a  way to automate updates to the documentation site.  So, after your 
+There's a deployment script at the root of this project.  We do not currently
+have a  way to automate updates to the documentation site.  So, after your
 changes have been accepted and merged into master, you'll need to
 pull the changes down to your local master branch and then run the deploy script.
 
