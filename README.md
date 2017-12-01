@@ -32,7 +32,7 @@ pull the changes down to your local master branch and then run the deploy script
 * Show examples of what happens when user attempts to provide malformed request
 
 ## Troubleshooting
-* If you are using homebrew and rbenv while running cta-aggregator-docs locally and encounter issues installing the correct Ruby version, try these three tactics in order, only moving to the next tactic if the previous does resolve the issue:
+* If you are using homebrew and rbenv while running cta-aggregator-docs locally and encounter issues installing the correct Ruby version, try these three tactics in order, only moving to the next tactic if the previous does not resolve the issue:
   * Upgrade rbenv and ruby-build:
     * Run `brew upgrade rbenv ruby-build`
   * Update the make file:
