@@ -166,11 +166,11 @@ This endpoint retrieves all future events.
 
 You can filter based on the following attributes
 
-Filter          | Values                | Description                  | Example
---------------- | --------------------- | ---------------------------- | -----------
-past            | true                  | filter by events in the past | `GET "https://www.resistr.tech/v1/events?filter[past]=true"`
-free            | true, false           | filter by free events        | `GET "https://www.resistr.tech/v1/events?filter[free]=true"`
-origin_system   | 5calls, Facebook, etc | filter by origin_system      | `GET "https://www.resistr.tech/v1/events?filter[origin_system]=5calls"`
+Filter          | Values          | Description                  | Example
+--------------- | --------------- | ---------------------------- | -----------
+past            | true            | filter by events in the past | `GET "https://www.resistr.tech/v1/events?filter[past]=true"`
+free            | true, false     | filter by free events        | `GET "https://www.resistr.tech/v1/events?filter[free]=true"`
+origin_system   | 5calls, etc     | filter by origin_system      | `GET "https://www.resistr.tech/v1/events?filter[origin_system]=5calls"`
 
 
 ## Get a Specific Event

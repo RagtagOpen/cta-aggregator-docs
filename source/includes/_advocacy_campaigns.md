@@ -390,7 +390,7 @@ You can filter based on the following attributes
 Filter        | Values                                        | Description                       |  Example
 ------------- | --------------------------------------------- | --------------------------------- |  -----------
 action_type   | email, in-person, phone, postal, social-media | action type for advocacy campaign | https://www.resistr.tech/v1/advocacy_campaigns?filter[advocacy_campaign_type]=phone
-origin_system | 5calls, Facebook, etc                         | filter by free events             | https://www.resistr.tech/v1/advocacy_campaigns?filter[origin_system]=5calls
+origin_system | 5calls, Resistance Calendar, etc              | filter by free events             | https://www.resistr.tech/v1/advocacy_campaigns?filter[origin_system]=5calls
 
 
 
