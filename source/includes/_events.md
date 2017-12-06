@@ -164,12 +164,13 @@ This endpoint retrieves all future events.
 
 ### Filter
 
-You can filter based on the following attribteus
+You can filter based on the following attributes
 
-Filter    | Values      | Description                  | Example
---------- | ----------- | -----------                  | -----------
-past      | true        | filter by events in the past | `GET "https://www.resistr.tech/v1/events?filter[past]=true"`
-free      | true, false | filter by free events        | `GET "https://www.resistr.tech/v1/events?filter[free]=true"`
+Filter          | Values          | Description                  | Example
+--------------- | --------------- | ---------------------------- | -----------
+past            | true            | filter by events in the past | `GET "https://www.resistr.tech/v1/events?filter[past]=true"`
+free            | true, false     | filter by free events        | `GET "https://www.resistr.tech/v1/events?filter[free]=true"`
+origin_system   | 5calls, etc     | filter by origin_system      | `GET "https://www.resistr.tech/v1/events?filter[origin_system]=5calls"`
 
 
 ## Get a Specific Event
@@ -343,4 +344,3 @@ This endpoint creates a new event.
 `POST "https://www.resistr.tech/v1/events/"`
 
 Requests to create a resource must include a valid JWT token. This token can be obtained from the `authentication` endpoint.
-
