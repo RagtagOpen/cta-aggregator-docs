@@ -597,7 +597,7 @@ The API will reject your request.</p>
 
 <h3 id="filter">Filter</h3>
 
-<p>You can filter based on the following attribteus</p>
+<p>You can filter based on the following attributes</p>
 
 <table><thead>
 <tr>
@@ -618,6 +618,12 @@ The API will reject your request.</p>
 <td>true, false</td>
 <td>filter by free events</td>
 <td><code class="prettyprint">GET &quot;https://www.resistr.tech/v1/events?filter[free]=true&quot;</code></td>
+</tr>
+<tr>
+<td>origin_system</td>
+<td>5calls, etc</td>
+<td>filter by origin_system</td>
+<td><code class="prettyprint">GET &quot;https://www.resistr.tech/v1/events?filter[origin_system]=5calls&quot;</code></td>
 </tr>
 </tbody></table>
 
@@ -1672,6 +1678,12 @@ Every Location resource contains the following attributes.</p>
 <td>action type for advocacy campaign</td>
 <td>https://www.resistr.tech/v1/advocacy_campaigns?filter[advocacy_campaign_type]=phone</td>
 </tr>
+<tr>
+<td>origin_system</td>
+<td>5calls, Resistance Calendar, etc</td>
+<td>filter by free events</td>
+<td>https://www.resistr.tech/v1/advocacy_campaigns?filter[origin_system]=5calls</td>
+</tr>
 </tbody></table>
 
 <h2 id="get-a-specific-advocacy-campaign">Get a Specific Advocacy Campaign</h2>
@@ -1754,8 +1766,8 @@ Every Location resource contains the following attributes.</p>
 
 <h2 id="create-an-advocacy-campaign">Create an Advocacy Campaign</h2>
 <pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://www.resistr.tech/v1/advocacy_campaigns"</span>
-  -H <span class="s2">"Content-Type: application/vnd.api+json"</span> 
-  -H <span class="s2">"Accept: application/vnd.api+json"</span> 
+  -H <span class="s2">"Content-Type: application/vnd.api+json"</span>
+  -H <span class="s2">"Accept: application/vnd.api+json"</span>
   -H <span class="s2">"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1MDI2NjMwMjEsInN1YiI6ImI0ZDQ5MDAzLWEyMWYtNGVjZi1hYjM3LTQzMmRkMWM4MzE4MiJ9.Q_QeKrpgvelRZ-XB8gM1B1SSrjeGVEK93HLW2p4SoFJv5zICQV6aFiKyA1lJ8qhrPBzqIPtTgqQBTN9ng0c0PA"</span>
   -d <span class="s1">' {
     "data": {
