@@ -1,3 +1,7 @@
+:warning: App no longer active :warning:
+
+**Consider the code in this repo as sample code.**
+
 # CTA Aggregator Docs
 Documentation for the cta-aggregator project
 
