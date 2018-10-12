@@ -2,6 +2,8 @@
 
 **Consider the code in this repo as sample code.**
 
+:warning: Some dependencies in the Gemfile point to versions which have security vulnerabilities. Please update to the latest versions before using this code. :warning:
+
 # CTA Aggregator Docs
 Documentation for the cta-aggregator project
 
